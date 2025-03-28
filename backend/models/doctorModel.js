@@ -16,6 +16,11 @@ const Doctor = sequelize.define('Doctor', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  status: {
+    type: DataTypes.ENUM('PENDING', 'APPROVED', 'REJECTED'),
+    allowNull: false,
+    defaultValue: 'PENDING', // Default status is PENDING until admin approves
+  },
 }, {
   tableName: 'doctors',
   timestamps: false,

@@ -78,7 +78,83 @@ const deleteDoctorById = async (req, res) => {
   }
 };
 
+// Register a new doctor (pending admin approval)
+const registerDoctor = async (req, res) => {
+  try {
+    const { nom, prenom, email, mot_de_passe, numero_de_telephone, adresse, cin, specialite } = req.body;
+
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(mot_de_passe, saltRounds);
+
+    const user = await User.create({
+      nom,
+      prenom,
+      email,
+      mot_de_passe: hashedPassword,
+      numero_de_telephone,
+      adresse,
+      cin,
+      role: 'doctor',
+    });
+
+    const doctor = await Doctor.create({
+      user_id: user.user_id,
+      specialite,
+      status: 'PENDING',
+    });
+
+    res.status(201).json({ message: 'Doctor registration request submitted. Awaiting admin approval.', doctor });
+  } catch (err) {
+    res.status(500).json({ message: 'Error registering doctor', error: err.message });
+  }
+};
+
+// Approve or reject a doctor's registration
+const validateDoctor = async (req, res) => {
+  try {
+    const { user_id } = req.params;
+    const { status } = req.body;
+
+    if (!['APPROVED', 'REJECTED'].includes(status)) {
+      return res.status(400).json({ message: 'Invalid status. Must be APPROVED or REJECTED.' });
+    }
+
+    const doctor = await Doctor.findOne({ where: { user_id } });
+    if (!doctor) {
+      return res.status(404).json({ message: 'Doctor not found.' });
+    }
+
+    if (doctor.status !== 'PENDING') {
+      return res.status(400).json({ message: 'Doctor has already been validated.' });
+    }
+
+    doctor.status = status;
+    await doctor.save();
+
+    res.status(200).json({ message: `Doctor ${status.toLowerCase()} successfully.`, doctor });
+  } catch (err) {
+    res.status(500).json({ message: 'Error validating doctor', error: err.message });
+  }
+};
+
+// Get all pending doctors
+const getPendingDoctors = async (req, res) => {
+  try {
+    const pendingDoctors = await Doctor.findAll({
+      where: { status: 'PENDING' },
+      include: [{ model: User, attributes: ['nom', 'prenom', 'email'] }],
+    });
+
+    res.status(200).json(pendingDoctors);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching pending doctors', error: err.message });
+  }
+};
+
 module.exports = {
+  registerDoctor,
+  validateDoctor,
+   getPendingDoctors,
   createDoctor,
   getDoctorById,
   getAllDoctors,

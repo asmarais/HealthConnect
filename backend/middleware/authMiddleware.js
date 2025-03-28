@@ -17,3 +17,14 @@ const protect = (req, res, next) => {
 };
 
 module.exports = protect;
+const { Role } = require('../models/userModel');
+
+const admin = (req, res, next) => {
+  if (req.user && req.user.role === Role.ADMIN) {
+    next();
+  } else {
+    res.status(403).json({ message: 'Access denied. Admins only.' });
+  }
+};
+
+module.exports = { protect, admin };

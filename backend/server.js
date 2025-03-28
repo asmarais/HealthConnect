@@ -47,8 +47,19 @@ const createAdmin = async () => {
   }
 };
 
-// Create default admin on server startup
-createAdmin();
+const { Doctor } = require('./models/doctorModel');
+
+const syncDatabase = async () => {
+  try {
+    await User.sync();
+    await Doctor.sync();
+    console.log('Database tables synced successfully.');
+  } catch (err) {
+    console.error('Error syncing database:', err);
+  }
+};
+
+syncDatabase().then(() => createAdmin());
 
 // API Routes
 app.use('/api/auth', authRoutes);
