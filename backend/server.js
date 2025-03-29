@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+const session = require("express-session");
+const passport = require("./oauth/google");
 
 const {connectDB} = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
@@ -60,6 +62,18 @@ const syncDatabase = async () => {
 };
 
 syncDatabase().then(() => createAdmin());
+// Configuration de la session
+app.use(
+  session({
+    secret: "your_secret_key",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+// Initialisation de Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // API Routes
 app.use('/api/auth', authRoutes);

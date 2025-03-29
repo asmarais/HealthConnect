@@ -1,6 +1,7 @@
 const { User } = require('../models/userModel');
 const { Doctor } = require('../models/doctorModel');
 const bcrypt = require('bcryptjs');
+const{ sendEmail} = require('../utils/emailService');
 
 // Créer un utilisateur de type docteur
 const createDoctor = async (req, res) => {
@@ -130,6 +131,15 @@ const validateDoctor = async (req, res) => {
 
     doctor.status = status;
     await doctor.save();
+
+    const user =await User.findOne({ where: { user_id } });
+
+     // Envoyer un email de confirmation au docteur
+     if (status === "APPROVED") {
+      await sendEmail(user.email, "account_approved", user.firstname);
+    } else if (status === "REJECTED") {
+      await sendEmail(user.email, "account_rejected", user.firstname);
+    }
 
     res.status(200).json({ message: `Doctor ${status.toLowerCase()} successfully.`, doctor });
   } catch (err) {

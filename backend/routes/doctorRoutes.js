@@ -1,10 +1,11 @@
 const express = require('express');
 const doctorController = require('../controllers/doctorController');
 const router = express.Router();
-const { protect, admin } = require('../middleware/authMiddleware');
+const { protect, authorize } = require('../middleware/authMiddleware');
+
 
 router.post('/register', doctorController.registerDoctor);
-router.get('/pending', protect ,admin , doctorController.getPendingDoctors);
+router.get('/pending', authorize("admin") , doctorController.getPendingDoctors);
 router.put('/validate/:user_id',   doctorController.validateDoctor);
 
 router.post('/', doctorController.createDoctor);

@@ -25,8 +25,29 @@ const logoutController = (req, res) => {
 
 
 
+  const googleCallback= (req, res) => {
+    if (!req.user) {
+      return res.status(401).json({ message: "Authentication failed" });
+    }
+    
+    // Redirection après connexion
+    res.redirect("/dashboard");
+  };
+
+ const getDashboard= (req, res) => {
+    if (!req.user) {
+      return res.status(401).json({ message: "Not authenticated" });
+    }
+    
+    res.json({ user: req.user });
+  };
+
+
+
 module.exports = {
   signupController,
   loginController,
   logoutController,
+  googleCallback,
+  getDashboard
 };
