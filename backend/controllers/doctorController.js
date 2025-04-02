@@ -196,8 +196,7 @@ const getPendingDoctors = async (req, res) => {
 module.exports = {
   registerDoctor,
   validateDoctor,
-   
-  getPendingDoctors,
+   getPendingDoctors,
   getDoctorById,
   getAllDoctors,
   deleteDoctorById,
