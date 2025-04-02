@@ -82,11 +82,33 @@ const deleteDoctorById = async (req, res) => {
 // Register a new doctor (pending admin approval)
 const registerDoctor = async (req, res) => {
   try {
-    const { nom, prenom, email, mot_de_passe, numero_de_telephone, adresse, cin, specialite } = req.body;
+    const { 
+      nom, 
+      prenom, 
+      email, 
+      mot_de_passe, 
+      numero_de_telephone, 
+      adresse, 
+      cin, 
+      specialite, 
+      datedebut, 
+      datefin 
+    } = req.body;
+
+    // Validate if 'datedebut' is provided and is a valid date
+    if (!datedebut || isNaN(Date.parse(datedebut))) {
+      return res.status(400).json({ error: 'Invalid or missing start date (datedebut)' });
+    }
+
+    // 'datefin' can be optional, validate if it's provided and is a valid date
+    if (datefin && isNaN(Date.parse(datefin))) {
+      return res.status(400).json({ error: 'Invalid end date (datefin)' });
+    }
 
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(mot_de_passe, saltRounds);
 
+    // Create the user (Doctor user)
     const user = await User.create({
       nom,
       prenom,
@@ -98,15 +120,25 @@ const registerDoctor = async (req, res) => {
       role: 'doctor',
     });
 
+    // Create the doctor record associated with the user
     const doctor = await Doctor.create({
       user_id: user.user_id,
       specialite,
-      status: 'PENDING',
+      status: 'PENDING', // Default status as pending until admin approval
+      datedebut: new Date(datedebut), // Convert to date object
+      datefin: datefin ? new Date(datefin) : null, // If no datefin provided, set to null
     });
 
-    res.status(201).json({ message: 'Doctor registration request submitted. Awaiting admin approval.', doctor });
+    res.status(201).json({
+      message: 'Doctor registration request submitted. Awaiting admin approval.',
+      doctor,
+    });
   } catch (err) {
-    res.status(500).json({ message: 'Error registering doctor', error: err.message });
+    console.error(err);
+    res.status(500).json({
+      message: 'Error registering doctor',
+      error: err.message,
+    });
   }
 };
 
@@ -164,8 +196,8 @@ const getPendingDoctors = async (req, res) => {
 module.exports = {
   registerDoctor,
   validateDoctor,
-   getPendingDoctors,
-  createDoctor,
+   
+  getPendingDoctors,
   getDoctorById,
   getAllDoctors,
   deleteDoctorById,

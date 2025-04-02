@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
 const { User } = require('./userModel');
 
+
 const Doctor = sequelize.define('Doctor', {
   user_id: {
     type: DataTypes.INTEGER,
@@ -21,6 +22,14 @@ const Doctor = sequelize.define('Doctor', {
     allowNull: false,
     defaultValue: 'PENDING', // Default status is PENDING until admin approves
   },
+  datedebut: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  datefin: {
+    type: DataTypes.DATE,
+    allowNull: true, // Peut être null si pas encore défini
+  },
 }, {
   tableName: 'doctors',
   timestamps: false,
@@ -28,5 +37,7 @@ const Doctor = sequelize.define('Doctor', {
 
 // Associer le docteur à l'utilisateur
 Doctor.belongsTo(User, { foreignKey: 'user_id' });
+
+
 
 module.exports = { Doctor };
