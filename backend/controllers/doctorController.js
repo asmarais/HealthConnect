@@ -136,9 +136,9 @@ const validateDoctor = async (req, res) => {
 
      // Envoyer un email de confirmation au docteur
      if (status === "APPROVED") {
-      await sendEmail(user.email, "account_approved", user.firstname);
+      await sendEmail(user.email, "account_approved", user.nom);
     } else if (status === "REJECTED") {
-      await sendEmail(user.email, "account_rejected", user.firstname);
+      await sendEmail(user.email, "account_rejected", user.nom);
     }
 
     res.status(200).json({ message: `Doctor ${status.toLowerCase()} successfully.`, doctor });
