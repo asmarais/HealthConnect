@@ -1,22 +1,62 @@
 const { Patient } = require('../models/patientModel');
 const { User } = require('../models/userModel');
+const bcrypt = require('bcryptjs');
 
-// Créer un patient
+
+
 exports.createPatient = async (req, res) => {
   try {
-    const { user_id, numero_securite_sociale, allergies } = req.body;
+    const {
+      nom,
+      prenom,
+      email,
+      mot_de_passe,
+      numero_de_telephone,
+      adresse,
+      cin,
+      numero_securite_sociale,
+      allergies
+    } = req.body;
 
-    // Vérifier si l'utilisateur existe
-    const user = await User.findByPk(user_id);
-    if (!user) {
-      return res.status(404).json({ message: "Utilisateur non trouvé" });
+    // Check if the email is already taken
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).json({ error: 'Email déjà utilisé' });
     }
 
-    // Créer le patient
-    const patient = await Patient.create({ user_id, numero_securite_sociale, allergies });
-    res.status(201).json(patient);
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(mot_de_passe, 10);
+
+    // Create the user with the role 'Patient'
+    const user = await User.create({
+      nom,
+      prenom,
+      email,
+      mot_de_passe: hashedPassword,
+      numero_de_telephone,
+      adresse,
+      cin,
+      role: 'user', // User role as 'patient'
+    });
+
+    // Create the patient associated with the user created
+    const patient = await Patient.create({
+      user_id: user.user_id, // Reference the user ID
+      numero_securite_sociale,
+      allergies
+    });
+
+    // Respond with success message and patient data
+    res.status(201).json({
+      message: "Patient créé avec succès",
+      patient,
+    });
   } catch (error) {
-    res.status(500).json({ message: "Erreur lors de la création du patient", error });
+    console.error("Erreur:", error);
+    res.status(500).json({
+      message: "Erreur lors de la création du patient",
+      error: error.message,
+    });
   }
 };
 
