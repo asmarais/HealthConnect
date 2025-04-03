@@ -1,0 +1,226 @@
+@font-face {
+  font-family: 'Medico';
+  src:
+    url('../fonts/Medico.ttf') format('truetype'),
+    url('../fonts/Medico.woff') format('woff'),
+    url('../images/Medico.svg#Medico') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="medico-"], [class*=" medico-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'Medico' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.medico-appoinment:before {
+  content: "\e941";
+}
+.medico-teacher:before {
+  content: "\e942";
+}
+.medico-instagram-logo:before {
+  content: "\e935";
+}
+.medico-grid-world:before {
+  content: "\e936";
+}
+.medico-skype:before {
+  content: "\e937";
+}
+.medico-flickr:before {
+  content: "\e938";
+}
+.medico-youtube:before {
+  content: "\e939";
+}
+.medico-behance:before {
+  content: "\e93a";
+}
+.medico-dribble:before {
+  content: "\e93b";
+}
+.medico-linkedin:before {
+  content: "\e93c";
+}
+.medico-pinterest:before {
+  content: "\e93d";
+}
+.medico-google-plus:before {
+  content: "\e93e";
+}
+.medico-twitter:before {
+  content: "\e93f";
+}
+.medico-facebook:before {
+  content: "\e940";
+}
+.medico-dropdown:before {
+  content: "\e930";
+}
+.medico-previous:before {
+  content: "\e931";
+}
+.medico-next:before {
+  content: "\e932";
+}
+.medico-check:before {
+  content: "\e933";
+}
+.medico-loading:before {
+  content: "\e934";
+}
+.medico-x-ray:before {
+  content: "\e900";
+}
+.medico-sperm:before {
+  content: "\e901";
+}
+.medico-transfusion:before {
+  content: "\e902";
+}
+.medico-microscope:before {
+  content: "\e903";
+}
+.medico-heart-transplant:before {
+  content: "\e904";
+}
+.medico-tooth2:before {
+  content: "\e905";
+}
+.medico-hand:before {
+  content: "\e906";
+}
+.medico-stethoscope:before {
+  content: "\e907";
+}
+.medico-uterus:before {
+  content: "\e908";
+}
+.medico-germs:before {
+  content: "\e909";
+}
+.medico-stomach-1:before {
+  content: "\e90a";
+}
+.medico-bandage:before {
+  content: "\e90b";
+}
+.medico-stomach2:before {
+  content: "\e90c";
+}
+.medico-dental:before {
+  content: "\e90d";
+}
+.medico-chopper:before {
+  content: "\e90e";
+}
+.medico-scale:before {
+  content: "\e90f";
+}
+.medico-blood-pressure:before {
+  content: "\e910";
+}
+.medico-bone-1:before {
+  content: "\e911";
+}
+.medico-folder:before {
+  content: "\e912";
+}
+.medico-charity:before {
+  content: "\e913";
+}
+.medico-test-tube:before {
+  content: "\e914";
+}
+.medico-patient:before {
+  content: "\e915";
+}
+.medico-lung:before {
+  content: "\e916";
+}
+.medico-bone:before {
+  content: "\e917";
+}
+.medico-doctor-1:before {
+  content: "\e918";
+}
+.medico-checklist:before {
+  content: "\e919";
+}
+.medico-hospital-1:before {
+  content: "\e91a";
+}
+.medico-medical-report-1:before {
+  content: "\e91b";
+}
+.medico-hospital:before {
+  content: "\e91c";
+}
+.medico-ambulance:before {
+  content: "\e91d";
+}
+.medico-medical-report:before {
+  content: "\e91e";
+}
+.medico-pills:before {
+  content: "\e91f";
+}
+.medico-syringe:before {
+  content: "\e920";
+}
+.medico-nurse:before {
+  content: "\e921";
+}
+.medico-doctor-female:before {
+  content: "\e922";
+}
+.medico-registration:before {
+  content: "\e923";
+}
+.medico-stretcher:before {
+  content: "\e924";
+}
+.medico-Patient:before {
+  content: "\e925";
+}
+.medico-doctor-male:before {
+  content: "\e926";
+}
+.medico-emergency-Chopper:before {
+  content: "\e927";
+}
+.medico-tooth:before {
+  content: "\e928";
+}
+.medico-heart:before {
+  content: "\e929";
+}
+.medico-neurology:before {
+  content: "\e92a";
+}
+.medico-medicine:before {
+  content: "\e92b";
+}
+.medico-child:before {
+  content: "\e92c";
+}
+.medico-stomach:before {
+  content: "\e92d";
+}
+.medico-virus:before {
+  content: "\e92e";
+}
+.medico-lab-care:before {
+  content: "\e92f";
+}

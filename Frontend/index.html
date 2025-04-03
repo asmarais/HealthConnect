@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Home</title>
+    <!-- Favicon -->
+    <link href="images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+<!-- CDN CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-cz7DsOB8SyowJNxpePymOzqrNZH0MtBI9A/ZF2rnn8wOA6ksFzm5M/ZnEGEcRB+c91TiUSLWi/Ad4ggF74gKTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" integrity="sha512-c42qTSw/wiW5oaDSLFhnmtvkLCpqsU4T0FFk8 poseYTDpY5TXsAYv8Xy6zM0pmzA==" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" integrity="sha512-+EoPw+Fiwh6eSeRK7zwIKG2Z8PnmQ2r0q5F6M+YP+uYJvhx2KLIHP+NH5zTQr+NDnyIxGxgG0pRxMXYTmdH1poQ==" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Work+Sans:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&subset=latin-ext" rel="stylesheet" type="text/css">
+    <!-- Local CSS -->
+    <link href="css/sppagebuilder.css" rel="stylesheet" type="text/css">
+    <link href="css/sppagecontainer.css" rel="stylesheet" type="text/css">
+    <link href="css/spmedical.css" rel="stylesheet" type="text/css">
+    <link href="css/medico-fonts_1.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/style_1.css" rel="stylesheet" type="text/css">
+    <link href="css/style_2.css" rel="stylesheet" type="text/css">
+    <link href="css/spmedical-structure.css" rel="stylesheet" type="text/css">
+    <link href="css/medico-fonts.css" rel="stylesheet" type="text/css">
+    <link href="css/template.css" rel="stylesheet" type="text/css">
+    <link href="css/preset1.css" rel="stylesheet" type="text/css">
+
+    <!-- Inline CSS for Chatbot -->
+    <style>
+        /* Chatbot Icon */
+        .chatbot-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 40px;
+            width: 55px;
+            height: 55px;
+            background-color: #ffffff00;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .chatbot-icon:hover {
+            background-color: #666;
+        }
+
+        .chatbot-icon i {
+            font-size: 24px;
+        }
+
+        /* Chatbot Popup Container */
+        .chatbot-container {
+            position: fixed;
+            bottom: 90px;
+            right: 40px;
+            width: 350px;
+            max-height: 600px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: none; /* Hidden by default */
+            z-index: 1000;
+        }
+
+        /* Chatbot Header */
+        .chatbot-header {
+            background-color: #252C33;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-title {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .chatbot-close {
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        /* Chatbot Body */
+        .chatbot-body {
+            padding: 15px;
+            max-height: 450px;
+            overflow-y: auto;
+        }
+
+        .chatbot-message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+        }
+
+        .chatbot-bot {
+            background-color: #e5e5e5;
+            color: #252C33;
+            text-align: left;
+            max-width: 80%;
+        }
+
+        .chatbot-user {
+            background-color: #252C33;
+            color: #fff;
+            text-align: right;
+            max-width: 80%;
+            margin-left: auto;
+        }
+
+        /* Chatbot Footer */
+        .chatbot-footer {
+            padding: 10px 15px;
+            border-top: 1px solid #e5e5e5;
+            display: flex;
+            align-items: center;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #e5e5e5;
+            border-radius: 5px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            margin-right: 10px;
+            outline: none;
+        }
+
+        .chatbot-input::placeholder {
+            color: #666;
+        }
+
+        .chatbot-send-btn {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 15px;
+            background-color: #252C33;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .chatbot-send-btn:hover {
+            background-color: #666;
+        }
+		.imgchat {
+			max-width: 60% !important; /* Your provided style */
+			height: auto; /* Maintain aspect ratio */
+		}
+        /* Responsive Design */
+        @media (max-width: 767px) {
+            .chatbot-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .chatbot-icon i {
+                font-size: 20px;
+            }
+
+            .chatbot-container {
+                width: 300px;
+                bottom: 80px;
+                left: 10px;
+            }
+
+            .chatbot-title {
+                font-size: 14px;
+                line-height: 18px;
+            }
+
+            .chatbot-message {
+                font-size: 12px;
+                line-height: 16px;
+            }
+
+            .chatbot-input,
+            .chatbot-send-btn {
+                font-size: 12px;
+            }
+
+            .chatbot-footer {
+                flex-direction: column;
+            }
+
+            .chatbot-input {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 8px;
+            }
+
+            .chatbot-send-btn {
+                width: 100%;
+                padding: 8px;
+            }
+			.imgchat {
+				max-width: 50% !important;
+			}
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="js/jquery-noconflict.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.4.1.min.js" integrity="sha256-8zRDZbMNQQk3T7AvV+BFoC6gfs+E6J++EVkKHHH7Hnw=" crossorigin="anonymous"></script>
+    <script src="js/jquery.parallax.js" type="text/javascript"></script>
+    <script src="js/sppagebuilder.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0s8RblL1xO3P2tF7ZcN+VTo5N/NOxT6MMWnMp4=" crossorigin="anonymous"></script>
+    <script src="js/spmedical-search.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzCleJqpZ0QJ9jE1gKhXWg==" crossorigin="anonymous"></script>
+    <script src="js/core.js" type="text/javascript"></script>
+</head>
+
+<body class="site helix-ultimate com-sppagebuilder view-page layout-default task-none itemid-101 en-gb ltr sticky-header layout-fluid offcanvas-init offcanvs-position-right">
+    <div class="body-wrapper">
+        <div class="body-innerwrapper">
+            <section id="sp-top-bar">
+                <div class="container">
+                    <div class="container-inner">
+                        <div class="row">
+                            <div id="sp-top1" class="col-12 col-sm-6 col-lg-6">
+                                <div class="sp-column">
+                                    <ul class="social-icons">
+                                        <li class="social-icon-facebook"><a target="_blank" href="#" aria-label="facebook"><span class="fa fa-facebook" aria-hidden="true"></span></a></li>
+                                        <li class="social-icon-twitter"><a target="_blank" href="#" aria-label="twitter"><span class="fa fa-twitter" aria-hidden="true"></span></a></li>
+                                        <li class="social-icon-google-plus"><a target="_blank" href="#" aria-label="Google Plus"><span class="fa fa-google-plus" aria-hidden="true"></span></a></li>
+                                        <li><a target="_blank" href="#" aria-label="Youtube"><span class="fa fa-youtube-play" aria-hidden="true"></span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="sp-top2" class="col-12 col-sm-6 col-lg-6">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <header id="sp-header">
+                <div class="container">
+                    <div class="container-inner">
+                        <div class="row">
+                            <div id="sp-logo" class="col-6 col-sm-6 col-lg-3">
+                                <div class="sp-column">
+                                    <div class="logo"><a href="index.html"><img class="logo-image" src="images/HealthConnectLogo11.png" alt="Shaper Medico"></a></div>
+                                </div>
+                            </div>
+                            <div id="sp-menu" class="col-6 col-sm-6 col-lg-9">
+                                <div class="sp-column">
+                                    <nav class="sp-megamenu-wrapper" role="navigation">
+                                        <a id="offcanvas-toggler" aria-label="Navigation" class="offcanvas-toggler-right d-block d-lg-none" href="#"><i class="fa fa-bars" aria-hidden="true" title="Navigation"></i></a>
+                                        <ul class="sp-megamenu-parent menu-animation-fade-up d-none d-lg-block">
+                                            <li class="sp-menu-item sp-has-child current-item active"><a href="index.html">Home</a>
+                                                <div class="sp-dropdown sp-dropdown-main sp-menu-right" style="width: 240px;">
+                                                    <div class="sp-dropdown-inner">
+                                                        <ul class="sp-dropdown-items">
+                                                            <li class="sp-menu-item"><a href="index.html/home/home-dental">Home - Dental</a></li>
+                                                            <li class="sp-menu-item"><a href="index.html/home/home-paediatrics">Home - Paediatrics</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="sp-menu-item"><a href="appo.html">Appointments</a></li>
+                                            <li class="sp-menu-item"><a href="doctor.html">Doctors</a></li>
+                                            <li class="sp-menu-item"><a href="schedules.html">Schedules</a></li>
+                                            <li class="sp-menu-item"><a href="departments.html">Departments</a></li>
+                                            <li class="sp-menu-item sp-has-child"><a href="#">Pages</a>
+                                                <div class="sp-dropdown sp-dropdown-main sp-menu-left" style="width: 240px;">
+                                                    <div class="sp-dropdown-inner">
+                                                        <ul class="sp-dropdown-items">
+                                                            <li class="sp-menu-item"><a href="index.html/pages/about">About Us</a></li>
+                                                            <li class="sp-menu-item"><a href="index.html/pages/contact">Contact</a></li>
+                                                            <li class="sp-menu-item"><a href="index.html/pages/medico-icon">Medico Icon</a></li>
+                                                            <li class="sp-menu-item"><a href="login.html">Login</a></li>
+                                                            <li class="sp-menu-item"><a href="Register.html">Registration</a></li>
+                                                            <li class="sp-menu-item"><a href="index.html?Itemid=404">404</a></li>
+                                                            <li class="sp-menu-item"><a href="index.html?tmpl=comingsoon">Coming Soon</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <section id="sp-page-title">
+                <div class="row">
+                    <div id="sp-title" class="col-lg-12">
+                        <div class="sp-column"></div>
+                    </div>
+                </div>
+            </section>
+            <section id="sp-main-body">
+                <div class="row">
+                    <main id="sp-component" class="col-lg-12" role="main">
+                        <div class="sp-column">
+                            <div id="system-message-container"></div>
+                            <div id="sp-page-builder" class="sp-page-builder page-1">
+                                <div class="page-content">
+                                    <section id="section-id-1520246032676" class="sppb-section hero-section">
+                                        <div class="sppb-row-overlay"></div>
+                                        <div class="sppb-row-container">
+                                            <div class="sppb-row">
+                                                <div class="sppb-col-md-12" id="column-wrap-id-1520246032675">
+                                                    <div id="column-id-1520246032675" class="sppb-column">
+                                                        <div class="sppb-column-addons">
+                                                            <div id="sppb-addon-1520499494867" class="sppb-wow fadeInUp clearfix" data-sppb-wow-duration="700ms">
+                                                                <div class="sppb-addon sppb-addon-header sppb-text-left">
+                                                                    <h2 class="sppb-addon-title">the best medical center</h2>
+                                                                </div>
+                                                            </div>
+                                                            <div id="sppb-addon-1520492390120" class="sppb-wow fadeInUp clearfix" data-sppb-wow-duration="700ms" data-sppb-wow-delay="300ms">
+                                                                <div class="sppb-addon sppb-addon-header sppb-text-left">
+                                                                    <h2 class="sppb-addon-title"><strong>Bringing health</strong> to life for the whole family.</h2>
+                                                                </div>
+                                                            </div>
+                                                            <div id="sppb-addon-1520246050007" class="sppb-wow fadeInUp clearfix" data-sppb-wow-duration="700ms" data-sppb-wow-delay="500ms">
+                                                                <div class="sppb-text-left"><a href="#" id="btn-1520246050007" class="sppb-btn sppb-btn-primary sppb-btn-rounded">Get Appointment</a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section id="section-id-1520246050060" class="sppb-section">
+                                        <div class="sppb-row-container">
+                                            <div class="sppb-row">
+                                                <div class="sppb-col-md-12" id="column-wrap-id-1520246050059">
+                                                    <div id="column-id-1520246050059" class="sppb-column">
+                                                        <div class="sppb-column-addons">
+                                                            <div id="sppb-addon-1521709802974" class="clearfix">
+                                                                <div class="sppb-addon sppb-addon-module">
+                                                                    <div class="sppb-addon-content">
+                                                                        <div id="mod-spmedical-search106" class="mod-spmedical-search">
+                                                                            <div class="">
+                                                                                <form class="spmedical-search">
+                                                                                    <div class="input-item input-services">
+                                                                                        <select id="spmedical-departments" class="spmedical-combobox" data-placeholder="Departments">
+                                                                                            <option selected=""></option>
+                                                                                            <option value="1">Rehabilitation Center</option>
+                                                                                            <option value="2">Latest Equipments</option>
+                                                                                            <option value="3">Medical Counseling</option>
+                                                                                            <option value="4">Emergency Services</option>
+                                                                                            <option value="5">Dental Implant</option>
+                                                                                            <option value="6">Cardiology</option>
+                                                                                            <option value="7">Neurology</option>
+                                                                                            <option value="8">Medicine</option>
+                                                                                            <option value="9">Pediatric</option>
+                                                                                            <option value="10">Gastrology</option>
+                                                                                            <option value="11">Laboratory Tests</option>
+                                                                                            <option value="12">Medicilinic</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="input-item">
+                                                                                        <select id="spmedical-specialities" class="spmedical-combobox" data-placeholder="Speciality">
+                                                                                            <option selected=""></option>
+                                                                                            <option value="orthopedic surgery">Orthopedic Surgery</option>
+                                                                                            <option value="m.d">M.D</option>
+                                                                                            <option value="ph.d">Ph.D</option>
+                                                                                            <option value="endocrinologist">Endocrinologist</option>
+                                                                                            <option value="internal medicine">Internal Medicine</option>
+                                                                                            <option value="bariatric surgery">Bariatric surgery</option>
+                                                                                            <option value="endoscopy">Endoscopy</option>
+                                                                                            <option value="nutrition">Nutrition</option>
+                                                                                            <option value="obesity">Obesity</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="input-item">
+                                                                                        <select id="spmedical-specialists" class="spmedical-combobox" data-placeholder="Specialists">
+                                                                                            <option selected=""></option>
+                                                                                            <option value="1">Dr Mangle</option>
+                                                                                            <option value="2">Dr. Carrie Fisher</option>
+                                                                                            <option value="3">Dr Schotz</option>
+                                                                                            <option value="4">Dr. Poe Damarin</option>
+                                                                                            <option value="5">Prof. Albus Dumbledore</option>
+                                                                                            <option value="6">Dr Crownover</option>
+                                                                                            <option value="7">Dr. Remus Lupin</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <input type="hidden" id="url" name="rooturl" value="https://demo.joomshaper.comindex.html">
+                                                                                    <input type="hidden" id="menuid" name="menuid" value="&Itemid=172">
+                                                                                    <div class="input-item">
+                                                                                        <button type="submit" class="btn btn-primary">Find Doctors</button>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+															<br> <br> <br>
+															<section id="section-id-1522421572267" class="sppb-section "
+										data-sppb-parallax="on">
+										<div class="sppb-row-overlay"></div>
+										<div class="sppb-row-container">
+											<div class="sppb-row">
+												<div class="sppb-col-md-6" id="column-wrap-id-1522421572265">
+													<div id="column-id-1522421572265" class="sppb-column">
+														<div class="sppb-column-addons">
+															<div id="sppb-addon-1522421620030" class="clearfix">
+																<div
+																	class="sppb-addon sppb-addon-single-image sppb-text-center ">
+																	<div class="sppb-addon-content">
+																		<div class="sppb-addon-single-image-container">
+																			<img class="sppb-img-responsive"
+																				src="images/about-us-img2.jpg"
+																				alt="Image" title=""></div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="sppb-col-md-6" id="column-wrap-id-1522421572266">
+													<div id="column-id-1522421572266" class="sppb-column">
+														<div class="sppb-column-addons">
+															<div id="sppb-addon-1520402596291" class="clearfix">
+																<div
+																	class="sppb-addon sppb-addon-text-block 0 sppb-text-left custom-text">
+																	<h2 class="sppb-addon-title">Our Mission & Vision
+																	</h2>
+																	<div class="sppb-addon-content">Lorem ipsum dolor
+																		sit amet, consectetur adipisicing elit, sed do
+																		eiusmod tempor incididunt.</div>
+																</div>
+															</div>
+															<div id="sppb-addon-1520404263871" class="clearfix">
+																<div
+																	class="sppb-addon sppb-addon-text-block 0  custom-list custom-list-2 ">
+																	<div class="sppb-addon-content">
+																		<ul>
+																			<li>Cardioplegia</li>
+																			<li>Cardiothoracic</li>
+																			<li>Prescribed Medicine</li>
+																			<li>Emergency Care</li>
+																			<li>24/7 Nursing facility</li>
+																		</ul>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</section><br> <br>
+                                                            <div id="sppb-addon-1520246050063" class="clearfix">
+                                                                <div class="sppb-addon sppb-addon-header sppb-text-center">
+                                                                    <h2 class="sppb-addon-title">Services We Provide</h2>
+                                                                </div>
+                                                            </div>
+                                                            <div id="sppb-addon-1520246050079" class="clearfix">
+                                                                <div class="sppb-addon sppb-addon-text-block 0 sppb-text-center">
+                                                                    <h3 class="sppb-addon-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit seddo eiusmod tempor incididunt ut labore.</h3>
+                                                                    <div class="sppb-addon-content"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="sppb-addon-1522400691731" class="clearfix">
+                                                                <div class="sppb-addon sppb-addon-module">
+                                                                    <div class="sppb-addon-content">
+                                                                        <div class="mod-spmedical-services">
+                                                                            <div class="spmedical-service-list">
+                                                                                <div class="row">
+                                                                                    <div class="spmedical-departments col-md-6">
+                                                                                        <div class="spmedical-department-wrap has-image">
+                                                                                            <a href="departments.html/department/rehabilitation-center">
+                                                                                                <div class="spmedical-department-img-wrap">
+                                                                                                    <img src="images/department12.jpg" alt="">
+                                                                                                </div>
+                                                                                                <div class="spmedical-department-content">
+                                                                                                    <h3 class="spmedical-department-title">Rehabilitation Center</h3>
+                                                                                                    <div class="spmedical-department-details">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</div>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="spmedical-departments col-md-6">
+                                                                                        <div class="spmedical-department-wrap has-image">
+                                                                                            <a href="departments.html/department/latest-equipments">
+                                                                                                <div class="spmedical-department-img-wrap">
+                                                                                                    <img src="images/department11.jpg" alt="">
+                                                                                                </div>
+                                                                                                <div class="spmedical-department-content">
+                                                                                                    <h3 class="spmedical-department-title">Latest Equipments</h3>
+                                                                                                    <div class="spmedical-department-details">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</div>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="spmedical-departments col-md-6">
+                                                                                        <div class="spmedical-department-wrap has-image">
+                                                                                            <a href="departments.html/department/medical-counseling">
+                                                                                                <div class="spmedical-department-img-wrap">
+                                                                                                    <img src="images/department10.jpg" alt="">
+                                                                                                </div>
+                                                                                                <div class="spmedical-department-content">
+                                                                                                    <h3 class="spmedical-department-title">Medical Counseling</h3>
+                                                                                                    <div class="spmedical-department-details">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</div>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="spmedical-departments col-md-6">
+                                                                                        <div class="spmedical-department-wrap has-image">
+                                                                                            <a href="departments.html/department/emergency-services">
+                                                                                                <div class="spmedical-department-img-wrap">
+                                                                                                    <img src="images/department9.jpg" alt="">
+                                                                                                </div>
+                                                                                                <div class="spmedical-department-content">
+                                                                                                    <h3 class="spmedical-department-title">Emergency Services</h3>
+                                                                                                    <div class="spmedical-department-details">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</div>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <script data-cfasync="false" src="js/email-decode.min.js"></script>
+                                                                        <script>
+                                                                            jQuery(function ($) {
+                                                                                'use strict';
+                                                                                $('.spmedical-departments .spmedical-department-wrap a').on('hover', function (e) {
+                                                                                    $(this).find('.spmedical-department-details').slideToggle(300);
+                                                                                });
+                                                                            });
+                                                                        </script>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="sppb-addon-1520318867970" class="clearfix">
+                                                                <div class="sppb-text-center"><a href="departments.html" id="btn-1520318867970" class="sppb-btn sppb-btn-primary sppb-btn-rounded">VIEW MORE</a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section id="section-id-1522314846913" class="sppb-section">
+                                        <div class="sppb-row-container">
+                                            <div class="sppb-row">
+                                                <div class="sppb-col-md-12" id="column-wrap-id-1522314846912">
+                                                    <div id="column-id-1522314846912" class="sppb-column">
+                                                        <div class="sppb-column-addons">
+                                                            <div id="sppb-addon-1522400427546" class="clearfix">
+                                                                <div class="sppb-addon-divider-wrap">
+                                                                    <div class="sppb-divider sppb-divider-border"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="sppb-addon-1522314846922" class="clearfix">
+                                                                <div class="sppb-addon sppb-addon-header sppb-text-center">
+                                                                    <h2 class="sppb-addon-title">Our Specialists</h2>
+                                                                </div>
+                                                            </div>
+                                                            <div id="sppb-addon-1522314846927" class="clearfix">
+                                                                <div class="sppb-addon sppb-addon-text-block 0 sppb-text-center">
+                                                                    <h3 class="sppb-addon-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit seddo eiusmod tempor incididunt ut labore.</h3>
+                                                                    <div class="sppb-addon-content"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="sppb-addon-1522314846916" class="clearfix">
+                                                                <div class="sppb-addon sppb-addon-module">
+                                                                    <div class="sppb-addon-content">
+                                                                        <div class="mod-spmedical-specialists spmedical">
+                                                                            <div class="spmedical-specialist-list">
+                                                                                <div class="spmedical-row">
+                                                                                    <div class="col-sm-6 spmedical-col-lg-3">
+                                                                                        <div class="spmedical-specialist">
+                                                                                            <a href="Profildoctor.html">
+                                                                                                <img src="images/specialists-04.jpg" alt="">
+                                                                                            </a>
+                                                                                            <div class="medical-specialist-info">
+                                                                                                <div class="medical-specialist-name">
+                                                                                                    <a href="Profildoctor.html">Dr Mangle</a>
+                                                                                                    <small class="medical-specialist-designation">Orthopedic Surgery</small>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-sm-6 spmedical-col-lg-3">
+                                                                                        <div class="spmedical-specialist">
+                                                                                            <a href="doctor.html/specialist/dr-carrie-fisher">
+                                                                                                <img src="images/specialists-02.jpg" alt="">
+                                                                                            </a>
+                                                                                            <div class="medical-specialist-info">
+                                                                                                <div class="medical-specialist-name">
+                                                                                                    <a href="doctor.html/specialist/dr-carrie-fisher">Dr. Carrie Fisher</a>
+                                                                                                    <small class="medical-specialist-designation">Endocrinologist</small>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-sm-6 spmedical-col-lg-3">
+                                                                                        <div class="spmedical-specialist">
+                                                                                            <a href="doctor.html/specialist/dr-remus-lupin">
+                                                                                                <img src="images/specialists-03.jpg" alt="">
+                                                                                            </a>
+                                                                                            <div class="medical-specialist-info">
+                                                                                                <div class="medical-specialist-name">
+                                                                                                    <a href="doctor.html/specialist/dr-remus-lupin">Dr Schotz</a>
+                                                                                                    <small class="medical-specialist-designation">Internal Medicine</small>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-sm-6 spmedical-col-lg-3">
+                                                                                        <div class="spmedical-specialist">
+                                                                                            <a href="doctor.html/specialist/dr-poe-damarin">
+                                                                                                <img src="images/specialists-05.jpg" alt="">
+                                                                                            </a>
+                                                                                            <div class="medical-specialist-info">
+                                                                                                <div class="medical-specialist-name">
+                                                                                                    <a href="doctor.html/specialist/dr-poe-damarin">Dr. Poe Damarin</a>
+                                                                                                    <small class="medical-specialist-designation">Orthopedic Surgery</small>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="sppb-addon-1522314846919" class="clearfix">
+                                                                <div class="sppb-text-center"><a href="doctor.html" id="btn-1522314846919" class="sppb-btn sppb-btn-primary sppb-btn-rounded">VIEW MORE</a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section id="section-id-1520321814063" class="sppb-section">
+                                        <div class="sppb-row-container">
+                                            <div class="sppb-row">
+                                                <div class="sppb-col-md-12" id="column-wrap-id-1520321814062">
+                                                    <div id="column-id-1520321814062" class="sppb-column">
+                                                        <div class="sppb-column-addons">
+                                                            <div id="sppb-addon-1522400560450" class="clearfix">
+                                                                <div class="sppb-addon-divider-wrap">
+                                                                    <div class="sppb-divider sppb-divider-border"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="sppb-addon-1520326442203" class="clearfix">
+                                                                <div id="sppb-testimonial-pro-1520326442203" data-interval="5000" class="sppb-carousel sppb-testimonial-pro sppb-slide sppb-text-center" data-sppb-ride="sppb-carousel">
+                                                                    <span class="fa fa-quote-left"></span>
+                                                                    <div class="sppb-carousel-inner">
+                                                                        <div class="sppb-item active">
+                                                                            <div class="sppb-testimonial-message">“Kindness and Motivation Tips Challenge Groups to Make A Difference win the contest. Either put up a prize yourself.”</div>
+                                                                            <div class="sppb-addon-testimonial-pro-footer">
+                                                                                <div class="img-wrapper"><img src="images/testimonial-01.jpg" height="60" width="60" class="sppb-avatar-circle" alt="Nancy Dyer"></div>
+                                                                                <h4 class="sppb-testimonial-name">Nancy Dyer</h4>
+                                                                                <p class="sppb-addon-testimonial-pro-client-url">Marketing Executive, Bla Bla</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="sppb-item">
+                                                                            <div class="sppb-testimonial-message">“Kindness and Motivation Tips Challenge Groups to Make A Difference win the contest. Either put up a prize yourself.”</div>
+                                                                            <div class="sppb-addon-testimonial-pro-footer">
+                                                                                <div class="img-wrapper"><img src="images/testimonial-02.jpg" height="60" width="60" class="sppb-avatar-circle" alt="Amdia Nancy"></div>
+                                                                                <h4 class="sppb-testimonial-name">Amdia Nancy</h4>
+                                                                                <p class="sppb-addon-testimonial-pro-client-url">Marketing Executive, Bla Bla</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="sppb-item">
+                                                                            <div class="sppb-testimonial-message">“Kindness and Motivation Tips Challenge Groups to Make A Difference win the contest. Either put up a prize yourself.”</div>
+                                                                            <div class="sppb-addon-testimonial-pro-footer">
+                                                                                <div class="img-wrapper"><img src="images/testimonial-03.jpg" height="60" width="60" class="sppb-avatar-circle" alt="Eric Johnson"></div>
+                                                                                <h4 class="sppb-testimonial-name">Eric Johnson</h4>
+                                                                                <p class="sppb-addon-testimonial-pro-client-url">Marketing Executive, Bla Bla</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <a href="#sppb-testimonial-pro-1520326442203" class="left sppb-carousel-control" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                                                                    <a href="#sppb-testimonial-pro-1520326442203" class="right sppb-carousel-control" data-slide="next"><i class="fa fa-angle-right"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </section>
+            <section id="sp-bottom">
+                <div class="container">
+                    <div class="container-inner">
+                        <div class="row">
+                            <div id="sp-bottom1" class="col-sm-6 col-md-6 col-lg-4">
+                                <div class="sp-column">
+                                    <div class="sp-module">
+                                        <div class="sp-module-content">
+                                            <div class="mod-sppagebuilder sp-page-builder" data-module_id="102">
+                                                <div class="page-content">
+                                                    <div id="section-id-1520318869805" class="sppb-section">
+                                                        <div class="sppb-container-inner">
+                                                            <div class="sppb-row">
+                                                                <div class="sppb-col-md-12" id="column-wrap-id-1520318869804">
+                                                                    <div id="column-id-1520318869804" class="sppb-column">
+                                                                        <div class="sppb-column-addons">
+                                                                            <div id="sppb-addon-1520331120128" class="clearfix">
+                                                                                <div class="sppb-addon sppb-addon-single-image sppb-text-left">
+                                                                                    <div class="sppb-addon-content">
+                                                                                        <div class="sppb-addon-single-image-container">
+                                                                                            <a href="#"><img class="sppb-img-responsive" src="images/logo_1.svg" alt="Image" title=""></a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div id="sppb-addon-1520331120125" class="clearfix">
+                                                                                <div class="sppb-addon sppb-addon-text-block 0">
+                                                                                    <div class="sppb-addon-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore.</div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div id="sppb-addon-1520318869808" class="clearfix">
+                                                                                <div class="sppb-addon sppb-addon-feature sppb-text-left">
+                                                                                    <div class="sppb-addon-content">
+                                                                                        <div class="sppb-media">
+                                                                                            <div class="pull-left">
+                                                                                                <div class="sppb-icon">
+                                                                                                    <span class="sppb-icon-container"><i class="fa fa-home"></i></span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="sppb-media-body">
+                                                                                                <div class="sppb-addon-text">14001 Fake Street NW,<br>Washington, DC 20036</div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div id="sppb-addon-1520319563713" class="clearfix">
+                                                                                <div class="sppb-addon sppb-addon-feature sppb-text-left">
+                                                                                    <div class="sppb-addon-content">
+                                                                                        <div class="sppb-media">
+                                                                                            <div class="pull-left">
+                                                                                                <div class="sppb-icon">
+                                                                                                    <span class="sppb-icon-container"><i class="fa fa-envelope"></i></span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="sppb-media-body">
+                                                                                                <div class="sppb-addon-text"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9beffef6ebf7faeffeb5f6feffdbfee3faf6ebf7feb5f8f4f6">[email&nbsp;protected]</a></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div id="sppb-addon-1520319563710" class="clearfix">
+                                                                                <div class="sppb-addon sppb-addon-feature sppb-text-left">
+                                                                                    <div class="sppb-addon-content">
+                                                                                        <div class="sppb-media">
+                                                                                            <div class="pull-left">
+                                                                                                <div class="sppb-icon">
+                                                                                                    <span class="sppb-icon-container"><i class="fa fa-phone-square"></i></span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="sppb-media-body">
+                                                                                                <div class="sppb-addon-text">Hotline - (202) 555-5555</div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sp-bottom2" class="col-sm-6 col-md-6 col-lg-3">
+                                <div class="sp-column">
+                                    <div class="sp-module">
+                                        <h3 class="sp-module-title">Opening Hours</h3>
+                                        <div class="sp-module-content">
+                                            <div class="mod-sppagebuilder sp-page-builder" data-module_id="104">
+                                                <div class="page-content">
+                                                    <div id="section-id-1520321199414" class="sppb-section">
+                                                        <div class="sppb-container-inner">
+                                                            <div class="sppb-row">
+                                                                <div class="sppb-col-md-12" id="column-wrap-id-1520321199413">
+                                                                    <div id="column-id-1520321199413" class="sppb-column">
+                                                                        <div class="sppb-column-addons">
+                                                                            <div id="sppb-addon-1520321199417" class="clearfix">
+                                                                                <div class="sppb-addon sppb-addon-text-block 0">
+                                                                                    <div class="sppb-addon-content">
+                                                                                        Monday : 8am–6pm<br>Tuesday : 8am–6pm<br>Wednesday : 8am–6pm<br>Thursday : 8am–6pm<br>Friday : 10am–4pm<br><br><a href="#">Check Schedule</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sp-bottom3" class="col-sm-6 col-md-6 col-lg-3">
+                                <div class="sp-column">
+                                    <div class="sp-module">
+                                        <h3 class="sp-module-title">Quick Links</h3>
+                                        <div class="sp-module-content">
+                                            <ul class="menu">
+                                                <li class="item-164"><a href="#">About Us</a></li>
+                                                <li class="item-165"><a href="#">Specialists</a></li>
+                                                <li class="item-166"><a href="#">Appointment</a></li>
+                                                <li class="item-167"><a href="#">Privacy Policy</a></li>
+                                                <li class="item-168"><a href="#">Insurance Policy</a></li>
+                                                <li class="item-169"><a href="#">Contact Us</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="sp-module">
+                                        <div class="sp-module-content">
+                                            <div class="mod-sppagebuilder sp-page-builder" data-module_id="105">
+                                                <div class="page-content">
+                                                    <div id="section-id-1520328386288" class="sppb-section">
+                                                        <div class="sppb-container-inner">
+                                                            <div class="sppb-row">
+                                                                <div class="sppb-col-md-12" id="column-wrap-id-1520328386287">
+                                                                    <div id="column-id-1520328386287" class="sppb-column">
+                                                                        <div class="sppb-column-addons">
+                                                                            <div id="sppb-addon-1520328386291" class="clearfix">
+                                                                                <div class="sppb-addon sppb-addon-social-media">
+                                                                                    <div class="social-media-text-wrap">
+                                                                                        <a href="#" target="_blank" data-toggle="tooltip" data-placement="top"><i class="fa fa-facebook"></i></a>
+                                                                                        <a href="#" target="_blank" data-toggle="tooltip" data-placement="top"><i class="fa fa-twitter"></i></a>
+                                                                                        <a href="#" target="_blank" data-toggle="tooltip" data-placement="top"><i class="fa fa-google-plus"></i></a>
+                                                                                        <a href="#" target="_blank" data-toggle="tooltip" data-placement="top"><i class="fa fa-youtube-play"></i></a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sp-bottom4" class="col-sm-6 col-md-6 col-lg-2">
+                                <div class="sp-column">
+                                    <div class="sp-module">
+                                        <h3 class="sp-module-title">Services</h3>
+                                        <div class="sp-module-content">
+                                            <ul class="menu">
+                                                <li class="item-116"><a href="#">Primary Care</a></li>
+                                                <li class="item-163"><a href="#">Skin Care</a></li>
+                                                <li class="item-117"><a href="#">Urgent Care</a></li>
+                                                <li class="item-118"><a href="#">Orthopedics</a></li>
+                                                <li class="item-119"><a href="#">Eye Care</a></li>
+                                                <li class="item-120"><a href="#">Heart Care</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer id="sp-footer">
+                <div class="container">
+                    <div class="container-inner">
+                        <div class="row">
+                            <div id="sp-footer1" class="col-lg-12">
+                                <div class="sp-column"><span class="sp-copyright">Copyright © 2018 MEDICO <span class="part2">Design & Development By <a target="_blank" href="https://www.joomshaper.com">JoomShaper</a></span></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Off Canvas Menu -->
+    <div class="offcanvas-overlay"></div>
+    <div class="offcanvas-menu">
+        <a href="#" class="close-offcanvas"><span class="fa fa-remove"></span></a>
+        <div class="offcanvas-inner">
+            <div class="sp-module">
+                <div class="sp-module-content">
+                    <ul class="menu">
+                        <li class="item-101 default current active menu-deeper menu-parent"><a href="index.html">Home<span class="menu-toggler"></span></a>
+                            <ul class="menu-child">
+                                <li class="item-170"><a href="index.html/home/home-dental">Home - Dental</a></li>
+                                <li class="item-171"><a href="index.html/home/home-paediatrics">Home - Paediatrics</a></li>
+                            </ul>
+                        </li>
+                        <li class="item-177"><a href="appo.html">Appointments</a></li>
+                        <li class="item-172"><a href="doctor.html">Doctors</a></li>
+                        <li class="item-176"><a href="schedules.html">Schedules</a></li>
+                        <li class="item-162"><a href="departments.html">Departments</a></li>
+                        <li class="item-108 menu-deeper menu-parent"><a href="#">Pages<span class="menu-toggler"></span></a>
+                            <ul class="menu-child">
+                                <li class="item-107"><a href="index.html/pages/about">About Us</a></li>
+                                <li class="item-113"><a href="index.html/pages/contact">Contact</a></li>
+                                <li class="item-179"><a href="index.html/pages/medico-icon">Medico Icon</a></li>
+                                <li class="item-109"><a href="index.html/pages/login">Login</a></li>
+                                <li class="item-110"><a href="Register.html">Registration</a></li>
+                                <li class="item-111"><a href="index.html?Itemid=404">404</a></li>
+                                <li class="item-112"><a href="index.html?tmpl=comingsoon">Coming Soon</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Icon and Popup -->
+    <div class="chatbot-icon" id="chatbot-toggle">
+		<img class="imgchat" src="images/chatbot.png" alt="HealthBuddy Chatbot">
+	</div>
+    <div class="chatbot-container" id="chatbot-popup">
+        <div class="chatbot-header">
+            <h2 class="chatbot-title">HealthBuddy</h2>
+            <button class="chatbot-close" id="chatbot-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chatbot-body" id="chat-messages">
+            <!-- Message de bienvenue -->
+            <div class="chatbot-message chatbot-bot">
+                <div class="medical-response">
+                    <p>Bonjour ! Je suis HealthBuddy. Décrivez vos symptômes et je vous orienterai vers le spécialiste approprié.</p>
+                </div>
+            </div>
+        
+            <!-- Message de l'utilisateur -->
+            <div class="chatbot-message chatbot-user">
+                <div class="user-response">
+                    <p>J'ai des démangeaisons et des plaques rouges sur la peau depuis 2 jours.</p>
+                </div>
+            </div>
+        
+            <!-- Réponse du chatbot : Analyse des symptômes -->
+            <div class="chatbot-message chatbot-bot">
+                <div class="medical-response">
+                    <p>📌 Analyse des symptômes :</p>
+                    <ul>
+                        <li>🔎 Symptômes détectés : Démangeaisons, plaques rouges.</li>
+                        <li>⏳ Durée : 48 heures.</li>
+                    </ul>
+                </div>
+            </div>
+        
+            <!-- Réponse du chatbot : Hypothèses de maladies -->
+            <div class="chatbot-message chatbot-bot">
+                <div class="medical-response">
+                    <p>🩺 Hypothèses possibles :</p>
+                    <ul>
+                        <li>✅ <strong>Réaction allergique</strong> (probable) – Peut être due à un contact avec un allergène.</li>
+                        <li>✅ <strong>Dermatite de contact</strong> (possible) – Irritation causée par un produit ou un vêtement.</li>
+                    </ul>
+                    <p>⚠️ Ceci est une suggestion basée sur vos informations. Consultez un médecin pour un diagnostic précis.</p>
+                </div>
+            </div>
+        
+            <!-- Réponse du chatbot : Orientation vers un spécialiste -->
+            <div class="chatbot-message chatbot-bot">
+                <div class="medical-response">
+                    <p>👨‍⚕️ Recommandation :</p>
+                    <p>Je vous recommande de consulter un dermatologue. Voici des spécialistes disponibles :</p>
+                    <ul>
+                        <li>📍 <strong>Dr. Laura Mercier</strong> – Dermatologie, 📞 05 67 89 01 23</li>
+                        <li>📍 <strong>Dr. Clara Dupuis</strong> – Allergologie, 📞 01 01 23 45 67</li>
+                    </ul>
+                </div>
+            </div>
+        
+            <!-- Message de l'utilisateur -->
+            <div class="chatbot-message chatbot-user">
+                <div class="user-response">
+                    <p>Et si mes symptômes s'aggravent ?</p>
+                </div>
+            </div>
+        
+            <!-- Réponse du chatbot : Avertissement en cas d'urgence -->
+            <div class="chatbot-message chatbot-bot">
+                <div class="medical-response">
+                    <p>🚨 Attention :</p>
+                    <p>Si vous ressentez un gonflement du visage, des difficultés respiratoires ou des douleurs intenses, contactez immédiatement les urgences au <strong>15</strong> ou rendez-vous à l'hôpital le plus proche.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chatbot-footer">
+            <input type="text" class="chatbot-input" id="user-input" placeholder="Décrivez vos symptômes...">
+            <button class="chatbot-send-btn" id="send-btn">Envoyer</button>
+        </div>
+    </div>
+<!-- Ajoutez ce script JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const chatInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        const chatBody = document.getElementById('chat-messages');
+    
+        async function sendMessage() {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+    
+            // Ajouter le message utilisateur
+            addMessage(userMessage, 'user');
+            chatInput.value = '';
+    
+            try {
+                const response = await fetch('http://localhost:5000/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: userMessage })
+                });
+    
+                const data = await response.json();
+                addMedicalResponse(data.response);
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+                addMessage("Désolé, une erreur s'est produite. Veuillez réessayer.", 'bot');
+            }
+        }
+    
+        function addMedicalResponse(responseText) {
+            // Analyser la réponse structurée du backend
+            const response = JSON.parse(responseText);
+            
+            let htmlContent = `
+                <div class="medical-response">
+                    <h4>🔍 Symptômes analysés :</h4>
+                    <p>${response.symptoms}</p>
+    
+                    <div class="predictions">
+                        <h5>Hypothèses diagnostiques :</h5>
+                        <ul>`;
+    
+            response.diagnoses.forEach(diagnosis => {
+                htmlContent += `
+                            <li>
+                                <strong>${diagnosis.condition}</strong> (${diagnosis.probability})
+                                <div class="explanation">${diagnosis.explanation}</div>
+                            </li>`;
+            });
+    
+            htmlContent += `
+                        </ul>
+                    </div>`;
+    
+            if (response.doctors.length > 0) {
+                htmlContent += `
+                    <div class="recommendation">
+                        <h5>👨⚕️ Recommandation spécialiste :</h5>
+                        <div class="doctors-list">`;
+                
+                response.doctors.forEach(doctor => {
+                    htmlContent += `
+                            <div class="doctor-card">
+                                <div class="doctor-name">${doctor.name}</div>
+                                <div class="specialty">${doctor.specialty}</div>
+                                <div class="clinic">${doctor.clinic}</div>
+                                <div class="phone">📞 ${doctor.phone}</div>
+                            </div>`;
+                });
+    
+                htmlContent += `
+                        </div>
+                    </div>`;
+            }
+    
+            htmlContent += `
+                    <div class="disclaimer">
+                        ⚠️ ${response.warning}
+                    </div>
+                </div>`;
+    
+            addMessage(htmlContent, 'bot');
+        }
+    
+        function addMessage(content, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chatbot-message chatbot-${sender}`;
+            messageDiv.innerHTML = content;
+            chatBody.appendChild(messageDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+    
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    });
+    </script>
+    <!-- Scripts -->
+    <script data-cfasync="false" src="js/email-decode.min.js"></script>
+    <script>
+        (function () {
+            function c() {
+                var b = a.contentDocument || a.contentWindow.document;
+                if (b) {
+                    var d = b.createElement('script');
+                    d.innerHTML = "window.__CF$cv$params={r:'915edd815b490e60',t:'MTc0MDIyNjE0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                    b.getElementsByTagName('head')[0].appendChild(d);
+                }
+            }
+            if (document.body) {
+                var a = document.createElement('iframe');
+                a.height = 1;
+                a.width = 1;
+                a.style.position = 'absolute';
+                a.style.top = 0;
+                a.style.left = 0;
+                a.style.border = 'none';
+                a.style.visibility = 'hidden';
+                document.body.appendChild(a);
+                if ('loading' !== document.readyState) c();
+                else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c);
+                else {
+                    var e = document.onreadystatechange || function () {};
+                    document.onreadystatechange = function (b) {
+                        e(b);
+                        'loading' !== document.readyState && (document.onreadystatechange = e, c());
+                    };
+                }
+            }
+        })();
+
+        // Chatbot Toggle Functionality
+        jQuery(document).ready(function ($) {
+            $('#chatbot-toggle').on('click', function () {
+                $('#chatbot-popup').toggle();
+            });
+
+            $('#chatbot-close').on('click', function () {
+                $('#chatbot-popup').hide();
+            });
+        });
+    </script>
+</body>
+
+</html>
