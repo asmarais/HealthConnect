@@ -22,6 +22,11 @@ const Patient = sequelize.define('Patient', {
     type: DataTypes.TEXT,
     allowNull: true, // Peut être null si aucune allergie
   },
+  score: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 1
+  }
 }, {
   tableName: 'patients',
   timestamps: false,

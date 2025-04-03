@@ -17,7 +17,7 @@ const { User, Role } = require('./models/userModel');
 const { Doctor } = require('./models/doctorModel'); // 📌 Déclaration unique
 const { Patient } = require('./models/patientModel'); // 📌 Importer Patient
 const { RendezVous } = require('./models/rendezVousModel'); // 📌 Importer RendezVous
-
+const { scheduleRappels } = require("./controllers/rendezVousController");
 const app = express();
 
 // Middleware
@@ -70,7 +70,8 @@ const syncDatabase = async () => {
 
 // Exécuter la synchronisation puis créer l'admin
 syncDatabase().then(() => createAdmin());
-
+// Lancer la planification des rappels lors du démarrage du serveur
+scheduleRappels();
 // Configuration de la session
 app.use(
   session({
@@ -93,6 +94,8 @@ app.use('/api/rendezvous', rendezVousRoutes); // 📌 Ajouter la route RendezVou
 
 // Gestion des erreurs
 app.use(errorHandler);
+
+
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
