@@ -95,15 +95,15 @@ const registerDoctor = async (req, res) => {
       datefin 
     } = req.body;
 
-    // Validate if 'datedebut' is provided and is a valid date
-    if (!datedebut || isNaN(Date.parse(datedebut))) {
-      return res.status(400).json({ error: 'Invalid or missing start date (datedebut)' });
-    }
+    // // Validate if 'datedebut' is provided and is a valid date
+    // if (!datedebut || isNaN(Date.parse(datedebut))) {
+    //   return res.status(400).json({ error: 'Invalid or missing start date (datedebut)' });
+    // }
 
-    // 'datefin' can be optional, validate if it's provided and is a valid date
-    if (datefin && isNaN(Date.parse(datefin))) {
-      return res.status(400).json({ error: 'Invalid end date (datefin)' });
-    }
+    // // 'datefin' can be optional, validate if it's provided and is a valid date
+    // if (datefin && isNaN(Date.parse(datefin))) {
+    //   return res.status(400).json({ error: 'Invalid end date (datefin)' });
+    // }
 
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(mot_de_passe, saltRounds);
@@ -125,8 +125,8 @@ const registerDoctor = async (req, res) => {
       user_id: user.user_id,
       specialite,
       status: 'PENDING', // Default status as pending until admin approval
-      datedebut: new Date(datedebut), // Convert to date object
-      datefin: datefin ? new Date(datefin) : null, // If no datefin provided, set to null
+      datedebut: typeof datedebut === 'string' ? datedebut : null, // Ensure it's a string
+  datefin: typeof datefin === 'string' ? datefin : null, // Ensure it's a string or null
     });
 
     res.status(201).json({

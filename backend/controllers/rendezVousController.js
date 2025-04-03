@@ -195,3 +195,48 @@ exports.scheduleRappels = () => {
   setInterval(envoyerRappelsRendezVous, 24 * 60 * 60 * 1000); // Toutes les 24h
 };
 
+
+const APPOINTMENT_DURATION = 45 * 60 * 1000; // Durée d'un rendez-vous en millisecondes (45 minutes)
+const TIME_INTERVAL = 5 * 60 * 1000; // Intervalle de 5 minutes en millisecondes
+
+exports.getOptimizedRendezVous = async (req, res) => {
+  try {
+    const doctors = await Doctor.findAll();
+    let nextAppointments = [];
+
+    for (const doctor of doctors) {
+      // Récupérer les rendez-vous triés par date pour ce docteur
+      const appointments = await RendezVous.findAll({
+        where: { medecin_id: doctor.user_id },
+        order: [["date_debut", "ASC"]],
+      });
+
+      let startTime = new Date();
+      startTime.setHours(parseInt(doctor.datedebut.split(':')[0]), parseInt(doctor.datedebut.split(':')[1]), 0, 0);
+      
+      let endTime = new Date();
+      endTime.setHours(parseInt(doctor.datefin.split(':')[0]), parseInt(doctor.datefin.split(':')[1]), 0, 0);
+
+      if (appointments.length === 0) {
+        // Si aucun rendez-vous n'est trouvé, le premier créneau disponible est `datedebut`
+        nextAppointments.push({ doctorId: doctor.user_id, nextAvailableSlot: startTime });
+      } else {
+        // Si le médecin a des rendez-vous, calculer les créneaux disponibles
+        let lastAppointmentEnd = new Date(appointments[appointments.length - 1].date_fin);
+
+        // Calculer le prochain créneau à partir de la fin du dernier rendez-vous + intervalle de 5 minutes
+        let nextAvailableTime = new Date(lastAppointmentEnd.getTime() + TIME_INTERVAL);
+
+        // Vérifier si le prochain créneau est dans les heures de travail
+        if (nextAvailableTime.getTime() + APPOINTMENT_DURATION <= endTime.getTime()) {
+          nextAppointments.push({ doctorId: doctor.user_id, nextAvailableSlot: nextAvailableTime });
+        }
+      }
+    }
+
+    res.status(200).json(nextAppointments);
+  } catch (error) {
+    res.status(500).json({ message: "Erreur lors de la récupération des prochains créneaux disponibles", error });
+  }
+};
+

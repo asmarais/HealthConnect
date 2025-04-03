@@ -23,12 +23,12 @@ const Doctor = sequelize.define('Doctor', {
     defaultValue: 'PENDING', // Default status is PENDING until admin approves
   },
   datedebut: {
-    type: DataTypes.DATE,
+    type: DataTypes.TIME,
     allowNull: false,
   },
   datefin: {
-    type: DataTypes.DATE,
-    allowNull: true, // Peut être null si pas encore défini
+    type: DataTypes.TIME,
+    allowNull: false,
   },
 }, {
   tableName: 'doctors',
