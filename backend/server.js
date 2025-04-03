@@ -10,13 +10,13 @@ const errorHandler = require('./middleware/errorHandler');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const doctorRoutes = require('./routes/doctorRoutes');
-const patientRoutes = require('./routes/patientRoutes'); // 📌 Ajouter route Patient
-const rendezVousRoutes = require('./routes/rendezVousRoutes'); // 📌 Ajouter route RendezVous
+const patientRoutes = require('./routes/patientRoutes');
+const rendezVousRoutes = require('./routes/rendezVousRoutes');
 
 const { User, Role } = require('./models/userModel'); 
-const { Doctor } = require('./models/doctorModel'); // 📌 Déclaration unique
-const { Patient } = require('./models/patientModel'); // 📌 Importer Patient
-const { RendezVous } = require('./models/rendezVousModel'); // 📌 Importer RendezVous
+const { Doctor } = require('./models/doctorModel'); 
+const { Patient } = require('./models/patientModel');
+const { RendezVous } = require('./models/rendezVousModel');
 const { scheduleRappels } = require("./controllers/rendezVousController");
 const app = express();
 
@@ -45,12 +45,12 @@ const createAdmin = async () => {
         role: Role.ADMIN,
       });
 
-      console.log('✅ Admin user created successfully.');
+      console.log('Admin user created successfully.');
     } else {
-      console.log('✅ Admin user already exists.');
+      console.log('Admin user already exists.');
     }
   } catch (err) {
-    console.error('❌ Error creating admin:', err);
+    console.error('Error creating admin:', err);
   }
 };
 
@@ -62,9 +62,9 @@ const syncDatabase = async () => {
     await Patient.sync();
     await RendezVous.sync();
     
-    console.log('✅ Database tables synced successfully.');
+    console.log(' Database tables synced successfully.');
   } catch (err) {
-    console.error('❌ Error syncing database:', err);
+    console.error(' Error syncing database:', err);
   }
 };
 
