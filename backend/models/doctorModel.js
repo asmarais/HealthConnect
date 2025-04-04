@@ -30,6 +30,13 @@ const Doctor = sequelize.define('Doctor', {
     type: DataTypes.TIME,
     allowNull: false,
   },
+  image_url: {
+    type: DataTypes.STRING, // Stockera l'URL de l'image
+    allowNull: true,
+    validate: {
+      isUrl: true // Validation optionnelle pour s'assurer que c'est une URL valide
+    }
+  },
 }, {
   tableName: 'doctors',
   timestamps: false,

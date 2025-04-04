@@ -92,7 +92,8 @@ const registerDoctor = async (req, res) => {
       cin, 
       specialite, 
       datedebut, 
-      datefin 
+      datefin ,
+      image_url
     } = req.body;
 
     // // Validate if 'datedebut' is provided and is a valid date
@@ -118,6 +119,7 @@ const registerDoctor = async (req, res) => {
       adresse,
       cin,
       role: 'doctor',
+      image_url,
     });
 
     // Create the doctor record associated with the user
@@ -127,6 +129,7 @@ const registerDoctor = async (req, res) => {
       status: 'PENDING', // Default status as pending until admin approval
       datedebut: typeof datedebut === 'string' ? datedebut : null, // Ensure it's a string
   datefin: typeof datefin === 'string' ? datefin : null, // Ensure it's a string or null
+  image_url,
     });
 
     res.status(201).json({
