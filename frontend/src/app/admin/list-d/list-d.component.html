@@ -7,46 +7,104 @@
     <thead>
       <tr>
         <th>Nom</th>
-        <th>Email</th>
-        <th>Téléphone</th>
+        <th>Prénom</th>
+        <th>Adresse</th>
         <th>Spécialité</th>
+        <th>Téléphone</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let doctor of doctors">
-        <td>{{ doctor.name }}</td>
-        <td>{{ doctor.email }}</td>
-        <td>{{ doctor.phone }}</td>
-        <td>{{ doctor.specialty }}</td>
-        <td><button class="action-btn view">Voir le profil</button></td>
+      <tr *ngFor="let doctor of approvedDoctors">
+        <td>{{ doctor.nom }}</td>
+        <td>{{ doctor.prenom }}</td>
+        <td>{{ doctor.adresse }}</td>
+        <td>{{ doctor.specialite }}</td>
+        <td>{{ doctor.numero_de_telephone }}</td>
+        <td>
+          <button class="action-btn view" (click)="viewProfile(doctor.id)">Voir</button>
+          <button class="action-btn edit" (click)="openEditModal(doctor)">Modifier</button>
+          <button class="action-btn delete" (click)="deleteDoctor(doctor.id)">Supprimer</button>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
+
 <br>
+
 <div class="table-container">
   <div class="table-header">
-    <h2 class="text-lg font-bold">Liste des médecins Pending</h2>
+    <h2 class="text-lg font-bold">Liste des médecins en attente</h2>
   </div>
   <table class="table">
     <thead>
       <tr>
         <th>Nom</th>
-        <th>Email</th>
-        <th>Téléphone</th>
+        <th>Prénom</th>
+        <th>Adresse</th>
         <th>Spécialité</th>
+        <th>Téléphone</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let doctor of doctors">
-        <td>{{ doctor.name }}</td>
-        <td>{{ doctor.email }}</td>
-        <td>{{ doctor.phone }}</td>
-        <td>{{ doctor.specialty }}</td>
-        <td><button class="action-btn view">Voir le profil</button></td>
+      <tr *ngFor="let doctor of pendingDoctors">
+        <td>{{ doctor.nom }}</td>
+        <td>{{ doctor.prenom }}</td>
+        <td>{{ doctor.adresse }}</td>
+        <td>{{ doctor.specialite }}</td>
+        <td>{{ doctor.numero_de_telephone }}</td>
+        <td>
+          <button class="action-btn view" (click)="viewProfile(doctor.id)">Voir</button>
+          <button class="action-btn edit" (click)="openEditModal(doctor)">Modifier</button>
+          <button class="action-btn accept" (click)="acceptDoctor(doctor.id)">Accepter</button>
+          <button class="action-btn reject" (click)="rejectDoctor(doctor.id)">Rejeter</button>
+          <button class="action-btn delete" (click)="deleteDoctor(doctor.id)">Supprimer</button>
+        </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- Profile Modal -->
+<div class="modal" *ngIf="showProfileModal">
+  <div class="modal-content">
+    <h2>Profil du Médecin</h2>
+    <div *ngIf="selectedDoctor">
+      <p><strong>Nom:</strong> {{ selectedDoctor.nom }}</p>
+      <p><strong>Prénom:</strong> {{ selectedDoctor.prenom }}</p>
+      <p><strong>Email:</strong> {{ selectedDoctor.email }}</p>
+      <p><strong>Téléphone:</strong> {{ selectedDoctor.numero_de_telephone }}</p>
+      <p><strong>Adresse:</strong> {{ selectedDoctor.adresse }}</p>
+      <p><strong>CIN:</strong> {{ selectedDoctor.cin }}</p>
+      <p><strong>Spécialité:</strong> {{ selectedDoctor.specialite }}</p>
+      <p><strong>Heure début:</strong> {{ selectedDoctor.datedebut }}</p>
+      <p><strong>Heure fin:</strong> {{ selectedDoctor.datefin }}</p>
+      <p><strong>Statut:</strong> {{ selectedDoctor.status }}</p>
+      <img [src]="selectedDoctor.image_url" alt="Doctor Image" style="max-width: 200px;">
+    </div>
+    <button (click)="closeModal()">Fermer</button>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal" *ngIf="showEditModal">
+  <div class="modal-content">
+    <h2>Modifier le Médecin</h2>
+    <form>
+      <input [(ngModel)]="editedDoctor.nom" name="nom" placeholder="Nom">
+      <input [(ngModel)]="editedDoctor.prenom" name="prenom" placeholder="Prénom">
+      <input [(ngModel)]="editedDoctor.email" name="email" placeholder="Email">
+      <input [(ngModel)]="editedDoctor.numero_de_telephone" name="telephone" placeholder="Téléphone">
+      <input [(ngModel)]="editedDoctor.adresse" name="adresse" placeholder="Adresse">
+      <input [(ngModel)]="editedDoctor.cin" name="cin" placeholder="CIN">
+      <input [(ngModel)]="editedDoctor.specialite" name="specialite" placeholder="Spécialité">
+      <input [(ngModel)]="editedDoctor.datedebut" name="datedebut" placeholder="Heure début">
+      <input [(ngModel)]="editedDoctor.datefin" name="datefin" placeholder="Heure fin">
+      <input [(ngModel)]="editedDoctor.image_url" name="image_url" placeholder="URL Image">
+      <button type="button" (click)="updateDoctor()">Sauvegarder</button>
+      <button type="button" (click)="closeModal()">Annuler</button>
+    </form>
+  </div>
 </div>
