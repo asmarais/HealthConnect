@@ -1,0 +1,8 @@
+<aside class="sidebar">
+  <h2>Admin Dashboard</h2>
+  <ul>
+    <li><a  [ngClass]="{'active': activePage === 'dashboard'}" (click)="selectPage('dashboard')">Tableau de bord</a></li>
+    <li><a  [ngClass]="{'active': activePage === 'patients'}" (click)="selectPage('patients')">Liste des patients</a></li>
+    <li><a  [ngClass]="{'active': activePage === 'doctors'}" (click)="selectPage('doctors')">Liste des médecins</a></li>
+  </ul>
+</aside>

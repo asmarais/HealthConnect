@@ -1,0 +1,7 @@
+<app-sidebar (pageChange)="onPageChange($event)"></app-sidebar>
+<app-header-a></app-header-a>
+<div class="main-content">
+  <app-dashborad *ngIf="activePage === 'dashboard'"></app-dashborad>
+  <app-list-p *ngIf="activePage === 'patients'"></app-list-p>
+  <app-list-d *ngIf="activePage === 'doctors'"></app-list-d>
+</div>

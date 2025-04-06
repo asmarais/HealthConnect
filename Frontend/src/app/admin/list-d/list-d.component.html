@@ -1,0 +1,52 @@
+<div class="table-container">
+  <div class="table-header">
+    <h2 class="text-lg font-bold">Liste des médecins</h2>
+    <button class="add-btn">Ajouter un médecin</button>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Téléphone</th>
+        <th>Spécialité</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doctor of doctors">
+        <td>{{ doctor.name }}</td>
+        <td>{{ doctor.email }}</td>
+        <td>{{ doctor.phone }}</td>
+        <td>{{ doctor.specialty }}</td>
+        <td><button class="action-btn view">Voir le profil</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<div class="table-container">
+  <div class="table-header">
+    <h2 class="text-lg font-bold">Liste des médecins Pending</h2>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Téléphone</th>
+        <th>Spécialité</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doctor of doctors">
+        <td>{{ doctor.name }}</td>
+        <td>{{ doctor.email }}</td>
+        <td>{{ doctor.phone }}</td>
+        <td>{{ doctor.specialty }}</td>
+        <td><button class="action-btn view">Voir le profil</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
