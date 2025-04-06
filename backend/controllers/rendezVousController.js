@@ -240,3 +240,40 @@ exports.getOptimizedRendezVous = async (req, res) => {
   }
 };
 
+// Récupérer tous les rendez-vous par ID de patient
+exports.getRendezVousByPatientId = async (req, res) => {
+  try {
+    const { patient_id } = req.params;
+    const rendezVous = await RendezVous.findAll({
+      where: { patient_id },
+      include: [Patient, Doctor],
+    });
+
+    if (!rendezVous.length) {
+      return res.status(404).json({ message: "Aucun rendez-vous trouvé pour ce patient" });
+    }
+
+    res.status(200).json(rendezVous);
+  } catch (error) {
+    res.status(500).json({ message: "Erreur lors de la récupération des rendez-vous du patient", error });
+  }
+};
+
+// Récupérer tous les rendez-vous par ID de médecin
+exports.getRendezVousByDoctorId = async (req, res) => {
+  try {
+    const { medecin_id } = req.params;
+    const rendezVous = await RendezVous.findAll({
+      where: { medecin_id },
+      include: [Patient, Doctor],
+    });
+
+    if (!rendezVous.length) {
+      return res.status(404).json({ message: "Aucun rendez-vous trouvé pour ce médecin" });
+    }
+
+    res.status(200).json(rendezVous);
+  } catch (error) {
+    res.status(500).json({ message: "Erreur lors de la récupération des rendez-vous du médecin", error });
+  }
+};
