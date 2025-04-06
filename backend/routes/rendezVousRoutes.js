@@ -14,4 +14,10 @@ router.put('/cancel/:id', rendezVousController.cancelRendezVous);
 
 router.delete('/:id', rendezVousController.deleteRendezVous);
 
+// Récupérer tous les rendez-vous par ID de patient
+router.get('/patient/:patient_id', rendezVousController.getRendezVousByPatientId);
+
+// Récupérer tous les rendez-vous par ID de médecin
+router.get('/doctor/:medecin_id', rendezVousController.getRendezVousByDoctorId);
+
 module.exports = router;
