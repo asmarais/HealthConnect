@@ -1,0 +1,1924 @@
+/**
+*
+* @package com_spmedical
+*
+* @author JoomShaper http://www.joomshaper.com
+* @copyright Copyright (c) 2010 - 2018 JoomShaper
+* @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or later
+*/
+
+a,
+button {
+  transition: color 0.4s, background 0.4s;
+}
+.spmedical textarea,
+.spmedical input[type="text"],
+.spmedical input[type="password"],
+.spmedical input[type="datetime"],
+.spmedical input[type="datetime-local"],
+.spmedical input[type="date"],
+.spmedical input[type="month"],
+.spmedical input[type="time"],
+.spmedical input[type="week"],
+.spmedical input[type="number"],
+.spmedical input[type="email"],
+.spmedical input[type="url"],
+.spmedical input[type="search"],
+.spmedical input[type="tel"],
+.spmedical input[type="color"],
+.uneditable-input{
+  display: block;
+  width: 100%;
+  padding: 11px 20px;
+  font-size: 14px;
+  line-height: 1.25;
+  height: auto;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  box-shadow: none;
+  margin-bottom: 0;
+}
+.spmedical .spmedical-btn {
+  background-color: #048581;
+  background-image: none;
+  border: none;
+  padding: 11px 30px;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.spmedical-btn.spmedical-btn-link {
+  padding: 0;
+  border: none;
+  color: #048581;
+  background-color: transparent;
+}
+
+.spmedical-btn.spmedical-btn-link:hover,
+.spmedical-btn.spmedical-btn-link:focus {
+  color: rgb(17, 76, 238);
+}
+
+.spmedical-btn.spmedical-btn-primary:hover,
+.spmedical-btn.spmedical-btn-primary:focus {
+  color: #fff;
+  background-color: rgb(23, 81, 240);
+}
+
+/* Departments */
+.spmedical-departments {
+  margin-bottom: 30px;
+}
+
+.spmedical-departments .spmedical-department-wrap.has-image {
+  position: relative;
+  border-radius: 5px;
+  transition: box-shadow 0.3s, transform 0.3s;
+  overflow: hidden;
+}
+.spmedical-departments .spmedical-department-wrap .spmedical-department-img-wrap {
+  min-height: 200px;
+}
+.spmedical-departments .spmedical-department-wrap>a {
+  color: #fff;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.spmedical-departments .spmedical-department-img-wrap img {
+  width: 100%;
+}
+
+.spmedical-departments .spmedical-department-wrap>a:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.8;
+  background-image: linear-gradient(-180deg, rgba(60, 112, 250, 0.00) 3%, #048581 98%);
+  transition: background 0.3s;
+  border-radius: 5px;
+}
+
+.spmedical-departments:hover .spmedical-department-wrap.has-image {
+  -webkit-box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.30);
+  box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.30);
+  transform: translateY(-10px);
+}
+
+.spmedical-departments:hover .spmedical-department-wrap>a:before {
+  background-color: #14b19d;
+  opacity: .9;
+}
+
+.spmedical-departments .spmedical-department-wrap>a .spmedical-department-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 5px;
+  padding: 30px;
+  color: #fff;
+}
+
+.spmedical-departments .spmedical-department-wrap .spmedical-department-content .spmedical-department-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  max-width: 150px;
+  line-height: 26px;
+}
+
+.spmedical-departments .spmedical-department-wrap>a .spmedical-department-content .spmedical-department-details {
+  display: none;
+  padding-top: 10px;
+  font-size: 14px;
+}
+
+.spmedical-departments .spmedical-department-wrap.has-icon .spmedical-department-icon-wrap>a {
+  padding: 80px 40px;
+  display: block;
+  color: #e5e5e5;
+}
+
+.spmedical-departments .spmedical-department-wrap.has-icon .spmedical-department-icon-wrap {
+  color: #e5e5e5;
+  text-align: center;
+  font-size: 80px;
+  border-radius: 5px;
+  border: 1px solid #D9D9D9;
+  line-height: 1;
+  margin-bottom: 30px;
+  transition: .4s;
+}
+
+.spmedical-departments .spmedical-department-wrap.has-icon .spmedical-department-title {
+  margin-bottom: 10px;
+  max-width: 100%;
+}
+
+.spmedical-departments .spmedical-department-wrap.has-icon .spmedical-department-title a {
+  color: #252c33;
+}
+
+.spmedical-departments .spmedical-department-wrap.has-icon .spmedical-department-title a:hover,
+.spmedical-departments .spmedical-department-wrap.has-icon .spmedical-department-title a:focus {
+  color: #14b19d;
+  text-decoration: none;
+}
+
+.spmedical-departments .spmedical-department-wrap.has-icon .spmedical-department-details {
+  color: rgba(102, 102, 102, 1);
+  line-height: 24px;
+}
+
+.spmedical-departments .spmedical-department-wrap.has-icon:hover .spmedical-department-icon-wrap {
+  background-color: #14b19d;
+  -webkit-box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.30);
+  box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.30);
+  border-color: #14b19d;
+}
+.view-department .specialists-wrapper .area-of-specialties .splms-person-title:hover,
+.view-department .specialists-wrapper .area-of-specialties .splms-person-title:focus{
+  color: #fff;
+}
+.spmedical-departments .spmedical-department-wrap.has-icon:hover .spmedical-department-icon-wrap>a {
+  color: #fff;
+  text-decoration: none;
+}
+.spmedical-departments .spmedical-department-wrap .spmedical-department-icon-wrap>a:hover,
+.spmedical-departments .spmedical-department-wrap .spmedical-department-icon-wrap>a:focus{
+  text-decoration: none;
+}
+/* Department */
+
+.spmedical-department-main-content {
+  margin-bottom: 80px;
+}
+
+.spmedical-specialists-wrapper {
+  margin-bottom: 30px;
+}
+
+.view-department .spmedical-title {
+  font-size: 42px;
+  line-height: 46px;
+  font-weight: 700;
+  color: rgba(37, 44, 51, 1);
+  margin-bottom: 20px;
+}
+
+.view-department .spmedical-details {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 32px;
+  margin-bottom: 30px;
+}
+
+.spmedical-department-wrapper .img-wrapper {
+  margin-bottom: 30px;
+}
+
+.spmedical-department-wrapper .img-wrapper img {
+  border-radius: 5px;
+}
+
+.spmedical .spmedical-department-wrapper .spmedical-title {
+  text-align: left;
+}
+
+.view-department .specialists-wrapper .specialists-img-wrapper .specialists-name h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.view-department .specialists-wrapper,
+.view-department .specialists-wrapper a {
+  color: #fff;
+}
+
+.view-department .specialists-wrapper .specialists-designation {
+  margin-bottom: 0;
+  color: #fff;
+}
+
+.spmedical-department-price-list {
+  padding: 55px 40px 30px 40px;
+  box-shadow: 0 7px 22px 0 rgba(0, 0, 0, 0.09);
+  border-radius: 5px;
+}
+
+.spmedical-department-price-list .title {
+  font-size: 18px;
+  color: rgba(37, 44, 51, 1);
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.spmedical-department-price-list ul {
+  padding: 0;
+}
+
+.spmedical-department-price-list ul>li {
+  list-style: none;
+  display: block;
+  overflow: hidden;
+  line-height: 38px;
+}
+
+.spmedical-department-cta {
+  background: #FFFFFF;
+  box-shadow: 0 7px 22px 0 rgba(0, 0, 0, 0.09);
+  border-radius: 5px;
+  padding: 40px;
+  margin-top: 100px;
+}
+
+.spmedical-department-cta>div {
+  align-items: center;
+}
+
+.spmedical-department-cta .tilte {
+  font-size: 18px;
+  color: #048581;
+  font-weight: 700;
+}
+
+/* Spmedical Search Module */
+
+.mod-spmedical-search {
+  margin: 0 -30px;
+}
+
+form.spmedical-search {
+  display: flex;
+  width: 100%;
+  padding: 20px 30px;
+  box-shadow: 0 7px 22px 0px rgba(0, 0, 0, 0.09);
+  border-radius: 5px;
+  background: #fff;
+}
+
+form.spmedical-search>div:not(:last-child) {
+  padding-right: 30px;
+  flex: 1;
+}
+
+form.spmedical-search .input-item input {
+  padding: 12px 22px;
+  border-radius: 3px;
+  border: 1px solid #e5e5e5;
+}
+
+form.spmedical-search select {
+  height: 40px;
+  min-width: 150px;
+}
+
+form.spmedical-search .btn-primary {
+  border: none;
+  padding: 13.5px 30px;
+  background-image: none;
+}
+
+.input-item .custom-combobox {
+  display: block;
+}
+
+.input-item .custom-combobox-input {
+  transition: .4s;
+  width: 100%;
+}
+
+form.spmedical-search .input-item .custom-combobox-input::placeholder {
+  color: #B5B5B5;
+}
+
+form.spmedical-search .input-item .custom-combobox-input:focus {
+  outline: none;
+  border-color: #048581;
+}
+
+.custom-combobox .custom-combobox-toggle {
+  color: #e5e5e5;
+  right: 8px;
+  top: 15px;
+  bottom: inherit;
+  font-size: 12px;
+  transition: .4s;
+}
+.custom-combobox .custom-combobox-toggle:hover,
+.custom-combobox .custom-combobox-toggle:focus{
+  text-decoration: none;
+}
+.custom-combobox .custom-combobox-toggle.active {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  top: 11px !important;
+}
+#spmedical-specialist-appintment-from .custom-combobox .custom-combobox-toggle.active {
+}
+.custom-combobox .custom-combobox-toggle:hover {
+  color: #048581;
+  cursor: pointer;
+}
+
+.ui-menu.ui-widget {
+  padding: 0;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  padding: 10px 0;
+  border-radius: 3px;
+  max-height: 200px;
+  overflow: auto;
+  color: #666666;
+}
+
+.ui-menu.ui-widget>li {
+  list-style: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: .4s;
+}
+
+.ui-menu.ui-widget>li:hover,
+.ui-menu.ui-widget>li:focus {
+  background: #048581;
+  color: #fff;
+}
+
+.spmedical-search-results {
+  position: relative;
+}
+
+.spmedical-search-results ul.spmedical-search {
+  padding: 0;
+  list-style: none;
+  border: 1px solid #e5e5e5;
+  line-height: 1.5;
+  max-height: 200px;
+  overflow: auto;
+  padding: 10px 0;
+  border-radius: 5px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  z-index: 10;
+}
+
+.spmedical-search-results ul.spmedical-search.results-list>li>a {
+  padding: 13px 20px;
+  display: block;
+  color: #666666;
+}
+
+.spmedical-search-results ul.spmedical-search.results-list>li>a:hover,
+.spmedical-search-results ul.spmedical-search.results-list>li>a:focus {
+  background-color: #048581;
+  color: #fff;
+}
+
+.spmedical-search-results ul.spmedical-search.results-list>li.spmedical-empty {
+  padding: 10px 30px;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+/* Spmedical Specialists Search */
+
+.spmedical-specialists-search {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.spmedical-specialist-search .input-item .spmedical-btn {
+  height: 100%;
+  border-radius: 5px;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.spmedical-specialist-search .input-filters {
+  display: flex;
+}
+
+.spmedical-specialist-search .input-filters .specialist-wrapper {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.spmedical-specialist-search .input-filters .specialist-wrapper .custom-combobox input {
+  border-radius: 3px;
+  border: 1px solid #e5e5e5;
+  outline: none;
+}
+
+.spmedical-specialist-search .input-filters .specialist-wrapper .custom-combobox input:focus {
+  border-color: #80bdff;
+}
+
+.spmedical-specialist-search .input-filters .specialist-wrapper .custom-combobox .custom-combobox-toggle {
+  top: 30px;
+  right: 20px;
+}
+.spmedical-specialist-search .input-filters .specialist-wrapper .custom-combobox .custom-combobox-toggle.active{
+  top: 22px !important;
+}
+.spmedical .spmedical-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.spmedical .spmedical-subtitle {
+  font-size: 20px;
+  line-height: 32px;
+  font-weight: 300;
+  text-align: center;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 35px;
+}
+
+.spmedical .spmedical-specialists-search-wrapper form input {
+  font-size: 20px;
+  font-weight: 300;
+  padding: 21px 35px;
+}
+
+.spmedical-specialists-search-wrapper .main-input-wrapper {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.spmedical .spmedical-specialists-search-wrapper .main-input-wrapper input {
+  padding: 21px 60px;
+}
+
+/* .spmedical-specialists-search-wrapper .main-input-wrapper button[type="submit"]{
+  position: absolute;
+  left: 23px;
+  top: 50%;
+  z-index: 2;
+  border: none;
+  transform: translateY(-50%);
+  color: #e5e5e5;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  transition: .4s;
+}
+.spmedical-specialists-search-wrapper .main-input-wrapper button[type="submit"]:hover,
+.spmedical-specialists-search-wrapper .main-input-wrapper button[type="submit"]:focus {
+  color: #444;
+} */
+
+.spmedical-specialists .specialist-wrapper {
+  box-shadow: 0 0 0 1px #e5e5e5;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  transition: .4s;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-img-wrapper {
+  margin-right: 35px;
+  flex: 1;
+  position: relative;
+  border-radius: 5px 0 0 5px;
+  overflow: hidden;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-img-wrapper:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(60, 112, 250, 0.95);
+  opacity: 0;
+  transition: .4s;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-img-wrapper .spmedical-btn{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  z-index: 10;
+  transition: .4s;
+  background: transparent;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-img-wrapper .spmedical-btn:hover,
+.spmedical-specialists .specialist-wrapper .specialists-img-wrapper .spmedical-btn:focus {
+  background-color: #fff;
+  color: #14b19d;
+  text-decoration: none;
+}
+
+.spmedical-specialists .specialist-wrapper:hover {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.09);
+  border-color: #fff;
+}
+
+.spmedical-specialists .specialist-wrapper:hover .specialists-img-wrapper:after {
+  opacity: 1;
+}
+
+.spmedical-specialists .specialist-wrapper:hover .specialists-img-wrapper .spmedical-btn {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-info-wrapper {
+  padding: 30px 30px 25px 0;
+  flex: 1.9;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-name {
+  margin-bottom: 20px;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-name h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-name h3 a {
+  color: rgba(37, 44, 51, 1);
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-name h3 a:hover,
+.spmedical-specialists .specialist-wrapper .specialists-name h3 a:focus {
+  color: #048581;
+}
+
+.spmedical-specialists .specialist-wrapper .area-of-specialties>div:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.spmedical-specialists .specialist-wrapper .area-of-specialties h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(74, 74, 74, 1);
+  text-transform: uppercase;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-available-hours>ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-available-hours>ul>li {
+  display: inline-block;
+  width: 50%;
+  float: left;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-available-hours>ul>li span {
+  display: inline-block;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-available-hours>ul>li span {
+  margin-right: 40px;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-category {
+  max-width: 260px;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-category ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-category ul>li {
+  display: inline-block;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-social-profile ul {
+  padding: 0;
+  list-style: none;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-social-profile ul>li {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-social-profile ul>li a {
+  color: #E1E1E1;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-social-profile ul>li a:hover,
+.spmedical-specialists .specialist-wrapper .specialists-social-profile ul>li a:focus {
+  color: #048581;
+}
+
+.spmedical-specialists .specialist-wrapper .specialists-social-profile .btn.btn-link {
+  padding: 0;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.spmedical-specialists-search-result .spmedical-result-counter {
+  margin-bottom: 30px;
+}
+
+.spmedical-specialists-search-result .spmedical-result-counter h4 {
+  font-size: 20px;
+  font-weight: 300;
+  color: #666;
+  margin: 0;
+}
+
+/* spmedical-sidebar */
+
+.spmedical-sidebar {
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  margin-right: 25px;
+}
+
+.spmedical-sidebar .sidebar-title {
+  font-size: 18px;
+  color: rgba(155, 155, 155, 1);
+  font-weight: 700;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 25px;
+}
+
+.spmedical-sidebar .spmedical-category-search .custom-checkbox {
+  display: flex;
+}
+
+.spmedical-sidebar .spmedical-category-search .custom-checkbox .checkmark {
+  width: 95%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 0;
+}
+
+.spmedical-sidebar .spmedical-category-search {
+  padding: 25px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.spmedical-sidebar .spmedical-category-search h3 {
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.spmedical-sidebar .spmedical-category-search ul {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.spmedical-sidebar .spmedical-category-search ul>li label {
+  padding-left: 10px;
+  margin-bottom: 3px;
+}
+
+#spmedical-specialists-filters-form ul>li label {
+  padding-left: 0;
+}
+
+#spmedical-specialists-filters-form ul>li label input {
+  padding-right: 10px;
+  margin-top: 4px;
+}
+
+#spmedical-specialists-filters-form ul>li label .checkmark {
+  padding-left: 10px;
+}
+
+.spmedical-sidebar a.reset-btn {
+  padding: 0;
+  margin: 15px;
+  text-align: center;
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #048581 !important;
+  font-weight: 500;
+}
+
+.spmedical-sidebar .spmedical-buttons-group {
+  text-align: center;
+  padding: 15px;
+}
+
+.spmedical-sidebar .spmedical-buttons-group .spmedical-submit-button {
+  font-weight: 500;
+  padding: 4px 20px;
+  border-radius: 5px;
+  position: relative;
+  margin-right: 15px;
+}
+
+.spmedical-sidebar .spmedical-buttons-group .spmedical-submit-button:after {
+  content: "|";
+  position: absolute;
+  right: -12px;
+  color: #048581;
+  pointer-events: none;
+}
+
+/* Pagination */
+
+div.pagination {
+  border: 1px solid #e5e5e5;
+  padding: 20px 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+div.pagination ul {
+  margin: 0;
+}
+
+div.pagination ul>li {
+  margin-right: 4px;
+}
+
+div.pagination ul>li>a {
+  border: none;
+  min-width: 30px;
+  height: 30px;
+  line-height: 1;
+  border-radius: 5px !important;
+}
+
+/* spmedical-specialist-appointment */
+
+.spmedical-specialist-appointment {
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.09);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.spmedical-specialist-appointment-form {
+  padding: 45px 90px;
+}
+
+.spmedical .spmedical-specialist-appointment-form h3 {
+  font-size: 42px;
+  color: rgba(37, 44, 51, 1);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.spmedical-specialist-appointment-form form .input-field:not(:last-child) {
+  margin-bottom: 25px;
+}
+
+.spmedical-specialist-appointment-form form .spmedical-btn {
+  border-radius: 3px;
+  border: 1px solid #048581;
+  background: transparent;
+  color: #048581;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 15px 40px;
+  margin-top: 20px;
+}
+
+.spmedical-specialist-appointment-form form .spmedical-btn:hover,
+.spmedical-specialist-appointment-form form .spmedical-btn:focus {
+  background-color: #048581;
+  color: #fff;
+}
+
+.spmedical-specialist-appointment-form form textarea {
+  width: 100%;
+  border-radius: 5px;
+  transition: all .4s;
+}
+
+.spmedical-specialist-appointment-form form textarea:focus {
+  border-color: #80bdff !important;
+  outline: transparent;
+}
+
+#spmedical-specialist-appintment-from .custom-combobox .custom-combobox-input {
+  padding: 14px 28px;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  margin-bottom: 25px;
+  outline: none;
+  color: #495057;
+}
+
+#spmedical-specialist-appintment-from .custom-combobox .custom-combobox-toggle {
+  top: 18px;
+  right: 15px;
+}
+
+.spmedical-specialist-appointment-form .spmedical-appointment-status .appointment-sent {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  position: relative;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  margin-top: 30px;
+}
+.spmedical-specialist-appointment-form .spmedical-appointment-status .appointment-error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+}
+.input-field-half-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-field-half-wrap>div:nth-child(1) {
+  flex: 1;
+  padding-right: 12.5px;
+}
+
+.input-field-half-wrap>div:nth-child(2) {
+  flex: 1;
+  padding-left: 12.5px;
+}
+
+/* spmedical-schedules */
+
+.spmedical .spmedical-schedules .table-bordered,
+.spmedical .spmedical-schedules .table-bordered td,
+.spmedical .spmedical-schedules .table-bordered th {
+  border-color: #e5e5e5;
+}
+
+.spmedical .spmedical-schedules .spmedical-table thead th {
+  border-bottom-color: #e5e5e5;
+}
+
+.spmedical .spmedical-schedules .spmedical-table th,
+.spmedical .spmedical-schedules .spmedical-table td {
+  border-top-color: #e5e5e5;
+}
+body.view-schedules #sp-main-body {
+  padding-top: 50px;
+}
+.spmedical-schedules {
+  font-weight: 300;
+  color: rgba(102, 102, 102, 1);
+  padding-top: 50px;
+}
+
+.spmedical .spmedical-schedules .spmedical-table {
+  margin-bottom: 0;
+}
+
+.spmedical-schedules td {
+  width: 170px;
+}
+.spmedical-schedules tbody>tr>td:first-child{
+  min-width: 145px;
+}
+.spmedical-schedules thead {
+  font-size: 20px;
+  color: rgba(102, 102, 102, 1);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.spmedical-schedules thead th {
+  font-weight: 300;
+  border-bottom: none !important;
+}
+
+.spmedical-schedules tbody>tr>td:first-child {
+  font-size: 20px;
+  vertical-align: bottom;
+}
+
+.spmedical-schedules .content-wrapper {
+  background: rgba(95, 137, 251, 1);
+  color: #ffff;
+  padding: 12px;
+  border-radius: 5px;
+  max-width: 130px;
+  position: relative;
+  transition: .4s;
+}
+
+.spmedical-schedules .content-wrapper:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+.spmedical-schedules .content-wrapper:hover {
+  background: #14b19d;
+}
+
+.spmedical-schedules .content-wrapper h3 {
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.spmedical-schedules .content-wrapper h4 {
+  margin-bottom: 0;
+}
+
+.spmedical-schedules .content-wrapper h3,
+.spmedical-schedules .content-wrapper h4 {
+  font-size: 13px;
+}
+
+.spmedical-schedules .special-in {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.spmedical-schedules .special-in span {
+  display: inline-block;
+}
+
+.spmedical-schedules .special-in span:after {
+  content: ", "
+}
+
+.spmedical-schedules .content-wrapper .details-info {
+  position: absolute;
+  bottom: calc(100% + 20px);
+  left: 0;
+  background: #048581;
+  color: #ffff;
+  padding: 12px;
+  border-radius: 5px;
+  max-width: 130px;
+  transition: .4s;
+  display: none;
+}
+
+.spmedical-schedules .content-wrapper:hover .details-info {
+  display: block;
+  animation: animationDown .5s;
+}
+
+.spmedical-schedules .details-info:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-width: 8px;
+  border-color: transparent transparent #048581 #048581;
+  border-style: solid;
+  transform: rotate(-45deg);
+  transform-origin: 0 0;
+  box-sizing: border-box;
+  margin-left: -15px;
+  position: absolute;
+  left: 50%;
+  bottom: -15px;
+  z-index: 10;
+}
+
+.spmedical-schedules .content-wrapper.bg-red {
+  background-color: #FB8989;
+}
+
+.spmedical-schedules .content-wrapper.bg-red:hover,
+.spmedical-schedules .content-wrapper.bg-red .details-info {
+  background-color: #FF6767;
+}
+
+.spmedical-schedules .content-wrapper.bg-red .details-info:before {
+  border-color: transparent transparent #FF6767 #FF6767;
+}
+
+.spmedical-schedules .content-wrapper.bg-green {
+  background-color: #77D6A4;
+}
+
+.spmedical-schedules .content-wrapper.bg-green:hover,
+.spmedical-schedules .content-wrapper.bg-green .details-info {
+  background-color: #32CD7B;
+}
+
+.spmedical-schedules .content-wrapper.bg-green .details-info:before {
+  border-color: transparent transparent #32CD7B #32CD7B;
+}
+
+@-webkit-keyframes animationDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -20px, 0);
+    transform: translate3d(0, -20px, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes animationDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -20px, 0);
+    transform: translate3d(0, -20px, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animationDown {
+  -webkit-animation-name: animationDown;
+  animation-name: animationDown;
+}
+
+@-webkit-keyframes animationFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes animationFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animationFade {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+/* Custom Selectbox */
+
+.spmedical-select {
+  position: relative;
+  cursor: pointer;
+  text-transform: capitalize;
+  border: 1px solid #e5e5e5;
+  color: rgba(102, 102, 102, 1);
+  font-size: 20px;
+  padding: 19px 25px 19px 35px;
+  border-radius: 5px;
+  font-weight: 300;
+  display: block;
+  max-width: 550px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.spmedical-select .spmedical-select-result {
+  text-align: left;
+  position: relative;
+}
+
+.spmedical-select ul {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 100%;
+  left: -2px;
+  right: -2px;
+  background: #fff;
+  z-index: 100;
+  text-align: left;
+  border: 1px solid rgb(213, 215, 218);
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.spmedical-select ul>li {
+  display: block;
+  height: auto;
+  line-height: normal;
+  padding: 10px 35px;
+  margin-bottom: 1px;
+  cursor: pointer;
+  transition: .4s;
+}
+
+.spmedical-select .spmedical-select-result i {
+  float: right;
+  font-size: 13px;
+  opacity: .5;
+  margin-top: 3px;
+}
+
+.spmedical-select ul>li.active,
+.spmedical-select ul>li:hover {
+  color: #fff;
+  background: #048581;
+}
+
+.spmedical-select .spmedical-select-dropdown {
+  max-height: 200px;
+  overflow: auto;
+}
+
+/* Custom checkbox */
+
+.spmedical .custom-checkbox {
+  display: block;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 3px;
+}
+
+/* Hide the browser's default checkbox */
+
+.custom-checkbox input[type="checkbox"] {
+  cursor: pointer;
+}
+
+input[type="checkbox"]+.checkmark {
+  padding-left: 10px;
+  pointer-events: none;
+}
+
+.custom-checkbox input:checked+.checkmark:before {
+  opacity: 0;
+}
+
+.custom-checkbox input:checked+.checkmark:after {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  background-color: #048581;
+  border-color: #048581;
+}
+
+.custom-checkbox:hover .checkmark:after {
+  border-color: rgba(60, 112, 250, 0.58);
+  box-shadow: inset 0 0 0 1px #e5e5e5;
+}
+
+/* cost estimator */
+
+.spmedical-services-list-wrapper {
+  margin-top: 50px;
+}
+
+.spmedical.spmedical-costestimates .spmedical-subtitle {
+  max-width: 750px;
+}
+
+.spmedical-services-test {
+  margin-top: 50px;
+}
+
+.spmedical .spmedical-test-list-wrapper h3 {
+  font-size: 18px;
+  color: rgba(74, 74, 74, 1);
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 20px 25px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.spmedical-test-list-wrapper {
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  height: 100%;
+}
+
+.spmedical-test-list {
+  padding: 20px 25px;
+}
+
+.spmedical-service-tests {
+  display: none;
+}
+
+.spmedical-service-tests.active {
+  display: block;
+  animation: animationFade .5s;
+}
+
+.spmedical-total-cost-wrapper {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.spmedical-total-cost-wrapper .spmedical-test-total-wrap {
+  color: #14b19d;
+  font-size: 42px;
+  font-weight: 700;
+  background: #FFFFFF;
+  box-shadow: 0 7px 22px 0 rgba(0, 0, 0, 0.09);
+  border-radius: 5px;
+  display: inline-block;
+  padding: 23px 80px;
+  line-height: 1.3;
+}
+
+/*********************************************************************/
+/* **************** Specialists Listing Start Here **************** */
+/*******************************************************************/
+
+.specialists-wrapper {
+  margin-bottom: 55px;
+}
+
+.specialists-wrapper .specialists-img-wrapper {
+  position: relative;
+}
+
+.specialists-wrapper .specialists-img-wrapper img {
+  border-radius: 5px;
+  width: 100%;
+}
+
+.specialists-wrapper .specialists-img-wrapper::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(60, 111, 250, 0.9);
+  border-radius: 5px;
+  z-index: 10;
+  opacity: 0;
+  transition: 400ms;
+}
+
+.specialists-wrapper .specialists-img-wrapper .area-of-specialties {
+  position: absolute;
+  bottom: 0;
+  padding: 20px;
+  z-index: 11;
+  opacity: 0;
+  transition: 400ms;
+}
+
+.specialists-wrapper
+  .specialists-img-wrapper
+  .area-of-specialties
+  .specialty-title
+  h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.specialists-wrapper
+  .specialists-img-wrapper
+  .area-of-specialties
+  .specialists-category
+  ul,
+.specialists-wrapper
+  .specialists-img-wrapper
+  .area-of-specialties
+  .specialists-social-profile
+  ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.specialists-wrapper
+  .specialists-img-wrapper
+  .area-of-specialties
+  .specialists-social-profile {
+  margin-top: 10px;
+}
+
+.specialists-wrapper
+  .specialists-img-wrapper
+  .area-of-specialties
+  .specialist-specialties {
+  color: #fff;
+}
+
+.specialists-wrapper
+  .specialists-img-wrapper
+  .area-of-specialties
+  .specialists-social-profile
+  ul
+  li {
+  display: inline-block;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.specialists-wrapper
+  .specialists-img-wrapper
+  .area-of-specialties
+  .specialists-social-profile
+  ul
+  li
+  a {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.specialists-wrapper .specialists-info-wrapper .specialists-name h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.specialists-wrapper .specialists-info-wrapper .specialists-name h3 a {
+  color: #252c33;
+}
+
+.specialists-wrapper .specialists-info-wrapper .specialists-name a {
+  text-decoration: none;
+}
+
+.specialists-wrapper .specialists-info-wrapper span.specialists-designation a {
+  color: #4a4a4a;
+}
+
+.specialists-wrapper:hover .specialists-img-wrapper::after,
+.specialists-wrapper:hover .area-of-specialties {
+  opacity: 1;
+}
+
+/*********************************************************************/
+/* ***************** Specialists Listing End Here ***************** */
+/*******************************************************************/
+
+/*********************************************************************/
+/* **************** Specialists Details Start Here **************** */
+/*******************************************************************/
+
+.specialist-info {
+  box-shadow: 0px 7px 22px 0 rgba(0, 0, 0, 0.09);
+  border-radius: 5px;
+}
+
+.specialist-info .specialist-name h3,
+.specialist-info .specialist-specialties h3,
+.specialist-info .specialist-contact-info h3,
+.specialist-info .specialist-available-hours h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #4a4a4a;
+  line-height: 18px;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+}
+
+.specialist-info .specialist-img img {
+  border-radius: 5px 5px 0 0;
+}
+
+.specialist-info .specialist-name {
+  padding: 20px;
+  border-bottom: solid 1px rgba(213, 215, 218, 0.3);
+}
+
+.specialist-info .specialist-name h3 {
+  text-transform: capitalize;
+}
+
+.specialist-info .specialist-specialties,
+.specialist-info .specialist-contact-info,
+.specialist-info .specialist-available-hours {
+  padding: 25px 20px;
+  border-bottom: solid 1px rgba(213, 215, 218, 0.3);
+}
+
+.specialist-info .specialist-contact-info p {
+  margin: 0;
+}
+
+.specialist-info .specialist-contact-info a {
+ color: #4A4A4A;
+}
+
+.specialist-info .specialist-contact-info ul.specialist-social-icon {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-top: 5px;
+}
+
+.specialist-info .specialist-contact-info ul.specialist-social-icon li {
+  display: inline-block;
+}
+
+.specialist-info .specialist-contact-info ul.specialist-social-icon li a {
+  color: #b5b5b5;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.specialist-info .specialist-contact-info ul.specialist-social-icon li a:hover {
+  color: #048581;
+}
+
+.specialist-info .specialist-available-hours ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-top: 10px;
+}
+
+.specialist-info .specialist-available-hours ul li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.appointment-button {
+  text-align: center;
+  padding: 30px 0 35px 0;
+}
+
+.appointment-button .spmedical-btn {
+  padding: 11px 20px;
+}
+
+.appointment-button .spmedical-btn:hover {
+  color: #fff;
+  text-decoration: none;
+}
+#appointment-submit.spmedical-btn i {
+  margin-right: 7px; 
+}
+.sp-spin {
+  transition: .4s;
+  display: inline-block;
+}
+.sp-spin{
+  -webkit-animation: sp-spin 1.5s infinite linear;
+  animation: sp-spin 1.5s infinite linear;
+}
+@keyframes sp-spin{
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+.about-specialist .specialist-intro h2,
+.about-specialist .specialist-work-experience h2,
+.about-specialist .specialist-awards h2,
+.about-specialist .specialist-education h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #252c33;
+  margin-bottom: 15px;
+}
+
+.about-specialist .specialist-intro p {
+  font-size: 20px;
+  font-weight: 300;
+  color: #353535;
+}
+
+.about-specialist .specialist-work-experience {
+    margin: 65px 0 65px 0;
+}
+
+.about-specialist .specialist-work-experience .spmedical-timeline-wrap,
+.about-specialist .specialist-awards .spmedical-timeline-wrap,
+.about-specialist .specialist-education .spmedical-timeline-wrap {
+    font-size: 20px;
+    margin-bottom: 25px;
+    margin-top: 20px;
+}
+
+.about-specialist .specialist-work-experience .spmedical-timeline-wrap .date,
+.about-specialist .specialist-awards .spmedical-timeline-wrap .date,
+.about-specialist .specialist-education .spmedical-timeline-wrap .date {
+    font-weight: 700;
+    color: #b5b5b5;
+}
+
+.about-specialist .specialist-work-experience .spmedical-timeline-wrap .info,
+.about-specialist .specialist-awards .spmedical-timeline-wrap .info,
+.about-specialist .specialist-education .spmedical-timeline-wrap .info {
+    color: #9b9b9b;
+    font-weight: 300;
+}
+
+.about-specialist .specialist-work-experience .spmedical-timeline-wrap .info span,
+.about-specialist .specialist-education .spmedical-timeline-wrap .info span,
+.about-specialist .specialist-awards .spmedical-timeline-wrap .info span {
+    display: block;
+    color: #353535;
+    font-weight: 300;
+}
+
+/*********************************************************************/
+/* **************** Specialists Details End:: Here **************** */
+/*******************************************************************/
+
+
+.custom-combobox {
+    position: relative;
+    display: inline-block;
+}
+.custom-combobox-toggle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin-left: -1px;
+  padding: 0;
+}
+.custom-combobox-input {
+  margin: 0;
+  padding-top: 2px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+}
+
+/* Responsive */
+
+@media (max-width: 1200px) {}
+
+@media (max-width: 992px) {
+  .spmedical-specialist-appointment-form {
+    padding: 40px 30px;
+  }
+  .spmedical-sidebar {
+    margin-right: 0;
+  }
+  .spmedical-specialists .specialist-wrapper .specialists-img-wrapper {
+    margin-right: 25px;
+  }
+  .spmedical-department-price-list {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 13px;
+  }
+  .spmedical .spmedical-btn {
+    font-size: 12px;
+  }
+  form.spmedical-search .input-item input {
+    padding: 7px 20px;
+  }
+  form.spmedical-search {
+    display: block;
+    padding: 15px;
+  }
+  form.spmedical-search .btn-primary {
+    padding: 6px 15px;
+  }
+  form.spmedical-search>div {
+    margin-bottom: 15px;
+    padding-right: 0 !important;
+  }
+  .spmedical-departments .spmedical-department-wrap .spmedical-department-content .spmedical-department-title {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+  .spmedical .spmedical-specialist-appointment-form h3 {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+  .spmedical-specialist-appointment-form form .spmedical-btn {
+    padding: 9px 20px;
+  }
+  .input-field-half-wrap {
+    flex-direction: column;
+  }
+  .input-field-half-wrap>div:nth-child(2) {
+    padding-left: 0;
+    padding-bottom: 15px;
+  }
+  .input-field-half-wrap>div:nth-child(1) {
+    padding-right: 0;
+  }
+  .spmedical-specialist-appointment-form form .input-field:not(:last-child) {
+    margin-bottom: 15px;
+  }
+  .spmedical .spmedical-title {
+    font-size: 30px;
+  }
+  .spmedical .spmedical-subtitle {
+    font-size: 14px;
+    line-height: 23px;
+  }
+  .spmedical .spmedical-specialists-search-wrapper form input {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+  .spmedical-specialist-search .input-filters .specialist-wrapper .custom-combobox .custom-combobox-toggle {
+    top: 13px;
+    right: 10px;
+  }
+  .spmedical-sidebar .sidebar-title {
+    font-size: 15px;
+    padding: 15px;
+  }
+  .spmedical-sidebar .spmedical-category-search {
+    padding: 15px;
+  }
+  .spmedical-sidebar {
+    margin-bottom: 40px;
+  }
+  .spmedical-sidebar .spmedical-category-search h3 {
+    font-size: 15px;
+  }
+  div.pagination {
+    padding: 10px 20px;
+  }
+  div.pagination a.page-link.next:after,
+  div.pagination a.page-link.previous:after {
+    font-size: 25px !important;
+    top: -7px;
+  }
+  .spmedical .spmedical-btn {
+    padding: 7px 20px;
+  }
+  .spmedical-specialist-search .input-item .spmedical-btn {
+    font-size: 12px;
+  }
+  .spmedical-specialists-search {
+    margin-bottom: 30px;
+  }
+  .com-spmedical #sp-main-body {
+    padding: 50px 0;
+  }
+  .spmedical-specialists-search-result .spmedical-result-counter {
+    margin-bottom: 15px;
+  }
+  .spmedical-specialists-search-result .spmedical-result-counter h4 {
+    font-size: 15px;
+  }
+  .view-department .spmedical-details {
+    font-size: 15px;
+  }
+  .spmedical-department-main-content {
+    margin-bottom: 40px;
+  }
+  .spmedical .spmedical-department-wrapper .spmedical-title {
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+  .spmedical-department-cta .spmedical-btn {
+    float: left;
+    margin-top: 20px;
+  }
+  .spmedical-department-cta {
+    padding: 20px;
+    margin-top: 30px;
+  }
+  .view-spmedical-specialist .specialist-info {
+    margin-bottom: 50px;
+  }
+  .spmedical .about-specialist .specialist-work-experience .spmedical-timeline-wrap,
+  .spmedical .about-specialist .specialist-awards .spmedical-timeline-wrap,
+  .spmedical .about-specialist .specialist-education .spmedical-timeline-wrap {
+    font-size: 14px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+  }
+  .spmedical .about-specialist .specialist-intro p {
+    font-size: 14px;
+  }
+  .spmedical .about-specialist .specialist-intro h2,
+  .spmedical .about-specialist .specialist-work-experience h2,
+  .spmedical .about-specialist .specialist-awards h2,
+  .spmedical .about-specialist .specialist-education h2 {
+    font-size: 25px;
+  }
+  .spmedical-select {
+    font-size: 15px;
+    padding: 7px 15px;
+  }
+  .spmedical-select ul {
+    font-size: 14px;
+  }
+  .spmedical-select ul>li {
+    padding: 8px 15px;
+  }
+  .spmedical-services-test {
+    margin-top: 20px;
+  }
+  .spmedical-test-list-wrapper {
+    margin-bottom: 20px;
+    height: auto;
+  }
+  .spmedical .spmedical-test-list-wrapper h3 {
+    font-size: 15px;
+    padding: 10px 15px;
+  }
+  .spmedical-test-list {
+    padding: 15px;
+  }
+  .spmedical-total-cost-wrapper {
+    margin-top: 0px;
+  }
+  .spmedical-total-cost-wrapper .spmedical-test-total-wrap {
+    font-size: 20px;
+    padding: 10px 20px;
+  }
+  .custom-combobox .custom-combobox-toggle {
+    top: 10px;
+    font-size: 10px;
+  }
+  .spmedical-schedules thead,
+  .spmedical-schedules tbody>tr>td:first-child {
+    font-size: 14px;
+  }
+  .spmedical-schedules .content-wrapper h3,
+  .spmedical-schedules .content-wrapper h4 {
+    font-size: 12px;
+  }
+  .spmedical-schedules .content-wrapper{
+    padding: 7px;
+  }
+  .spmedical .spmedical-table th,
+  .spmedical .spmedical-table td{
+    padding: 5px;
+  }
+  .spmedical-schedules .content-wrapper .details-info{
+    padding: 6px;
+  }
+}
+
+@media (max-width: 576px) {
+  .mod-spmedical-search {
+    margin: 0;
+  }
+  .spmedical-departments .spmedical-department-wrap>a .spmedical-department-content {
+    padding: 15px;
+  }
+  .ui-menu.ui-widget>li {
+    padding: 4px 15px;
+    font-size: 13px;
+  }
+  #spmedical-specialist-appintment-from .custom-combobox .custom-combobox-input {
+    padding: 6px 20px;
+    margin-bottom: 15px;
+  }
+  #spmedical-specialist-appintment-from .custom-combobox .custom-combobox-toggle {
+    top: 10px;
+    right: 10px;
+  }
+  .spmedical textarea {
+    padding: 6px 20px !important;
+  }
+  .spmedical .spmedical-title {
+    font-size: 25px;
+  }
+  .spmedical-specialist-search .input-filters {
+    flex-direction: column;
+    text-align: left;
+  }
+  .spmedical-specialist-search .input-filters .specialist-wrapper {
+    padding-bottom: 15px;
+  }
+  .spmedical-specialists .specialist-wrapper {
+    flex-direction: column;
+  }
+  .spmedical-specialists .specialist-wrapper .specialists-img-wrapper {
+    margin-right: 0;
+  }
+  .spmedical-specialists .specialist-wrapper .specialists-info-wrapper {
+    padding: 20px;
+  }
+  .spmedical-departments .spmedical-department-wrap>a .spmedical-department-content .spmedical-department-details {
+    font-size: 13px;
+  }
+  .spmedical-department-price-list {
+    padding: 20px;
+  }
+  .spmedical-schedules tbody>tr>td:first-child {
+    min-width: 110px;
+  }
+  .spmedical .about-specialist .specialist-intro h2,
+  .spmedical .about-specialist .specialist-work-experience h2,
+  .spmedical .about-specialist .specialist-awards h2,
+  .spmedical .about-specialist .specialist-education h2 {
+    font-size: 20px;
+  }
+  .spmedical .about-specialist .specialist-work-experience {
+    margin: 30px 0;
+  }
+  .spmedical .specialist-info .specialist-name h3,
+  .spmedical .specialist-info .specialist-specialties h3,
+  .spmedical .specialist-info .specialist-contact-info h3,
+  .spmedical .specialist-info .specialist-available-hours h3 {
+    font-size: 15px;
+    margin: 0 0 5px 0;
+  }
+}
+
+@media (max-width: 470px) {
+  .spmedical .specialists-wrapper {
+    margin-bottom: 20px;
+  }
+}
+
+/* New Update */
+.ui-helper-hidden-accessible{
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.ui-autocomplete {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: default;
+}

@@ -1,0 +1,105 @@
+<section id="sp-page-title">
+  <div class="row">
+    <div id="sp-title" class="col-lg-12 ">
+      <div class="sp-column ">
+        <div class="sp-page-title" style="background-image: url(../../assets/images/page-title.jpg);">
+          <div class="container">
+            <h2>Appointments</h2>
+            <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+              <li class="float-left">
+                <span class="divider fa fa-location" aria-hidden="true"></span>
+              </li>
+
+              <li itemprop="itemListElement" itemscope=""
+                itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a
+                  itemprop="item" href="index.html" class="pathway"><span
+                    itemprop="name">Home</span></a>
+                <meta itemprop="position" content="1">
+              </li>
+              <li itemprop="itemListElement" itemscope=""
+                itemtype="https://schema.org/ListItem" class="breadcrumb-item active"><span
+                  itemprop="name">Appointments</span>
+                <meta itemprop="position" content="2">
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="sp-main-body">
+  <div class="container">
+    <div class="container-inner">
+      <div class="row">
+        <main id="sp-component" class="col-lg-12 " role="main">
+          <div class="sp-column ">
+            <div id="system-message-container">
+            </div>
+
+            <div id="spmedical"
+              class="spmedical view-spmedical-appointments spmedical-appointments">
+              <!-- spmedical specialists Appointment(for details page) -->
+              <div class="spmedical-specialist-appointment">
+                <div class="img-wrap">
+                  <!-- <img src="index.htmlcomponents/com_spmedical/assets/images/appointment-img.jpg" alt="image"> -->
+                </div>
+                <div class="spmedical-specialist-appointment-form">
+                  <h3>Make an Appointment with</h3>
+                  <form id="spmedical-specialist-appintment-from"
+                    class="spmedical-specialist-appintment spmedial-suggest-fields">
+                    <div class="input-item">
+                      <select id="spmedical-specialists"
+                        class="spmedical-combobox spmedical-appointment-combobox"
+                        data-placeholder="Choose Specialists for make an appointment">
+                        <option selected=""></option>
+                        <option value="1">Dr Mangle</option>
+                        <option value="2">Dr. Baha Ell</option>
+                        <option value="3">Dr Schotz</option>
+                        <option value="4">Dr. Poe Damarin</option>
+                        <option value="5">Prof. Albus Dumbledore</option>
+                        <option value="6">Dr Crownover</option>
+                        <option value="7">Dr. Remus Lupin</option>
+                      </select>
+                    </div>
+                    <br>
+                    <div class="input-field">
+                      <input type="text" id="patient-name" name="patient-name"
+                        placeholder="Patient Name" required="true"
+                        autocomplete="off">
+                    </div>
+                    <div class="input-field-half-wrap">
+                      <div class="input-field input-field-half">
+                        <input type="text" name="phone" placeholder="Phone"
+                          required="true">
+                      </div>
+                      <div class="input-field input-field-half">
+                        <input type="text" name="email" placeholder="Email"
+                          required="true">
+                      </div>
+                    </div>
+                    <div class="input-field">
+                      <input type="text" name="appointment-date"
+                        placeholder="Appointment Date" required="true"
+                        autocomplete="off">
+                    </div>
+                    <div class="input-field">
+                      <textarea name="patient-note" placeholder="Appointment Note"
+                        cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="input-field spmedical-text-center">
+                      <button type="submit" id="appointment-submit"
+                        class="spmedical-btn spmedical-btn-primary">Request
+                        Appointment</button>
+                    </div>
+                  </form>
+                  <div class="spmedical-appointment-status"></div>
+                </div>
+              </div> <!-- //.end specialist appointment -->
+            </div> <!-- /#spmedical -->
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+</section>

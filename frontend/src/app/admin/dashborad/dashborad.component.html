@@ -1,0 +1,33 @@
+<div class="main-content">
+  <!-- Dashboard Page -->
+  <div class="page active" id="dashboard">
+    <div class="dashboard-grid">
+      <div class="dashboard-card">
+        <h3>Total des rendez-vous</h3>
+        <p id="totalAppointments">0</p>
+      </div>
+      <div class="dashboard-card">
+        <h3>Total des patients</h3>
+        <p id="totalPatients">0</p>
+      </div>
+      <div class="dashboard-card">
+        <h3>Total des médecins</h3>
+        <p id="totalDoctors">0</p>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <h3>Heures de travail par médecin</h3>
+      <select class="select-doctor" id="doctorSelect">
+        <option value="">Sélectionner un médecin</option>
+      </select>
+      <canvas id="hoursChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <h3>Variation des rendez-vous par jour</h3>
+      <canvas id="appointmentsVariationChart"></canvas>
+    </div>
+  </div>
+
+</div>

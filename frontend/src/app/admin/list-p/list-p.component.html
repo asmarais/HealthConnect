@@ -1,0 +1,69 @@
+<div class="table-container">
+  <div class="table-header">
+    <h2 class="text-lg font-bold">Liste des patients</h2>
+    <button class="add-btn">Ajouter un patient</button>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Adresse</th>
+        <th>Téléphone</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let patient of patients">
+        <td>{{ patient.nom }}</td>
+        <td>{{ patient.prenom }}</td>
+        <td>{{ patient.email }}</td>
+        <td>{{ patient.adresse }}</td>
+        <td>{{ patient.numero_de_telephone }}</td>
+        <td>
+          <button class="action-btn view" (click)="viewProfile(patient.id)">Voir</button>
+          <button class="action-btn edit" (click)="openEditModal(patient)">Modifier</button>
+          <button class="action-btn delete" (click)="deletePatient(patient.id)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Profile Modal -->
+<div class="modal" *ngIf="showProfileModal">
+  <div class="modal-content">
+    <h2>Profil du Patient</h2>
+    <div *ngIf="selectedPatient">
+      <p><strong>Nom:</strong> {{ selectedPatient.nom }}</p>
+      <p><strong>Prénom:</strong> {{ selectedPatient.prenom }}</p>
+      <p><strong>Email:</strong> {{ selectedPatient.email }}</p>
+      <p><strong>Téléphone:</strong> {{ selectedPatient.numero_de_telephone }}</p>
+      <p><strong>Adresse:</strong> {{ selectedPatient.adresse }}</p>
+      <p><strong>CIN:</strong> {{ selectedPatient.cin }}</p>
+      <p><strong>N° Sécurité Sociale:</strong> {{ selectedPatient.numero_securite_sociale }}</p>
+      <p><strong>Allergies:</strong> {{ selectedPatient.allergies }}</p>
+    </div>
+    <button (click)="closeModal()">Fermer</button>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal" *ngIf="showEditModal">
+  <div class="modal-content">
+    <h2>Modifier le Patient</h2>
+    <form>
+      <input [(ngModel)]="editedPatient.nom" name="nom" placeholder="Nom">
+      <input [(ngModel)]="editedPatient.prenom" name="prenom" placeholder="Prénom">
+      <input [(ngModel)]="editedPatient.email" name="email" placeholder="Email">
+      <input [(ngModel)]="editedPatient.numero_de_telephone" name="telephone" placeholder="Téléphone">
+      <input [(ngModel)]="editedPatient.adresse" name="adresse" placeholder="Adresse">
+      <input [(ngModel)]="editedPatient.cin" name="cin" placeholder="CIN">
+      <input [(ngModel)]="editedPatient.numero_securite_sociale" name="numero_securite_sociale" placeholder="N° Sécurité Sociale">
+      <input [(ngModel)]="editedPatient.allergies" name="allergies" placeholder="Allergies">
+      <button type="button" (click)="updatePatient()">Sauvegarder</button>
+      <button type="button" (click)="closeModal()">Annuler</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,167 @@
+<br><br><br><br><br>
+<div class="container">
+  <header class="header">
+    <div class="profile">
+      <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=150&h=150"
+           alt="Dean Guerrero" class="profile-pic" />
+      <button class="text-blue-600 hover:text-blue-800 p-2 rounded-full transition-colors duration-200" aria-label="Edit">
+        <i class="fas fa-pencil-alt w-5 h-5"></i>
+      </button>
+      <div class="profile-info">
+        <h1>{{ doctor.name }}</h1>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-award w-4 h-4"></i>
+            <span>{{ doctor.rating }}</span>
+            <i class="fas fa-calendar-alt w-4 h-4 ml-2"></i>
+            <span>Joined: {{ doctor.joined }}</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope w-4 h-4"></i>
+            <span>{{ doctor.email }}</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone w-4 h-4"></i>
+            <span>{{ doctor.phone }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stats flex gap-4">
+      <div class="stat-card rounded-lg p-4 text-center shadow-md">
+        <i class="fas fa-calendar-alt stat-icon w-4 h-4 mx-auto mb-2"></i>
+        <div class="stat-value font-bold text-xl">{{ stats.appointments }}</div>
+        <div class="stat-label text-sm">Appointments</div>
+      </div>
+      <div class="stat-card rounded-lg p-4 text-center shadow-md">
+        <i class="fas fa-users stat-icon w-4 h-4 mx-auto mb-2"></i>
+        <div class="stat-value font-bold text-xl">{{ stats.patients }}</div>
+        <div class="stat-label text-sm">Patients</div>
+      </div>
+    </div>
+    <nav class="nav mt-6">
+      <ul class="flex gap-2 justify-end flex-wrap">
+        <li>
+          <button id="schedule-btn" class="nav-button" (click)="setView('schedule')">Schedule</button>
+        </li>
+        <li>
+          <button id="patients-btn" class="nav-button" (click)="setView('patients')">Patients</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <br><br>
+  <main class="main max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-5 gap-6">
+    <section #scheduleSection id="schedule-section" class="schedule col-span-1 lg:col-span-3 bg-white rounded-xl p-6 shadow-md">
+      <div class="schedule-header flex justify-between items-center mb-6">
+        <h2 class="schedule-title text-lg font-bold">Doctor's Schedule</h2>
+        <div class="flex items-center gap-4">
+          <span class="schedule-date">{{ scheduleDateRange }}</span>
+          <div class="schedule-buttons flex gap-2">
+            <button class="schedule-button" [ngClass]="{'active': viewMode === 'week'}" (click)="setViewMode('week')">Work Week</button>
+            <button class="schedule-button" [ngClass]="{'active': viewMode === 'day'}" (click)="setViewMode('day')">Day</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="schedule-grid" [ngClass]="{'day-view': viewMode === 'day'}">
+        <div>
+          <div class="time-label h-10"></div>
+          <div class="time-label" *ngFor="let time of timeSlots">{{ time }}</div>
+        </div>
+        <div class="day-column" *ngFor="let day of days" [ngClass]="{'active': viewMode === 'day' && currentDay === day}">
+          <div class="day-header" (click)="selectDay(day)">{{ day }}</div>
+          <div class="time-slots">
+            <div class="time-slot" *ngFor="let slot of getDaySlots(day)">
+              <div class="appointment-block" *ngIf="slot.appointment" [ngClass]="{'not-accepted': !slot.appointment.accepted}"
+                   (click)="showTooltip(slot.appointment)">
+                {{ slot.appointment.patient }} – {{ slot.appointment.reason }}
+                <div class="tooltip" *ngIf="selectedAppointment === slot.appointment">
+                  <p><strong>Patient:</strong> {{ slot.appointment.patient }}</p>
+                  <p><strong>Reason:</strong> {{ slot.appointment.reason }}</p>
+                  <p><strong>Phone:</strong> {{ slot.appointment.phone }}</p>
+                  <p><strong>Notes:</strong> {{ slot.appointment.notes }}</p>
+                  <div class="tooltip-buttons">
+                    <button class="tooltip-btn accept" *ngIf="!slot.appointment.accepted" (click)="acceptAppointment(slot.appointment)">Accept</button>
+                    <button class="tooltip-btn reject" *ngIf="!slot.appointment.accepted" (click)="rejectAppointment(slot.appointment)">Reject</button>
+                    <button class="tooltip-btn edit" *ngIf="slot.appointment.accepted" (click)="editAppointment(slot.appointment)">Modify Date</button>
+                    <button class="tooltip-btn cancel" *ngIf="slot.appointment.accepted" (click)="cancelAppointment(slot.appointment)">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section #patientsSection id="patients-section" class="patients-table-container col-span-1 lg:col-span-3">
+      <div class="patients-table-header">
+        <input type="text" class="search-bar" placeholder="Search by name..." [(ngModel)]="searchQuery" (ngModelChange)="filterPatients()" />
+        <button class="sort-btn" (click)="toggleSort()">Sort by Pending Status ({{ sortDirection === 'desc' ? '↓' : '↑' }})</button>
+      </div>
+      <table class="patients-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Appointments</th>
+            <th>Pending?</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let patient of paginatedPatients">
+            <tr>
+              <td>{{ patient.name }}</td>
+              <td>{{ patient.email }}</td>
+              <td>{{ patient.phone }}</td>
+              <td>{{ getPatientAppointments(patient.name).length }}</td>
+              <td>
+                <i class="fas" [ngClass]="{'fa-check text-green-500': hasPendingAppointments(patient.name), 'fa-times text-red-500': !hasPendingAppointments(patient.name)}" class="w-5 h-5"></i>
+              </td>
+              <td>
+                <button class="toggle-appointments-btn" (click)="toggleAppointments(patient.name)">
+                  {{ visibleAppointments[patient.name] ? 'Hide' : 'Show' }} Appointments
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="visibleAppointments[patient.name]">
+              <td colspan="6">
+                <div class="appointments-list visible">
+                  <div class="appointment-item" *ngFor="let appointment of getPatientAppointments(patient.name)">
+                    <span>{{ appointment.time }} – {{ appointment.reason }} ({{ appointment.accepted ? 'Accepted' : 'Pending' }})</span>
+                    <div class="appointment-actions" *ngIf="!appointment.accepted">
+                      <button class="appointment-btn accept" (click)="acceptAppointment(appointment)">Accept</button>
+                      <button class="appointment-btn reject" (click)="rejectAppointment(appointment)">Reject</button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <button class="pagination-btn" *ngFor="let page of getPageNumbers()" [ngClass]="{'active': currentPage === page}" (click)="setPage(page)">{{ page }}</button>
+      </div>
+    </section>
+
+    <div class="right-column col-span-1 lg:col-span-2 flex flex-col gap-6">
+      <section class="notifications bg-white rounded-xl p-6 shadow-md flex-grow">
+        <div class="notifications-header flex justify-between items-center mb-4">
+          <h2 class="section-title text-lg font-bold">Notifications</h2>
+          <button class="view-all flex items-center gap-1 text-sm font-medium transition-all duration-200">View All</button>
+        </div>
+        <div class="notification border-b py-3" *ngFor="let notification of notifications" style="border-color: #353535;">
+          <div class="notification-header flex justify-between items-start">
+            <h3 class="notification-title font-medium">{{ notification.title }}</h3>
+            <span class="notification-date text-xs">{{ notification.date }}</span>
+          </div>
+          <p class="notification-description text-sm mt-1">{{ notification.description }}</p>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>

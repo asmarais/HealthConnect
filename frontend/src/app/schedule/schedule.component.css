@@ -1,0 +1,103 @@
+
+				.schedule-section {
+					padding: 30px 0;
+				}
+
+				.section-tittle span {
+					font-size: 14px;
+					color: #666;
+					text-transform: uppercase;
+				}
+
+				.section-tittle h2 {
+					font-family: 'Work Sans', sans-serif;
+					font-size: 36px;
+					font-weight: 700;
+					color: #252C33;
+					margin-top: 10px;
+				}
+
+				.schedule-tabs .nav-tabs {
+					background-color: #000;
+					border: none;
+					justify-content: center;
+					border-radius: 5px 5px 0 0;
+				}
+
+				.schedule-tabs .nav-link {
+					font-family: 'Work Sans', sans-serif;
+					font-size: 16px;
+					font-weight: 500;
+					color: #fff;
+					padding: 15px 25px;
+					border: none;
+					background: transparent;
+					transition: background-color 0.3s ease, color 0.3s ease;
+				}
+
+				.schedule-tabs .nav-link.active {
+					background-color: #048581;
+					color: #fff;
+				}
+
+				.schedule-tabs .nav-link:hover {
+					background-color: #048581;
+					color: #fff;
+				}
+
+				.tab-wrapper {
+					display: flex;
+					flex-wrap: wrap;
+					gap: 20px;
+					justify-content: center;
+					margin-top: 20px;
+				}
+
+				.single-box {
+					background: #fff;
+					border-radius: 10px;
+					box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+					padding: 20px;
+					width: 300px;
+					text-align: center;
+				}
+
+				.single-caption span {
+					font-size: 14px;
+					color: #666;
+					margin-bottom: 10px;
+				}
+
+				.single-caption h3 {
+					font-family: 'Work Sans', sans-serif;
+					font-size: 20px;
+					font-weight: 600;
+					color: #252C33;
+					margin: 10px 0;
+				}
+
+				.single-caption p {
+					font-size: 14px;
+					color: #666;
+					margin: 5px 0;
+				}
+
+				.single-caption .btn {
+					background-color: #252C33;
+					color: #fff;
+					padding: 10px 20px;
+					border-radius: 5px;
+					font-family: 'Work Sans', sans-serif;
+					font-size: 14px;
+					font-weight: 500;
+					text-transform: uppercase;
+					border: none;
+					transition: background-color 0.3s ease;
+					width: 100%;
+					margin-top: 15px;
+				}
+
+				.single-caption .btn:hover {
+					background-color: #666;
+				}
+

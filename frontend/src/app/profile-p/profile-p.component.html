@@ -1,0 +1,87 @@
+<br><br><br><br><br>
+<div class="container">
+  <!-- Header -->
+  <header class="header">
+    <div class="profile">
+      <img [src]="doctor.profilePic" [alt]="doctor.name" class="profile-pic" />
+      <button class="text-blue-600 hover:text-blue-800 p-2 rounded-full transition-colors duration-200 edit-btn" aria-label="Edit">
+        <i class="fas fa-pencil-alt w-5 h-5"></i>
+      </button>
+      <div class="profile-info">
+        <h1>{{ doctor.name }}</h1>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-award w-4 h-4"></i>
+            <span>{{ doctor.rating }}</span>
+            <i class="fas fa-calendar-alt w-4 h-4 ml-2"></i>
+            <span>Joined: {{ doctor.joined }}</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope w-4 h-4"></i>
+            <span>{{ doctor.email }}</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone w-4 h-4"></i>
+            <span>{{ doctor.phone }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-5 gap-6">
+    <!-- Announcements -->
+    <section class="announcements-container col-span-1 lg:col-span-3">
+      <div class="announcements-header">
+        <h2>Announcements</h2>
+        <button class="view-all">View All</button>
+      </div>
+      <div class="announcement" [ngClass]="announcement.bgClass" *ngFor="let announcement of announcements">
+        <div class="flex justify-between">
+          <h3>{{ announcement.title }}</h3>
+          <span class="announcement-date">{{ announcement.date }}</span>
+        </div>
+        <p>{{ announcement.description }}</p>
+      </div>
+    </section>
+
+    <!-- Right Column: Calendar and Events -->
+    <div class="right-column col-span-1 lg:col-span-2">
+      <!-- Calendar -->
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <button (click)="prevMonth()" class="text-2xl text-#353535"><</button>
+          <h2>{{ currentDate | date: 'MMMM yyyy' }}</h2>
+          <button (click)="nextMonth()" class="text-2xl text-#353535">></button>
+        </div>
+        <div class="calendar-grid">
+          <div class="calendar-day header" *ngFor="let day of daysOfWeek">{{ day }}</div>
+          <div class="calendar-day disabled" *ngFor="let empty of emptyDays"></div>
+          <div class="calendar-day"
+               *ngFor="let day of daysInMonth"
+               [ngClass]="{'selected': selectedDate === getDateString(day)}"
+               (click)="selectDay(day)">
+            {{ day }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Events -->
+      <section class="events-container">
+        <div class="events-header">
+          <h2>Appointments</h2>
+          <button class="text-sm text-#048581">...</button>
+        </div>
+        <div id="eventsList">
+          <div class="event" *ngIf="selectedAppointments.length === 0">
+            <p>No appointments for the selected day.</p>
+          </div>
+          <div class="event" *ngFor="let appointment of selectedAppointments">
+            <p><span class="event-time">{{ appointment.time }}</span> – {{ appointment.reason }} ({{ appointment.status }})</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>

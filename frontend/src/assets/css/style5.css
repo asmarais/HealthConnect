@@ -1,0 +1,368 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #FFFFFF;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #E6F0FA 0%, #F5F7FA 100%);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid #FFFFFF;
+    margin-bottom: 8px;
+}
+
+.profile-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 8px;
+}
+
+.profile-desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+    line-height: 20px;
+    margin-bottom: 8px;
+}
+
+.profile-contact {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+    margin-bottom: 4px;
+}
+
+.profile-contact i {
+    margin-right: 8px;
+    color: #666666;
+}
+
+.stats {
+    display: flex;
+    gap: 15px;
+}
+
+.stat-card {
+    background-color: #FFFFFF;
+    width: 100px;
+    height: 80px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 12px;
+}
+
+.stat-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+}
+
+/* Navigation */
+.nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.nav-link {
+    background-color: #E6F0FA;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.nav-link.active {
+    background-color: #FFFFFF;
+}
+
+.nav-link:hover {
+    background-color: #D3E3FD;
+}
+
+/* Main Content */
+.main {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    gap: 20px;
+}
+
+/* Schedule */
+.schedule {
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.schedule-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333333;
+}
+
+.schedule-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.schedule-controls span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #666666;
+}
+
+.schedule-btn {
+    background-color: #E6F0FA;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.schedule-btn.active {
+    background-color: #4A90E2;
+    color: #FFFFFF;
+}
+
+.schedule-grid {
+    display: grid;
+    grid-template-columns: 60px repeat(5, 1fr);
+    grid-template-rows: repeat(9, 60px);
+    gap: 1px;
+    background-color: #E0E0E0;
+}
+
+.time-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #666666;
+    background-color: #FFFFFF;
+}
+
+.event {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+    transition: opacity 0.3s;
+}
+
+.event:hover {
+    opacity: 0.8;
+}
+
+.physics {
+    background-color: #D3E3FD;
+}
+
+.chemistry {
+    background-color: #FFD1DC;
+}
+
+/* Sidebar */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Performance */
+.performance {
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+}
+
+.performance h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 16px;
+}
+
+.performance canvas {
+    width: 120px !important;
+    height: 120px !important;
+    margin: 0 auto;
+}
+
+.semester {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+    margin-top: 8px;
+}
+
+/* Announcements */
+.announcements {
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    padding: 16px;
+    flex-grow: 1;
+}
+
+.announcements-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.announcements-header h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333333;
+}
+
+.view-all {
+    font-size: 14px;
+    font-weight: 500;
+    color: #4A90E2;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.view-all:hover {
+    text-decoration: underline;
+    color: #2A6DB0;
+}
+
+.announcement {
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.announcement h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+    margin-bottom: 4px;
+}
+
+.announcement-date {
+    font-size: 12px;
+    font-weight: 400;
+    color: #666666;
+    margin-bottom: 4px;
+}
+
+.announcement p {
+    font-size: 12px;
+    font-weight: 400;
+    color: #666666;
+}
+
+.announcement-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 1023px) {
+    .main {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 8px;
+    }
+
+    .profile-name {
+        font-size: 18px;
+    }
+
+    .profile-desc,
+    .profile-contact,
+    .nav-link,
+    .schedule-header h2,
+    .schedule-controls span,
+    .schedule-btn,
+    .event,
+    .announcements-header h2,
+    .view-all,
+    .announcement h3 {
+        font-size: 12px;
+    }
+
+    .stat-value {
+        font-size: 20px;
+    }
+
+    .stat-label {
+        font-size: 12px;
+    }
+}
