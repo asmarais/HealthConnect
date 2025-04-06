@@ -16,15 +16,15 @@
     </thead>
     <tbody>
       <tr *ngFor="let patient of patients">
-        <td>{{ patient.nom }}</td>
-        <td>{{ patient.prenom }}</td>
-        <td>{{ patient.email }}</td>
-        <td>{{ patient.adresse }}</td>
-        <td>{{ patient.numero_de_telephone }}</td>
+        <td>{{ patient.User.nom }}</td>
+        <td>{{ patient.User.prenom }}</td>
+        <td>{{ patient.User.email }}</td>
+        <td>{{ patient.User.adresse }}</td>
+        <td>{{ patient.User.numero_de_telephone }}</td>
         <td>
-          <button class="action-btn view" (click)="viewProfile(patient.id)">Voir</button>
+          <button class="action-btn view" (click)="viewProfile(patient.user_id)">Voir</button>
           <button class="action-btn edit" (click)="openEditModal(patient)">Modifier</button>
-          <button class="action-btn delete" (click)="deletePatient(patient.id)">Supprimer</button>
+          <button class="action-btn delete" (click)="deletePatient(patient.user_id)">Supprimer</button>
         </td>
       </tr>
     </tbody>
@@ -36,12 +36,12 @@
   <div class="modal-content">
     <h2>Profil du Patient</h2>
     <div *ngIf="selectedPatient">
-      <p><strong>Nom:</strong> {{ selectedPatient.nom }}</p>
-      <p><strong>Prénom:</strong> {{ selectedPatient.prenom }}</p>
-      <p><strong>Email:</strong> {{ selectedPatient.email }}</p>
-      <p><strong>Téléphone:</strong> {{ selectedPatient.numero_de_telephone }}</p>
-      <p><strong>Adresse:</strong> {{ selectedPatient.adresse }}</p>
-      <p><strong>CIN:</strong> {{ selectedPatient.cin }}</p>
+      <p><strong>Nom:</strong> {{ selectedPatient.User.nom }}</p>
+      <p><strong>Prénom:</strong> {{ selectedPatient.User.prenom }}</p>
+      <p><strong>Email:</strong> {{ selectedPatient.User.email }}</p>
+      <p><strong>Téléphone:</strong> {{ selectedPatient.User.numero_de_telephone }}</p>
+      <p><strong>Adresse:</strong> {{ selectedPatient.User.adresse }}</p>
+      <p><strong>CIN:</strong> {{ selectedPatient.User.cin }}</p>
       <p><strong>N° Sécurité Sociale:</strong> {{ selectedPatient.numero_securite_sociale }}</p>
       <p><strong>Allergies:</strong> {{ selectedPatient.allergies }}</p>
     </div>

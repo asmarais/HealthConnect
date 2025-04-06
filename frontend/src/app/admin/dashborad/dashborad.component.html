@@ -1,18 +1,18 @@
+<!-- dashborad.component.html -->
 <div class="main-content">
-  <!-- Dashboard Page -->
   <div class="page active" id="dashboard">
     <div class="dashboard-grid">
       <div class="dashboard-card">
         <h3>Total des rendez-vous</h3>
-        <p id="totalAppointments">0</p>
+        <p id="totalAppointments">{{ totalAppointments }}</p>
       </div>
       <div class="dashboard-card">
         <h3>Total des patients</h3>
-        <p id="totalPatients">0</p>
+        <p id="totalPatients">{{ totalPatients }}</p>
       </div>
       <div class="dashboard-card">
         <h3>Total des médecins</h3>
-        <p id="totalDoctors">0</p>
+        <p id="totalDoctors">{{ totalDoctors }}</p>
       </div>
     </div>
 
@@ -29,5 +29,4 @@
       <canvas id="appointmentsVariationChart"></canvas>
     </div>
   </div>
-
 </div>

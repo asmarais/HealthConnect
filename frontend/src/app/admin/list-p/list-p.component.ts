@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./list-p.component.css']
 })
 export class ListPComponent implements OnInit {
-  private apiUrl = 'http://localhost:3000/api/patient';
+  private apiUrl = 'http://localhost:5000/api/patient';
   patients: any[] = [];
   selectedPatient: any = null;
   showProfileModal = false;
@@ -21,9 +21,10 @@ export class ListPComponent implements OnInit {
   }
 
   loadPatients() {
-    this.http.get(this.apiUrl).subscribe(
+    this.http.get(`${this.apiUrl}/`).subscribe(
       (data: any) => {
         this.patients = data;
+        console.log(this.patients);
       },
       (error) => {
         console.error('Error fetching patients:', error);
@@ -31,7 +32,7 @@ export class ListPComponent implements OnInit {
     );
   }
 
-  viewProfile(id: string) {
+  viewProfile(id: number) {
     this.http.get(`${this.apiUrl}/${id}`).subscribe(
       (data: any) => {
         this.selectedPatient = data;
@@ -44,12 +45,35 @@ export class ListPComponent implements OnInit {
   }
 
   openEditModal(patient: any) {
-    this.editedPatient = { ...patient };
+    this.editedPatient = {
+      user_id: patient.user_id,
+      numero_securite_sociale: patient.numero_securite_sociale,
+      allergies: patient.allergies,
+      nom: patient.User.nom,
+      prenom: patient.User.prenom,
+      email: patient.User.email,
+      numero_de_telephone: patient.User.numero_de_telephone,
+      adresse: patient.User.adresse,
+      cin: patient.User.cin,
+    };
     this.showEditModal = true;
   }
 
   updatePatient() {
-    this.http.put(`${this.apiUrl}/${this.editedPatient.id}`, this.editedPatient).subscribe(
+    const payload = {
+      numero_securite_sociale: this.editedPatient.numero_securite_sociale,
+      allergies: this.editedPatient.allergies,
+      User: {
+        nom: this.editedPatient.nom,
+        prenom: this.editedPatient.prenom,
+        email: this.editedPatient.email,
+        numero_de_telephone: this.editedPatient.numero_de_telephone,
+        adresse: this.editedPatient.adresse,
+        cin: this.editedPatient.cin,
+      }
+    };
+
+    this.http.put(`${this.apiUrl}/${this.editedPatient.user_id}`, payload).subscribe(
       () => {
         this.loadPatients();
         this.showEditModal = false;
@@ -60,7 +84,7 @@ export class ListPComponent implements OnInit {
     );
   }
 
-  deletePatient(id: string) {
+  deletePatient(id: number) {
     if (confirm('Are you sure you want to delete this patient?')) {
       this.http.delete(`${this.apiUrl}/${id}`).subscribe(
         () => {

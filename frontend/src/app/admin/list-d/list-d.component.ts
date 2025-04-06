@@ -8,112 +8,122 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ListDComponent implements OnInit {
   private apiUrl = 'http://localhost:5000/api/doctor';
+
   approvedDoctors: any[] = [];
   pendingDoctors: any[] = [];
+
   selectedDoctor: any = null;
+  editedDoctor: any = null;
+
   showProfileModal = false;
   showEditModal = false;
-  editedDoctor: any = {};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  ngOnInit() {
-    this.loadApprovedDoctors();
-    this.loadPendingDoctors();
+  ngOnInit(): void {
+    this.fetchDoctors();
   }
 
-  loadApprovedDoctors() {
-    this.http.get(`${this.apiUrl}`).subscribe(
-      (data: any) => {
-        this.approvedDoctors = data;
+  fetchDoctors(): void {
+    this.http.get<any>(`${this.apiUrl}/`).subscribe(
+      (response) => {
+        if (Array.isArray(response.doctors)) {
+          const allDoctors = response.doctors.map((doc: any) => ({
+            ...doc.User,
+            ...doc,
+            nom: doc.User.nom,
+            prenom: doc.User.prenom,
+            email: doc.User.email,
+            numero_de_telephone: doc.User.numero_de_telephone,
+            adresse: doc.User.adresse,
+            cin: doc.User.cin,
+          }));
+
+          this.approvedDoctors = allDoctors.filter((doc: any) => doc.status === 'APPROVED');
+          this.pendingDoctors = allDoctors.filter((doc: any) => doc.status === 'PENDING');
+        } else {
+          console.error('Invalid doctor data format');
+        }
       },
       (error) => {
-        console.error('Error fetching approved doctors:', error);
+        console.error('Erreur lors du chargement des médecins :', error);
       }
     );
   }
 
-  loadPendingDoctors() {
-    this.http.get(`${this.apiUrl}/pending`).subscribe(
-      (data: any) => {
-        this.pendingDoctors = data;
-      },
-      (error) => {
-        console.error('Error fetching pending doctors:', error);
-      }
-    );
-  }
-
-  viewProfile(id: string) {
-    this.http.get(`${this.apiUrl}/${id}`).subscribe(
-      (data: any) => {
-        this.selectedDoctor = data;
+  viewProfile(userId: number): void {
+    this.http.get<any>(`${this.apiUrl}/${userId}`).subscribe(
+      (doctor) => {
+        this.selectedDoctor = {
+          ...doctor.User,
+          ...doctor,
+        };
         this.showProfileModal = true;
       },
       (error) => {
-        console.error('Error fetching doctor:', error);
+        console.error('Erreur lors de la récupération du médecin :', error);
       }
     );
   }
 
-  openEditModal(doctor: any) {
+  openEditModal(doctor: any): void {
     this.editedDoctor = { ...doctor };
     this.showEditModal = true;
   }
 
-  updateDoctor() {
-    this.http.put(`${this.apiUrl}/${this.editedDoctor.id}`, this.editedDoctor).subscribe(
+  updateDoctor(): void {
+    if (!this.editedDoctor.user_id) return;
+
+    this.http.put(`${this.apiUrl}/${this.editedDoctor.user_id}`, this.editedDoctor).subscribe(
       () => {
-        this.loadApprovedDoctors();
-        this.loadPendingDoctors();
         this.showEditModal = false;
+        this.fetchDoctors();
       },
       (error) => {
-        console.error('Error updating doctor:', error);
+        console.error('Erreur lors de la mise à jour du médecin :', error);
       }
     );
   }
 
-  deleteDoctor(id: string) {
-    if (confirm('Are you sure you want to delete this doctor?')) {
-      this.http.delete(`${this.apiUrl}/${id}`).subscribe(
+  deleteDoctor(userId: number): void {
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce médecin ?')) {
+      this.http.delete(`${this.apiUrl}/${userId}`).subscribe(
         () => {
-          this.loadApprovedDoctors();
-          this.loadPendingDoctors();
+          this.fetchDoctors();
         },
         (error) => {
-          console.error('Error deleting doctor:', error);
+          console.error('Erreur lors de la suppression du médecin :', error);
         }
       );
     }
   }
 
-  acceptDoctor(id: string) {
-    this.http.put(`${this.apiUrl}/validate/${id}`, { status: 'APPROVED' }).subscribe(
+  acceptDoctor(userId: number): void {
+    this.http.put(`${this.apiUrl}/validate/${userId}`, { status: 'APPROVED' }).subscribe(
       () => {
-        this.loadPendingDoctors();
-        this.loadApprovedDoctors();
+        this.fetchDoctors();
       },
       (error) => {
-        console.error('Error accepting doctor:', error);
+        console.error('Erreur lors de l\'approbation du médecin :', error);
       }
     );
   }
 
-  rejectDoctor(id: string) {
-    this.http.put(`${this.apiUrl}/validate/${id}`, { status: 'REJECTED' }).subscribe(
+  rejectDoctor(userId: number): void {
+    this.http.put(`${this.apiUrl}/validate/${userId}`, { status: 'REJECTED' }).subscribe(
       () => {
-        this.loadPendingDoctors();
-        this.loadApprovedDoctors();
+        this.fetchDoctors();
       },
       (error) => {
-        console.error('Error rejecting doctor:', error);
+        console.error('Erreur lors du rejet du médecin :', error);
       }
     );
   }
 
-  closeModal() {
+  closeModal(): void {
     this.showProfileModal = false;
     this.showEditModal = false;
+    this.selectedDoctor = null;
+    this.editedDoctor = null;
   }
 }

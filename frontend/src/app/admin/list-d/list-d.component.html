@@ -1,6 +1,6 @@
 <div class="table-container">
   <div class="table-header">
-    <h2 class="text-lg font-bold">Liste des médecins</h2>
+    <h2 class="text-lg font-bold">Liste des médecins approuvés</h2>
     <button class="add-btn">Ajouter un médecin</button>
   </div>
   <table class="table">
@@ -16,15 +16,15 @@
     </thead>
     <tbody>
       <tr *ngFor="let doctor of approvedDoctors">
-        <td>{{ doctor.nom }}</td>
-        <td>{{ doctor.prenom }}</td>
-        <td>{{ doctor.adresse }}</td>
+        <td>{{ doctor.User.nom }}</td>
+        <td>{{ doctor.User.prenom }}</td>
+        <td>{{ doctor.User.adresse }}</td>
         <td>{{ doctor.specialite }}</td>
-        <td>{{ doctor.numero_de_telephone }}</td>
+        <td>{{ doctor.User.numero_de_telephone }}</td>
         <td>
-          <button class="action-btn view" (click)="viewProfile(doctor.id)">Voir</button>
+          <button class="action-btn view" (click)="viewProfile(doctor.user_id)">Voir</button>
           <button class="action-btn edit" (click)="openEditModal(doctor)">Modifier</button>
-          <button class="action-btn delete" (click)="deleteDoctor(doctor.id)">Supprimer</button>
+          <button class="action-btn delete" (click)="deleteDoctor(doctor.user_id)">Supprimer</button>
         </td>
       </tr>
     </tbody>
@@ -50,24 +50,24 @@
     </thead>
     <tbody>
       <tr *ngFor="let doctor of pendingDoctors">
-        <td>{{ doctor.nom }}</td>
-        <td>{{ doctor.prenom }}</td>
-        <td>{{ doctor.adresse }}</td>
+        <td>{{ doctor.User.nom }}</td>
+        <td>{{ doctor.User.prenom }}</td>
+        <td>{{ doctor.User.adresse }}</td>
         <td>{{ doctor.specialite }}</td>
-        <td>{{ doctor.numero_de_telephone }}</td>
+        <td>{{ doctor.User.numero_de_telephone }}</td>
         <td>
-          <button class="action-btn view" (click)="viewProfile(doctor.id)">Voir</button>
+          <button class="action-btn view" (click)="viewProfile(doctor.user_id)">Voir</button>
           <button class="action-btn edit" (click)="openEditModal(doctor)">Modifier</button>
-          <button class="action-btn accept" (click)="acceptDoctor(doctor.id)">Accepter</button>
-          <button class="action-btn reject" (click)="rejectDoctor(doctor.id)">Rejeter</button>
-          <button class="action-btn delete" (click)="deleteDoctor(doctor.id)">Supprimer</button>
+          <button class="action-btn accept" (click)="acceptDoctor(doctor.user_id)">Accepter</button>
+          <button class="action-btn reject" (click)="rejectDoctor(doctor.user_id)">Rejeter</button>
+          <button class="action-btn delete" (click)="deleteDoctor(doctor.user_id)">Supprimer</button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<!-- Profile Modal -->
+<!-- Modal de Profil -->
 <div class="modal" *ngIf="showProfileModal">
   <div class="modal-content">
     <h2>Profil du Médecin</h2>
@@ -82,23 +82,23 @@
       <p><strong>Heure début:</strong> {{ selectedDoctor.datedebut }}</p>
       <p><strong>Heure fin:</strong> {{ selectedDoctor.datefin }}</p>
       <p><strong>Statut:</strong> {{ selectedDoctor.status }}</p>
-      <img [src]="selectedDoctor.image_url" alt="Doctor Image" style="max-width: 200px;">
+      <img [src]="selectedDoctor.image_url" alt="Doctor Image" style="max-width: 100%; border-radius: 10px;">
     </div>
     <button (click)="closeModal()">Fermer</button>
   </div>
 </div>
 
-<!-- Edit Modal -->
+<!-- Modal de Modification -->
 <div class="modal" *ngIf="showEditModal">
   <div class="modal-content">
     <h2>Modifier le Médecin</h2>
     <form>
-      <input [(ngModel)]="editedDoctor.nom" name="nom" placeholder="Nom">
-      <input [(ngModel)]="editedDoctor.prenom" name="prenom" placeholder="Prénom">
-      <input [(ngModel)]="editedDoctor.email" name="email" placeholder="Email">
-      <input [(ngModel)]="editedDoctor.numero_de_telephone" name="telephone" placeholder="Téléphone">
-      <input [(ngModel)]="editedDoctor.adresse" name="adresse" placeholder="Adresse">
-      <input [(ngModel)]="editedDoctor.cin" name="cin" placeholder="CIN">
+      <input [(ngModel)]="editedDoctor.User.nom" name="nom" placeholder="Nom">
+      <input [(ngModel)]="editedDoctor.User.prenom" name="prenom" placeholder="Prénom">
+      <input [(ngModel)]="editedDoctor.User.email" name="email" placeholder="Email">
+      <input [(ngModel)]="editedDoctor.User.numero_de_telephone" name="telephone" placeholder="Téléphone">
+      <input [(ngModel)]="editedDoctor.User.adresse" name="adresse" placeholder="Adresse">
+      <input [(ngModel)]="editedDoctor.User.cin" name="cin" placeholder="CIN">
       <input [(ngModel)]="editedDoctor.specialite" name="specialite" placeholder="Spécialité">
       <input [(ngModel)]="editedDoctor.datedebut" name="datedebut" placeholder="Heure début">
       <input [(ngModel)]="editedDoctor.datefin" name="datefin" placeholder="Heure fin">
