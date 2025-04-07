@@ -34,414 +34,66 @@
       <div class="row">
         <main id="sp-component" class="col-lg-12" role="main">
           <div class="sp-column">
-            <div id="system-message-container"></div>
-
-            <div id="spmedical" class="spmedical view-spmedical-schedules">
-              <!-- Section Title -->
-              <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-8">
-                  <div class="section-tittle text-center mb-50">
-                    <span>OUR DOCTOR SCHEDULE</span>
-                    <h3>SELECT YOUR APPOINTMENT TIME</h3>
-                    <br>
-                  </div>
+            <div class="row justify-content-center">
+              <div class="col-lg-6 col-md-8">
+                <div class="section-tittle text-center mb-50">
+                  <span>OUR DOCTOR SCHEDULE</span>
+                  <h3>SELECT YOUR APPOINTMENT TIME</h3>
+                  <br>
                 </div>
               </div>
+            </div>
 
-              <!-- Tab Navigation (Kept as is from previous design) -->
-              <div class="row justify-content-center mb-20">
-                <div class="col-lg-11">
-                  <div class="schedule-tabs">
-                    <nav>
-                      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-sun">Sun<br>2/6</a>
-                        <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-mon">Mon<br>3/6</a>
-                        <a class="nav-item nav-link active" data-bs-toggle="tab" href="#nav-tue">Tue<br>4/6</a>
-                        <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-wed">Wed<br>5/6</a>
-                        <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-thu">Thu<br>6/6</a>
-                        <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-fri">Fri<br>7/6</a>
-                        <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-sat">Sat<br>8/6</a>
-                      </div>
-                    </nav>
-                  </div>
+            <div class="row justify-content-center mb-20">
+              <div class="col-lg-11">
+                <div class="schedule-tabs">
+                  <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                      <a *ngFor="let day of days" class="nav-item nav-link" [class.active]="day.id === 'tue'"
+                         data-bs-toggle="tab" [attr.href]="'#nav-' + day.id">{{day.label}}<br>{{day.date}}</a>
+                    </div>
+                  </nav>
                 </div>
               </div>
-              <br><br>
-              <!-- Tab Content -->
-              <div class="row justify-content-center">
-                <div class="col-lg-11">
-                  <div class="tab-content" id="nav-tabContent">
-                    <!-- Tuesday (Active by Default) -->
-                    <div class="tab-pane fade show active" id="nav-tue" role="tabpanel">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="tab-wrapper d-flex flex-wrap gap-20 justify-content-center">
-                            <!-- Appointment 1 (White Card, #252C33 Button) -->
-<div class="single-box">
-<div class="single-caption text-center">
-  <div class="caption">
-      <span>18:00 - 20:00</span>
-      <h3>Orthopedic Surgery</h3>
-      <p><span>by</span> <strong>Dr. Mangle</strong></p>
-      <p><span>Specialty</span> <strong>Orthopedic Surgery</strong></p>
-<p><span>Rate</span> <strong>
-  <i class="fas fa-star" style="color: #6ecef2;"></i>
-  <i class="fas fa-star" style="color: #6ecef2;"></i>
-  <i class="fas fa-star" style="color: #6ecef2;"></i>
-  <i class="fas fa-star" style="color: #6ecef2;"></i>
-  <i class="fas fa-star" style="color: #6ecef2;"></i>
-</strong></p>
-    <br>
-      <p><span>Area of Focus:</span> Orthopedic Surgery, M.D</p>
-      <button class="btn" data-bs-toggle="modal" data-bs-target="#bookModalTue1">BOOK APPOINTMENT</button>
-  </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="bookModalTue1" tabindex="-1" aria-labelledby="bookModalLabelTue1" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="bookModalLabelTue1">Reservation Confirmation</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <p>Are you sure you want to reserve a place for Orthopedic Surgery with Dr. Mangle?</p>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-secondary">Confirm</button>
-          </div>
-      </div>
-  </div>
-</div>
-</div>
-<!-- Appointment 2 (White Card, #252C33 Button) -->
-<div class="single-box">
-<div class="single-caption text-center">
-  <div class="caption">
-      <span>20:00 - 22:00</span>
-      <h3>Endocrinology</h3>
-      <p><span>by</span> <strong>Dr. Carrie Fisher</strong></p>
-      <p><span>Specialty</span> <strong>Endocrinologist</strong></p>
-      <p><span>Rate</span> <strong>
-  <i class="fas fa-star" style="color: #6ecef2;"></i>
-  <i class="fas fa-star" style="color: #6ecef2;"></i>
-  <i class="fas fa-star" style="color: #6ecef2;"></i>
-</strong></p>
-      <br>
-      <p><span>Area of Focus:</span> Endocrinologist, M.D, Ph.D</p>
-      <button class="btn" data-bs-toggle="modal" data-bs-target="#bookModalTue2">BOOK APPOINTMENT</button>
-  </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="bookModalTue2" tabindex="-1" aria-labelledby="bookModalLabelTue2" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="bookModalLabelTue2">Reservation Confirmation</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <p>Are you sure you want to reserve a place for Endocrinology with Dr. Carrie Fisher?</p>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-secondary">Confirm</button>
-          </div>
-      </div>
-  </div>
-</div>
-</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Monday -->
-                    <div class="tab-pane fade" id="nav-mon" role="tabpanel">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="tab-wrapper d-flex flex-wrap gap-20 justify-content-center">
-                            <div class="single-box">
-                              <div class="single-caption text-center">
-                                <div class="caption">
-                                  <span>9:00 - 10:00</span>
-                                  <h3>Cardiology Checkup</h3>
-                                  <p><span>by</span> <strong>Dr. John Smith</strong></p>
-                                  <p><span>Capacity</span> <strong>5</strong></p>
-                                  <p><span>Available Seats</span> <strong>3</strong></p>
-                                  <button class="btn" data-bs-toggle="modal" data-bs-target="#bookModalMon1">BOOK APPOINTMENT</button>
-                                </div>
-                              </div>
-                              <!-- Modal -->
-                              <div class="modal fade" id="bookModalMon1" tabindex="-1" aria-labelledby="bookModalLabelMon1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="bookModalLabelMon1">Reservation Confirmation</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <p>Are you sure you want to reserve a place for Cardiology Checkup with Dr. John Smith?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                      <button type="button" class="btn btn-secondary">Confirm</button>
-                                    </div>
-                                  </div>
-                                </div>
+            </div>
+
+            <div class="row justify-content-center">
+              <div class="col-lg-11">
+                <div class="tab-content" id="nav-tabContent">
+                  <div *ngFor="let day of days" class="tab-pane fade" [class.show]="day.id === 'tue'" 
+                       [class.active]="day.id === 'tue'" [attr.id]="'nav-' + day.id" role="tabpanel">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="tab-wrapper d-flex flex-wrap gap-20 justify-content-center">
+                          <div *ngFor="let slot of availabilityByDay[day.id]" class="single-box">
+                            <div class="single-caption text-center">
+                              <div class="caption">
+                                <span>{{slot.start}} - {{slot.end}}</span>
+                                <h3>{{slot.specialty}}</h3>
+                                <p><span>by</span> <strong>{{slot.doctorName}}</strong></p>
+                                <p><span>Specialty</span> <strong>{{slot.specialty}}</strong></p>
+                                <button class="btn" data-bs-toggle="modal" [attr.data-bs-target]="'#bookModal-' + slot.doctorId + '-' + slot.start">
+                                  BOOK APPOINTMENT
+                                </button>
                               </div>
                             </div>
-                            <div class="single-box">
-                              <div class="single-caption text-center">
-                                <div class="caption">
-                                  <span>4:00 - 7:00</span>
-                                  <h3>Internal Medicine</h3>
-                                  <p><span>by</span> <strong>Dr. Schotz</strong></p>
-                                  <p><span>Capacity</span> <strong>5</strong></p>
-                                  <p><span>Available Seats</span> <strong>5</strong></p>
-                                  <button class="btn" data-bs-toggle="modal" data-bs-target="#bookModalMon2">BOOK APPOINTMENT</button>
-                                </div>
-                              </div>
-                              <!-- Modal -->
-                              <div class="modal fade" id="bookModalMon2" tabindex="-1" aria-labelledby="bookModalLabelMon2" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="bookModalLabelMon2">Reservation Confirmation</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <p>Are you sure you want to reserve a place for Internal Medicine with Dr. Schotz?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                      <button type="button" class="btn btn-secondary">Confirm</button>
-                                    </div>
+                            <div class="modal fade" [attr.id]="'bookModal-' + slot.doctorId + '-' + slot.start" 
+                                 tabindex="-1" [attr.aria-labelledby]="'bookModalLabel-' + slot.doctorId + '-' + slot.start">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" [attr.id]="'bookModalLabel-' + slot.doctorId + '-' + slot.start">
+                                      Reservation Confirmation
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                   </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Wednesday -->
-                    <div class="tab-pane fade" id="nav-wed" role="tabpanel">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="tab-wrapper d-flex flex-wrap gap-20 justify-content-center">
-                            <div class="single-box">
-                              <div class="single-caption text-center">
-                                <div class="caption">
-                                  <span>2:00 - 3:00</span>
-                                  <h3>Heart Specialist</h3>
-                                  <p><span>by</span> <strong>Prof. Albus Dumbledore</strong></p>
-                                  <p><span>Capacity</span> <strong>5</strong></p>
-                                  <p><span>Available Seats</span> <strong>5</strong></p>
-                                  <button class="btn" data-bs-toggle="modal" data-bs-target="#bookModalWed1">BOOK APPOINTMENT</button>
-                                </div>
-                              </div>
-                              <!-- Modal -->
-                              <div class="modal fade" id="bookModalWed1" tabindex="-1" aria-labelledby="bookModalLabelWed1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="bookModalLabelWed1">Reservation Confirmation</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <p>Are you sure you want to reserve a place for Heart Specialist with Prof. Albus Dumbledore?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                      <button type="button" class="btn btn-secondary">Confirm</button>
-                                    </div>
+                                  <div class="modal-body">
+                                    <p>Are you sure you want to reserve {{slot.start}} - {{slot.end}} with {{slot.doctorName}}?</p>
                                   </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="single-box">
-                              <div class="single-caption text-center">
-                                <div class="caption">
-                                  <span>9:00 - 10:00</span>
-                                  <h3>Internal Medicine</h3>
-                                  <p><span>by</span> <strong>Dr. Remus Lupin</strong></p>
-                                  <p><span>Capacity</span> <strong>5</strong></p>
-                                  <p><span>Available Seats</span> <strong>5</strong></p>
-                                  <button class="btn" data-bs-toggle="modal" data-bs-target="#bookModalWed2">BOOK APPOINTMENT</button>
-                                </div>
-                              </div>
-                              <!-- Modal -->
-                              <div class="modal fade" id="bookModalWed2" tabindex="-1" aria-labelledby="bookModalLabelWed2" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="bookModalLabelWed2">Reservation Confirmation</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <p>Are you sure you want to reserve a place for Internal Medicine with Dr. Remus Lupin?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                      <button type="button" class="btn btn-secondary">Confirm</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Thursday -->
-                    <div class="tab-pane fade" id="nav-thu" role="tabpanel">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="tab-wrapper d-flex flex-wrap gap-20 justify-content-center">
-                            <div class="single-box">
-                              <div class="single-caption text-center">
-                                <div class="caption">
-                                  <span>4:00 - 5:00</span>
-                                  <h3>Endocrinology</h3>
-                                  <p><span>by</span> <strong>Dr. Crownover</strong></p>
-                                  <p><span>Capacity</span> <strong>5</strong></p>
-                                  <p><span>Available Seats</span> <strong>5</strong></p>
-                                  <button class="btn" data-bs-toggle="modal" data-bs-target="#bookModalThu1">BOOK APPOINTMENT</button>
-                                </div>
-                              </div>
-                              <!-- Modal -->
-                              <div class="modal fade" id="bookModalThu1" tabindex="-1" aria-labelledby="bookModalLabelThu1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="bookModalLabelThu1">Reservation Confirmation</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <p>Are you sure you want to reserve a place for Endocrinology with Dr. Crownover?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                      <button type="button" class="btn btn-secondary">Confirm</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Friday -->
-                    <div class="tab-pane fade" id="nav-fri" role="tabpanel">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="tab-wrapper d-flex flex-wrap gap-20 justify-content-center">
-                            <div class="single-box">
-                              <div class="single-caption text-center">
-                                <div class="caption">
-                                  <span>4:00 - 5:00</span>
-                                  <h3>Endocrinology</h3>
-                                  <p><span>by</span> <strong>Dr. Crownover</strong></p>
-                                  <p><span>Capacity</span> <strong>5</strong></p>
-                                  <p><span>Available Seats</span> <strong>5</strong></p>
-                                  <button class="btn" data-bs-toggle="modal" data-bs-target="#bookModalFri1">BOOK APPOINTMENT</button>
-                                </div>
-                              </div>
-                              <!-- Modal -->
-                              <div class="modal fade" id="bookModalFri1" tabindex="-1" aria-labelledby="bookModalLabelFri1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="bookModalLabelFri1">Reservation Confirmation</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <p>Are you sure you want to reserve a place for Endocrinology with Dr. Crownover?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                      <button type="button" class="btn btn-secondary">Confirm</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Saturday -->
-                    <div class="tab-pane fade" id="nav-sat" role="tabpanel">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="tab-wrapper d-flex flex-wrap gap-20 justify-content-center">
-                            <div class="single-box">
-                              <div class="single-caption text-center">
-                                <div class="caption">
-                                  <span>9:00 - 10:00</span>
-                                  <h3>Internal Medicine</h3>
-                                  <p><span>by</span> <strong>Dr. Remus Lupin</strong></p>
-                                  <p><span>Capacity</span> <strong>5</strong></p>
-                                  <p><span>Available Seats</span> <strong>5</strong></p>
-                                  <button class="btn" data-bs-toggle="modal" data-bs-target="#bookModalSat1">BOOK APPOINTMENT</button>
-                                </div>
-                              </div>
-                              <!-- Modal -->
-                              <div class="modal fade" id="bookModalSat1" tabindex="-1" aria-labelledby="bookModalLabelSat1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="bookModalLabelSat1">Reservation Confirmation</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <p>Are you sure you want to reserve a place for Internal Medicine with Dr. Remus Lupin?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                      <button type="button" class="btn btn-secondary">Confirm</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Sunday -->
-                    <div class="tab-pane fade" id="nav-sun" role="tabpanel">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="tab-wrapper d-flex flex-wrap gap-20 justify-content-center">
-                            <div class="single-box">
-                              <div class="single-caption text-center">
-                                <div class="caption">
-                                  <span>9:00 - 10:00</span>
-                                  <h3>Orthopedic Surgery</h3>
-                                  <p><span>by</span> <strong>Dr. Mangle</strong></p>
-                                  <p><span>Capacity</span> <strong>5</strong></p>
-                                  <p><span>Available Seats</span> <strong>5</strong></p>
-                                  <button class="btn" data-bs-toggle="modal" data-bs-target="#bookModalSun1">BOOK APPOINTMENT</button>
-                                </div>
-                              </div>
-                              <!-- Modal -->
-                              <div class="modal fade" id="bookModalSun1" tabindex="-1" aria-labelledby="bookModalLabelSun1" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="bookModalLabelSun1">Reservation Confirmation</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <p>Are you sure you want to reserve a place for Orthopedic Surgery with Dr. Mangle?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                      <button type="button" class="btn btn-secondary">Confirm</button>
-                                    </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" 
+                                            (click)="bookAppointment(slot)">Confirm</button>
                                   </div>
                                 </div>
                               </div>

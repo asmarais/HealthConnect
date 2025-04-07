@@ -1,242 +1,101 @@
-<section id="sp-page-title">
-  <div class="row">
-    <div id="sp-title" class="col-lg-12 ">
-      <div class="sp-column ">
-        <div class="sp-page-title" style="background-image: url(../../assets/images/page-title.jpg);">
-          <div class="container">
-            <h2>Registration</h2>
-
-            <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
-              <li class="float-left">
-                <span class="divider fa fa-location" aria-hidden="true"></span>
-              </li>
-
-              <li itemprop="itemListElement" itemscope=""
-                itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a
-                  itemprop="item" href="index.html" class="pathway"><span
-                    itemprop="name">Home</span></a>
-                <meta itemprop="position" content="1">
-              </li>
-
-              <li itemprop="itemListElement" itemscope=""
-                itemtype="https://schema.org/ListItem" class="breadcrumb-item active"><span
-                  itemprop="name">Registration</span>
-                <meta itemprop="position" content="3">
-              </li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 <section id="sp-main-body">
   <div class="container">
     <div class="container-inner">
       <div class="row">
-        <main id="sp-component" class="col-lg-12 " role="main">
-          <div class="sp-column ">
-            <div id="system-message-container">
-            </div>
+        <main id="sp-component" class="col-lg-12" role="main">
+          <div class="sp-column">
             <div class="registration">
               <div class="row justify-content-center">
                 <div class="col-md-9 col-lg-6">
-
-                  <form id="member-registration"
-                    action="Register.html?task=registration.register" method="post"
-                    class="form-validate" enctype="multipart/form-data">
+                  <form id="member-registration" (ngSubmit)="onRegister()" class="form-validate">
                     <fieldset>
                       <legend>User Registration</legend>
-                      <form (submit)="onRegister(); $event.preventDefault()">
+                      <div class="form-group">
+                        <label>Are you a doctor?</label>
+                        <input type="checkbox" [(ngModel)]="isDoctor" name="isDoctor" />
+                      </div>
+
+                      <div class="form-group">
+                        <label>Name</label>
+                        <input [(ngModel)]="formData.nom" name="nom" class="form-control" required />
+                      </div>
+
+                      <div class="form-group">
+                        <label>First Name</label>
+                        <input [(ngModel)]="formData.prenom" name="prenom" class="form-control" required />
+                      </div>
+
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input [(ngModel)]="formData.email" name="email" type="email" class="form-control" required />
+                      </div>
+
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input [(ngModel)]="formData.mot_de_passe" name="mot_de_passe" type="password" class="form-control" required />
+                      </div>
+
+                      <div class="form-group">
+                        <label>Phone Number</label>
+                        <input [(ngModel)]="formData.numero_de_telephone" name="numero_de_telephone" class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                        <label>Address</label>
+                        <input [(ngModel)]="formData.adresse" name="adresse" class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                        <label>CIN</label>
+                        <input [(ngModel)]="formData.cin" name="cin" class="form-control" />
+                      </div>
+
+                      <!-- Champs spécifiques aux patients -->
+                      <div *ngIf="!isDoctor">
                         <div class="form-group">
-                          <label>Name</label>
-                          <input [(ngModel)]="formData.nom" name="nom" class="form-control" required />
+                          <label>Social Security Number</label>
+                          <input [(ngModel)]="formData.numero_securite_sociale" name="numero_securite_sociale" class="form-control" required />
                         </div>
-                      
+
                         <div class="form-group">
-                          <label>First Name</label>
-                          <input [(ngModel)]="formData.prenom" name="prenom" class="form-control" required />
+                          <label>Allergies</label>
+                          <input [(ngModel)]="formData.allergies" name="allergies" class="form-control" placeholder="e.g., Pollen, Peanuts" />
                         </div>
-                      
+                      </div>
+
+                      <!-- Champs spécifiques aux docteurs -->
+                      <div *ngIf="isDoctor">
                         <div class="form-group">
-                          <label>Email</label>
-                          <input [(ngModel)]="formData.email" name="email" type="email" class="form-control" required />
+                          <label>Specialty</label>
+                          <input [(ngModel)]="formData.specialite" name="specialite" class="form-control" required />
                         </div>
-                      
+
                         <div class="form-group">
-                          <label>Password</label>
-                          <input [(ngModel)]="formData.mot_de_passe" name="mot_de_passe" type="password" class="form-control" required />
+                          <label>Start Time (e.g., 09:00:00)</label>
+                          <input [(ngModel)]="formData.datedebut" name="datedebut" class="form-control" required />
                         </div>
-                      
+
                         <div class="form-group">
-                          <label>Phone Number</label>
-                          <input [(ngModel)]="formData.numero_de_telephone" name="numero_de_telephone" class="form-control" />
+                          <label>End Time (e.g., 17:00:00)</label>
+                          <input [(ngModel)]="formData.datefin" name="datefin" class="form-control" required />
                         </div>
-                      
+
                         <div class="form-group">
-                          <label>Address</label>
-                          <input [(ngModel)]="formData.adresse" name="adresse" class="form-control" />
+                          <label>Image URL (optional)</label>
+                          <input [(ngModel)]="formData.image_url" name="image_url" class="form-control" placeholder="Enter image URL" />
                         </div>
-                      
-                        <div class="form-group">
-                          <label>CIN</label>
-                          <input [(ngModel)]="formData.cin" name="cin" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                          <button (click)="signupWithGoogle()" class="google-login-btn">
-                            <i class="fab fa-google"></i> Register with Google
-                          </button>
-                          
-                        </div>
-                        <div class="form-group text-center">
-                          <button type="submit" class="btn btn-primary">Register</button>
-                        </div>
-                      </form>
-                      
-                      <!-- <div class="row">
-                        <div class="col-lg-12">
-                          <div class="form-group">
-                            <span class="spacer"><span
-                                class="before"></span><span
-                                class="text"><label id="jform_spacer-lbl"
-                                  class=""><strong class="red">*</strong>
-                                  Required field</label></span><span
-                                class="after"></span></span>
-                          </div>
-                        </div>
-                        <div class="col-lg-12">
-                          <div class="form-group">
-                            <label id="jform_name-lbl" for="jform_name"
-                              class="hasPopover required" title="Name"
-                              data-content="Enter your full name.">
-                              Name<span class="star">*</span></label>
+                      </div>
 
+                      <div class="form-group">
+                        <button (click)="signupWithGoogle()" class="google-login-btn">
+                          <i class="fab fa-google"></i> Register with Google
+                        </button>
+                      </div>
 
-                            <input type="text" name="jform[name]"
-                              id="jform_name" value=""
-                              class="form-control required" size="30"
-                              title="Enter your full name." required=""
-                              aria-required="true">
-
-
-
-                          </div>
-                        </div>
-                        <div class="col-lg-12">
-                          <div class="form-group">
-                            <label id="jform_username-lbl" for="jform_username"
-                              class="hasPopover required" title="Username"
-                              data-content="Enter your desired username.">
-                              Username<span class="star">*</span></label>
-
-
-                            <input type="text" name="jform[username]"
-                              id="jform_username" value=""
-                              class="form-control validate-username required"
-                              size="30" title="Enter your desired username."
-                              required="" aria-required="true">
-
-
-
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label id="jform_password1-lbl"
-                              for="jform_password1"
-                              class="hasPopover required" title="Password"
-                              data-content="Enter your desired password.">
-                              Password<span class="star">*</span></label>
-                            <div class="password-group">
-                              <div class="input-group">
-                                <span class="input-group-prepend">
-                                  <span class="input-group-text">
-                                    <span class="fa fa-key"
-                                      aria-hidden="true"></span>
-                                    <span class="sr-only">Show</span>
-                                  </span>
-                                </span>
-                                <input type="password"
-                                  name="jform[password1]"
-                                  id="jform_password1" value=""
-                                  autocomplete="off"
-                                  class="form-control validate-password required"
-                                  size="30" maxlength="99" required=""
-                                  aria-required="true">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label id="jform_password2-lbl"
-                              for="jform_password2"
-                              class="hasPopover required"
-                              title="Confirm Password"
-                              data-content="Confirm your password.">
-                              Confirm Password<span
-                                class="star">*</span></label>
-                            <div class="password-group">
-                              <div class="input-group">
-                                <span class="input-group-prepend">
-                                  <span class="input-group-text">
-                                    <span class="fa fa-key"
-                                      aria-hidden="true"></span>
-                                    <span class="sr-only">Show</span>
-                                  </span>
-                                </span>
-                                <input type="password"
-                                  name="jform[password2]"
-                                  id="jform_password2" value=""
-                                  autocomplete="off"
-                                  class="form-control validate-password required"
-                                  size="30" maxlength="99" required=""
-                                  aria-required="true">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label id="jform_email1-lbl" for="jform_email1"
-                              class="hasPopover required"
-                              title="Email Address"
-                              data-content="Enter your email address.">
-                              Email Address<span
-                                class="star">*</span></label> <input
-                              type="email" name="jform[email1]"
-                              class="form-control validate-email required"
-                              id="jform_email1" value="" size="30"
-                              autocomplete="email" required=""
-                              aria-required="true">
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label id="jform_email2-lbl" for="jform_email2"
-                              class="hasPopover required"
-                              title="Confirm Email Address"
-                              data-content="Confirm your email address.">
-                              Confirm Email Address<span
-                                class="star">*</span></label> <input
-                              type="email" name="jform[email2]"
-                              class="form-control validate-email required"
-                              id="jform_email2" value="" size="30" required=""
-                              aria-required="true">
-                          </div>
-                        </div>
-                      </div> -->
+                      <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                      </div>
                     </fieldset>
-                    <!-- <div>
-                      <button type="submit"
-                        class="btn btn-primary validate">Register</button>
-                      <a class="btn btn-secondary" href="index.html"
-                        title="Cancel">Cancel</a>
-                      <input type="hidden" name="option" value="com_users">
-                      <input type="hidden" name="task" value="registration.register">
-                    </div> -->
-                    <input type="hidden" name="43c9ecccda63ff9e65d84e0b5e10ce55"
-                      value="1">
                   </form>
                 </div>
               </div>
