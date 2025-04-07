@@ -36,7 +36,7 @@ exports.createPatient = async (req, res) => {
       numero_de_telephone,
       adresse,
       cin,
-      role: 'user', // User role as 'patient'
+      role: 'patient', // User role as 'patient'
     });
 
     // Create the patient associated with the user created

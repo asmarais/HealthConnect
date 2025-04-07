@@ -6,6 +6,7 @@ const Role = {
   USER: 'user',
   ADMIN: 'admin',
   DOCTOR: 'doctor', // Le rôle doctor
+  PATIENT: 'patient',
 };
 const User = sequelize.define('User', {
   user_id: {

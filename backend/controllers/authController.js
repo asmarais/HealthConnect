@@ -11,12 +11,17 @@ const signupController = async (req, res) => {
 
 const loginController = async (req, res) => {
   try {
-    const token = await login(req.body);
-    res.status(200).json({ message: 'Login successful', token });
+    const { token, user } = await login(req.body);
+    res.status(200).json({ 
+      message: 'Login successful', 
+      token:token, 
+      user:user 
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 const logoutController = (req, res) => {
   const message = logout();
