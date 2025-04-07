@@ -47,10 +47,53 @@
                     class="form-validate" enctype="multipart/form-data">
                     <fieldset>
                       <legend>User Registration</legend>
-                      <div class="form-group">
-                                                      <a href="#" class="google-login-btn"><i class="fab fa-google"></i> Connect with Google</a>
-                                                  </div>
-                      <div class="row">
+                      <form (submit)="onRegister(); $event.preventDefault()">
+                        <div class="form-group">
+                          <label>Name</label>
+                          <input [(ngModel)]="formData.nom" name="nom" class="form-control" required />
+                        </div>
+                      
+                        <div class="form-group">
+                          <label>First Name</label>
+                          <input [(ngModel)]="formData.prenom" name="prenom" class="form-control" required />
+                        </div>
+                      
+                        <div class="form-group">
+                          <label>Email</label>
+                          <input [(ngModel)]="formData.email" name="email" type="email" class="form-control" required />
+                        </div>
+                      
+                        <div class="form-group">
+                          <label>Password</label>
+                          <input [(ngModel)]="formData.mot_de_passe" name="mot_de_passe" type="password" class="form-control" required />
+                        </div>
+                      
+                        <div class="form-group">
+                          <label>Phone Number</label>
+                          <input [(ngModel)]="formData.numero_de_telephone" name="numero_de_telephone" class="form-control" />
+                        </div>
+                      
+                        <div class="form-group">
+                          <label>Address</label>
+                          <input [(ngModel)]="formData.adresse" name="adresse" class="form-control" />
+                        </div>
+                      
+                        <div class="form-group">
+                          <label>CIN</label>
+                          <input [(ngModel)]="formData.cin" name="cin" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                          <button (click)="signupWithGoogle()" class="google-login-btn">
+                            <i class="fab fa-google"></i> Register with Google
+                          </button>
+                          
+                        </div>
+                        <div class="form-group text-center">
+                          <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+                      </form>
+                      
+                      <!-- <div class="row">
                         <div class="col-lg-12">
                           <div class="form-group">
                             <span class="spacer"><span
@@ -182,16 +225,16 @@
                               aria-required="true">
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                     </fieldset>
-                    <div>
+                    <!-- <div>
                       <button type="submit"
                         class="btn btn-primary validate">Register</button>
                       <a class="btn btn-secondary" href="index.html"
                         title="Cancel">Cancel</a>
                       <input type="hidden" name="option" value="com_users">
                       <input type="hidden" name="task" value="registration.register">
-                    </div>
+                    </div> -->
                     <input type="hidden" name="43c9ecccda63ff9e65d84e0b5e10ce55"
                       value="1">
                   </form>

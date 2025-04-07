@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-interface Doctor {
+interface Patient {
   name: string;
   profilePic: string;
   rating: string;
@@ -28,13 +28,13 @@ interface Appointment {
   styleUrls: ['./profile-p.component.css']
 })
 export class ProfilePComponent implements OnInit {
-  doctor: Doctor = {
-    name: 'Dean Guerrero',
-    profilePic: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=150&h=150',
-    rating: 'A+',
-    joined: 'January 2025',
-    email: 'dean.guerrero@email.com',
-    phone: '+1 543 235 64'
+  patient: Patient = {
+    name: '',
+    profilePic: '',
+    rating: '',
+    joined: '',
+    email: '',
+    phone: ''
   };
 
   announcements: Announcement[] = [
@@ -64,8 +64,27 @@ export class ProfilePComponent implements OnInit {
 
   ngOnInit() {
     this.updateEvents(this.selectedDate);
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      const user = JSON.parse(userData);
+  
+      this.patient = {
+        name: `${user.nom} ${user.prenom}`,
+        email: user.email,
+        phone: user.numero_de_telephone,
+        rating: '', // You can update this if rating exists in user
+        profilePic:user.profilePic,
+        joined: this.formatDate(user.createdAt)
+      };
+    } else {
+      console.warn('No doctor data found in localStorage.');
+    }
   }
-
+  formatDate(dateStr: string): string {
+    const date = new Date(dateStr);
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long' };
+    return date.toLocaleDateString(undefined, options);
+  }
   get daysInMonth(): number[] {
     const days = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0).getDate();
     return Array.from({ length: days }, (_, i) => i + 1);
