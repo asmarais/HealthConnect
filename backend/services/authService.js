@@ -42,7 +42,7 @@ console.log(user.mot_de_passe)
 
 const login = async ({ email, mot_de_passe }) => {
   const user = await User.findOne({ where: { email } });
-  if (!user) throw new Error('User non trouvé');
+  if (!user) throw new Error('User not found');
 
   console.log('Stored hashed password:', user.mot_de_passe);
   console.log('Input password:', mot_de_passe);
@@ -52,10 +52,13 @@ const login = async ({ email, mot_de_passe }) => {
 
   if (!isMatch) throw new Error('Incorrect password');
 
-  // Générer un token JWT
+  // Generate JWT token
   const token = generateToken(user);
-  return token;
+
+  // ✅ Return both token and user as an object
+  return { token, user };
 };
+
 
 
 // Déconnexion
