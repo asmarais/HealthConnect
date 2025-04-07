@@ -31,11 +31,11 @@ export class ProfileDComponent implements OnInit {
   @ViewChild('patientsSection') patientsSection!: ElementRef;
 
   doctor = {
-    name: 'Dean Guerrero',
-    rating: 'A+',
-    joined: 'January 2025',
-    email: 'dean.guerrero@email.com',
-    phone: '+1 543 235 64'
+    name: '',
+    rating: '',
+    joined: '',
+    email: '',
+    phone: ''
   };
 
   stats = {
@@ -96,8 +96,27 @@ export class ProfileDComponent implements OnInit {
     this.renderPatientsTable();
     // Set initial view to schedule
     this.setView('schedule');
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      const user = JSON.parse(userData);
+  
+      this.doctor = {
+        name: `${user.nom} ${user.prenom}`,
+        email: user.email,
+        phone: user.numero_de_telephone,
+        rating: 'A+', // You can update this if rating exists in user
+        joined: this.formatDate(user.createdAt)
+      };
+    } else {
+      console.warn('No doctor data found in localStorage.');
+    }
   }
 
+  formatDate(dateStr: string): string {
+    const date = new Date(dateStr);
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long' };
+    return date.toLocaleDateString(undefined, options);
+  }
   setView(viewId: string) {
     if (viewId === 'schedule') {
       this.scheduleSection.nativeElement.style.display = 'block';

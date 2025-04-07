@@ -3,26 +3,26 @@
   <!-- Header -->
   <header class="header">
     <div class="profile">
-      <img [src]="doctor.profilePic" [alt]="doctor.name" class="profile-pic" />
+      <img [src]="patient.profilePic" [alt]="patient.name" class="profile-pic" />
       <button class="text-blue-600 hover:text-blue-800 p-2 rounded-full transition-colors duration-200 edit-btn" aria-label="Edit">
         <i class="fas fa-pencil-alt w-5 h-5"></i>
       </button>
       <div class="profile-info">
-        <h1>{{ doctor.name }}</h1>
+        <h1>{{ patient.name }}</h1>
         <div class="contact-info">
           <div class="contact-item">
             <i class="fas fa-award w-4 h-4"></i>
-            <span>{{ doctor.rating }}</span>
+            <span>{{ patient.rating }}</span>
             <i class="fas fa-calendar-alt w-4 h-4 ml-2"></i>
-            <span>Joined: {{ doctor.joined }}</span>
+            <span>Joined: {{ patient.joined }}</span>
           </div>
           <div class="contact-item">
             <i class="fas fa-envelope w-4 h-4"></i>
-            <span>{{ doctor.email }}</span>
+            <span>{{ patient.email }}</span>
           </div>
           <div class="contact-item">
             <i class="fas fa-phone w-4 h-4"></i>
-            <span>{{ doctor.phone }}</span>
+            <span>{{ patient.phone }}</span>
           </div>
         </div>
       </div>
