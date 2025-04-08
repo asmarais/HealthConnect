@@ -47,6 +47,7 @@ const getDoctorById = async (req, res) => {
     const doctor = await Doctor.findOne({
       where: { user_id: req.params.user_id },
       include: User
+
     });
     if (!doctor) {
       return res.status(404).json({ error: 'Docteur non trouvé' });
@@ -56,6 +57,7 @@ const getDoctorById = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 // Obtenir tous les docteurs
 const getAllDoctors = async (req, res) => {

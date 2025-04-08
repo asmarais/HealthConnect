@@ -9,8 +9,8 @@ router.get('/pending', authorize("admin") , doctorController.getPendingDoctors);
 router.put('/validate/:user_id',   doctorController.validateDoctor);
 
 
-router.get('/:user_id', doctorController.getDoctorById);
+router.get('/:id', doctorController.getDoctorById);
 router.get('/', doctorController.getAllDoctors);
-router.delete('/:user_id', doctorController.deleteDoctorById);
+router.delete('/:id', doctorController.deleteDoctorById);
 
 module.exports = router;
