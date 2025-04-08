@@ -44,7 +44,10 @@ const createDoctor = async (req, res) => {
 // Obtenir un docteur par ID
 const getDoctorById = async (req, res) => {
   try {
-    const doctor = await Doctor.findByPk(req.params.id, { include: User });
+    const doctor = await Doctor.findOne({
+      where: { user_id: req.params.user_id },
+      include: User
+    });
     if (!doctor) {
       return res.status(404).json({ error: 'Docteur non trouvé' });
     }
