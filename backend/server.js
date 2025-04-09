@@ -12,11 +12,14 @@ const userRoutes = require('./routes/userRoutes');
 const doctorRoutes = require('./routes/doctorRoutes');
 const patientRoutes = require('./routes/patientRoutes'); // 📌 Ajouter route Patient
 const rendezVousRoutes = require('./routes/rendezVousRoutes'); // 📌 Ajouter route RendezVous
+const notificationRoutes = require('./routes/notificationRoutes'); // 📌 Ajouter route Patient
 
 const { User, Role } = require('./models/userModel'); 
 const { Doctor } = require('./models/doctorModel'); // 📌 Déclaration unique
+const { RendezVous } = require('./models/rendezVousModel'); // 📌 Déclaration unique
+const { Notification } = require('./models/notificationModel'); // 📌 Déclaration unique
+
 const { Patient } = require('./models/patientModel'); // 📌 Importer Patient
-const { RendezVous } = require('./models/rendezVousModel'); // 📌 Importer RendezVous
 const { scheduleRappels } = require("./controllers/rendezVousController");
 const app = express();
 
@@ -61,7 +64,7 @@ const syncDatabase = async () => {
     await Doctor.sync();
     await Patient.sync();
     await RendezVous.sync();
-    
+    await Notification.sync();
     console.log('✅ Database tables synced successfully.');
   } catch (err) {
     console.error('❌ Error syncing database:', err);
@@ -91,6 +94,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/doctor', doctorRoutes);
 app.use('/api/patient', patientRoutes); // 📌 Ajouter la route Patient
 app.use('/api/rendezvous', rendezVousRoutes); // 📌 Ajouter la route RendezVous
+app.use('/api/notification', notificationRoutes); // 📌 Ajouter la route RendezVous
 
 // Gestion des erreurs
 app.use(errorHandler);

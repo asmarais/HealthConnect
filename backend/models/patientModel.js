@@ -26,7 +26,10 @@ const Patient = sequelize.define('Patient', {
     type: DataTypes.INTEGER,
     allowNull: false,
     defaultValue: 1
-  }
+  },
+  raison: {
+    type: DataTypes.TEXT,
+    allowNull:true  }
 }, {
   tableName: 'patients',
   timestamps: false,

@@ -51,6 +51,10 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  genre: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 }, {
   tableName: 'users',
   timestamps: false, // Sequelize automatically adds `createdAt` & `updatedAt` if not disabled
