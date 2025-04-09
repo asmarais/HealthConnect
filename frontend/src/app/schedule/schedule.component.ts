@@ -48,6 +48,7 @@ export class ScheduleComponent implements OnInit {
     { id: 'fri', label: 'Fri', date: '7/6', fullDate: '2025-06-07' },
     { id: 'sat', label: 'Sat', date: '8/6', fullDate: '2025-06-08' }
   ];
+  patient: {usert_id:string; name: string; email: any; phone: any; profilePic: any; } | undefined;
 
   constructor(private http: HttpClient) {}
 
@@ -158,8 +159,23 @@ export class ScheduleComponent implements OnInit {
   }
 
   bookAppointment(slot: AvailabilitySlot) {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      const user = JSON.parse(userData);
+  
+      this.patient = {
+        usert_id : user.user_id,
+        name: `${user.nom} ${user.prenom}`,
+        email: user.email,
+        phone: user.numero_de_telephone,
+        profilePic:user.profilePic,
+      };
+    } else {
+      console.warn('No patient data found in localStorage.');
+    }
     const appointmentData = {
-      patient_id: 12,
+      
+      patient_id: this.patient?.usert_id,
       medecin_id: slot.doctorId,
       date_debut: `2025-06-${slot.day === 'sun' ? '02' : '0' + (this.days.findIndex(d => d.id === slot.day) + 2)}T${slot.start}:00Z`,
       date_fin: `2025-06-${slot.day === 'sun' ? '02' : '0' + (this.days.findIndex(d => d.id === slot.day) + 2)}T${slot.end}:00Z`,

@@ -30,13 +30,6 @@ export class ProfileDComponent implements OnInit {
   @ViewChild('scheduleSection') scheduleSection!: ElementRef;
   @ViewChild('patientsSection') patientsSection!: ElementRef;
 
-  doctor = {
-    name: '',
-    rating: '',
-    joined: '',
-    email: '',
-    phone: ''
-  };
 
   stats = {
     appointments: 25,
@@ -91,26 +84,42 @@ export class ProfileDComponent implements OnInit {
   paginatedPatients: Patient[] = [];
   visibleAppointments: { [key: string]: boolean } = {};
 
+  doctor = {
+    name: '',
+    rating: '',
+    joined: '',
+    email: '',
+    phone: ''
+  };
   ngOnInit() {
     this.filteredPatients = [...this.patients];
     this.renderPatientsTable();
-    // Set initial view to schedule
-    this.setView('schedule');
-    const userData = localStorage.getItem('user');
-    if (userData) {
+    // // Set initial view to schedule
+    // this.setView('schedule');
+     // Load doctor data from localStorage
+  const userData = localStorage.getItem('user');
+console.log(userData ,"from local storage")
+  if (userData) {
+    try {
       const user = JSON.parse(userData);
-  
+
       this.doctor = {
-        name: `${user.nom} ${user.prenom}`,
-        email: user.email,
-        phone: user.numero_de_telephone,
-        rating: 'A+', // You can update this if rating exists in user
-        joined: this.formatDate(user.createdAt)
+        name: `${user.nom || ''} ${user.prenom || ''}`.trim(),
+        email: user.email || '',
+        phone: user.numero_de_telephone || '',
+        rating: user.rating || 'A+', // Use rating if available, otherwise default
+        joined: user.createdAt ? this.formatDate(user.createdAt) : ''
       };
-    } else {
-      console.warn('No doctor data found in localStorage.');
+    } catch (error) {
+      console.error('Error parsing user data from localStorage:', error);
     }
+  } else {
+    console.warn('No doctor data found in localStorage.');
   }
+}
+ngAfterViewInit() {
+  this.setView('schedule');
+}
 
   formatDate(dateStr: string): string {
     const date = new Date(dateStr);

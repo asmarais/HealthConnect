@@ -31,7 +31,7 @@ export class LoginComponent {
   
         // Redirect based on user role
         if (response.user.role === 'patient') {
-          this.router.navigate(['/profilp']);
+          this.router.navigate(['/profilP']);
         } else if (response.user.role === 'doctor') {
           this.router.navigate(['/profilD']);
         } else {
