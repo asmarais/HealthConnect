@@ -60,6 +60,41 @@ const getDoctorById = async (req, res) => {
   }
 };
 
+// Mettre à jour les informations d'un docteur
+const updateDoctor = async (req, res) => {
+  try {
+    const { user_id } = req.params;
+    const {
+      specialite,
+      datedebut,
+      datefin,
+      image_url,
+      rating,
+    } = req.body;
+
+    // Récupérer le docteur existant
+    const doctor = await Doctor.findOne({ where: { user_id } });
+
+    if (!doctor) {
+      return res.status(404).json({ error: 'Docteur non trouvé' });
+    }
+
+    // Mettre à jour les champs fournis
+    if (specialite !== undefined) doctor.specialite = specialite;
+    if (datedebut !== undefined) doctor.datedebut = datedebut;
+    if (datefin !== undefined) doctor.datefin = datefin;
+    if (image_url !== undefined) doctor.image_url = image_url;
+    if (rating !== undefined) doctor.rating = rating;
+
+    await doctor.save();
+
+    res.status(200).json({ message: 'Informations du docteur mises à jour', doctor });
+  } catch (err) {
+    res.status(500).json({ error: 'Erreur lors de la mise à jour du docteur', details: err.message });
+  }
+};
+
+
 
 // Obtenir tous les docteurs
 const getAllDoctors = async (req, res) => {
@@ -283,6 +318,7 @@ const getApprovedDoctors = async (req, res) => {
 };
 
 module.exports = {
+  updateDoctor,
   registerDoctor,
   getApprovedDoctors,
   validateDoctor,
