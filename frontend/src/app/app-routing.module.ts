@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileDComponent } from './profile-d/profile-d.component';
 import { ProfilePComponent } from './profile-p/profile-p.component';
+import { DDoctorComponent } from './ddoctor/ddoctor.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -23,6 +24,8 @@ const routes: Routes = [
   {path : 'reg',component:RegisterComponent},
   {path : 'profilD',component:ProfileDComponent},
   {path : 'profilP',component:ProfilePComponent},
+  {path : 'DDoctor',component:DDoctorComponent},
+
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
 
 

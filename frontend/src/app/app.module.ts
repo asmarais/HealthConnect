@@ -14,6 +14,7 @@ import { ProfileDComponent } from './profile-d/profile-d.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfilePComponent } from './profile-p/profile-p.component';
+import { DDoctorComponent } from './ddoctor/ddoctor.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ProfilePComponent } from './profile-p/profile-p.component';
     LoginComponent,
     RegisterComponent,
     ProfileDComponent,
-    ProfilePComponent
+    ProfilePComponent,
+    DDoctorComponent
   ],
   imports: [
     BrowserModule,
