@@ -8,8 +8,12 @@ router.post('/register', doctorController.registerDoctor);
 router.get('/pending', authorize("admin") , doctorController.getPendingDoctors);
 router.put('/validate/:user_id',   doctorController.validateDoctor);
 
-
+router.get('/patients/:id', doctorController.getPatientsByDoctor);
+router.get('/rendez-vous/:id', doctorController.getRendezVousByDoctor);
 router.get('/:id', doctorController.getDoctorById);
+
+
+
 router.get('/', doctorController.getAllDoctors);
 router.delete('/:id', doctorController.deleteDoctorById);
 

@@ -37,6 +37,15 @@ const Doctor = sequelize.define('Doctor', {
       isUrl: true // Validation optionnelle pour s'assurer que c'est une URL valide
     }
   },
+  rating: {
+    type: DataTypes.STRING, // Stockera l'URL de l'image
+    allowNull: true,
+  },
+  joined_at: {
+    type: DataTypes.DATE, // Stockera l'URL de l'image
+    allowNull: true,
+   
+  },
 }, {
   tableName: 'doctors',
   timestamps: false,

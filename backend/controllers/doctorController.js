@@ -2,6 +2,8 @@ const { User } = require('../models/userModel');
 const { Doctor } = require('../models/doctorModel');
 const bcrypt = require('bcryptjs');
 const{ sendEmail} = require('../utils/emailService');
+const { Patient } = require('../models/patientModel');
+const { RendezVous } = require('../models/rendezVousModel');
 
 // Créer un utilisateur de type docteur
 const createDoctor = async (req, res) => {
@@ -126,7 +128,13 @@ const registerDoctor = async (req, res) => {
       role: 'doctor',
       image_url,
     });
+  // Vérifier si le hash en base est bien celui généré
+  const savedUser = await User.findOne({ where: { email } });
+  console.log('Stored hashed password in DB:', savedUser.mot_de_passe);
 
+  user.mot_de_passe = hashedPassword;
+  await user.save();
+console.log(user.mot_de_passe)  
     // Create the doctor record associated with the user
     const doctor = await Doctor.create({
       user_id: user.user_id,
@@ -201,6 +209,62 @@ const getPendingDoctors = async (req, res) => {
   }
 };
 
+
+const getPatientsByDoctor = async (req, res) => {
+  try {
+    const doctorId = req.params.id;
+
+    const rendezVousList = await RendezVous.findAll({
+      where: { medecin_id: doctorId },
+      include: [{
+        model: Patient,
+        include: [User] // Pour inclure les données du compte utilisateur (nom, email, etc.)
+      }]
+    });
+
+    // Extraire les patients uniques via leur user_id
+    const patients = rendezVousList
+      .map(rdv => rdv.Patient)
+      .filter(patient => patient); // filtrer les nulls au cas où
+
+    const uniquePatientsMap = new Map();
+    patients.forEach(patient => {
+      uniquePatientsMap.set(patient.user_id, patient);
+    });
+
+    const uniquePatients = Array.from(uniquePatientsMap.values());
+
+    res.status(200).json({ patients: uniquePatients });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erreur lors de la récupération des patients', details: err.message });
+  }
+};
+const getRendezVousByDoctor = async (req, res) => {
+  try {
+    const doctorId = req.params.id;
+
+    const rendezVous = await RendezVous.findAll({
+      where: { medecin_id: doctorId },
+      include: [
+        {
+          model: Patient,
+          include: [User]
+        },
+        {
+          model: Doctor,
+          include: [User]
+        }
+      ]
+    });
+
+    res.status(200).json({ rendezVous });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erreur lors de la récupération des rendez-vous', details: err.message });
+  }
+};
+
 module.exports = {
   registerDoctor,
   validateDoctor,
@@ -208,4 +272,7 @@ module.exports = {
   getDoctorById,
   getAllDoctors,
   deleteDoctorById,
+  getPatientsByDoctor,
+  getRendezVousByDoctor
 };
+

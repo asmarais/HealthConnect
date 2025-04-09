@@ -32,6 +32,7 @@ const logoutController = (req, res) => {
 
   const googleCallback= (req, res) => {
     if (!req.user) {
+      console.log(req.user,res)
       return res.status(401).json({ message: "Authentication failed" });
     }
     

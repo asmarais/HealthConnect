@@ -1,8 +1,9 @@
 const { Patient } = require('../models/patientModel');
 const { User } = require('../models/userModel');
 const bcrypt = require('bcryptjs');
+const { RendezVous } = require('../models/rendezVousModel');
 
-
+const { Doctor } = require('../models/doctorModel');
 
 exports.createPatient = async (req, res) => {
   try {
@@ -38,7 +39,13 @@ exports.createPatient = async (req, res) => {
       cin,
       role: 'patient', // User role as 'patient'
     });
+  // Vérifier si le hash en base est bien celui généré
+  const savedUser = await User.findOne({ where: { email } });
+  console.log('Stored hashed password in DB:', savedUser.mot_de_passe);
 
+  user.mot_de_passe = hashedPassword;
+  await user.save();
+console.log(user.mot_de_passe)  
     // Create the patient associated with the user created
     const patient = await Patient.create({
       user_id: user.user_id, // Reference the user ID
@@ -119,5 +126,68 @@ exports.deletePatient = async (req, res) => {
     res.status(200).json({ message: "Patient supprimé avec succès" });
   } catch (error) {
     res.status(500).json({ message: "Erreur lors de la suppression du patient", error });
+  }
+};
+
+// Récupérer tous les docteurs associés à un patient (via les rendez-vous)
+exports.getAllDoctorsByPatient = async (req, res) => {
+  try {
+    const patientId = req.params.id;
+
+    const rendezvous = await RendezVous.findAll({
+      where: { patient_id: patientId },
+      include: {
+        model: Doctor,
+        include: [{ model: User, attributes: ['nom', 'prenom', 'email'] }]
+      }
+    });
+
+    // Extraire les docteurs uniques
+    const doctorsMap = {};
+    rendezvous.forEach(rdv => {
+      const doctor = rdv.Doctor;
+      if (doctor && !doctorsMap[doctor.user_id]) {
+        doctorsMap[doctor.user_id] = doctor;
+      }
+    });
+
+    const uniqueDoctors = Object.values(doctorsMap);
+
+    res.status(200).json(uniqueDoctors);
+  } catch (error) {
+    console.error("Erreur lors de la récupération des docteurs par patient :", error);
+    res.status(500).json({ message: "Erreur serveur", error: error.message });
+  }
+};
+
+
+// Obtenir tous les rendez-vous d’un patient
+exports.getRendezVousByPatient = async (req, res) => {
+  try {
+    const patientId = req.params.id;
+
+    // Vérifie que le patient existe
+    const patient = await Patient.findOne({ where: { user_id: patientId } });
+    if (!patient) {
+      return res.status(404).json({ error: 'Patient non trouvé' });
+    }
+
+    const rendezVousList = await RendezVous.findAll({
+      where: { patient_id: patientId },
+      include: [
+        {
+          model: Doctor,
+          include: {
+            model: User,
+            attributes: ['nom', 'prenom', 'email']
+          }
+        }
+      ],
+      order: [['date_debut', 'DESC']]
+    });
+
+    res.status(200).json({ rendezVous: rendezVousList });
+  } catch (err) {
+    res.status(500).json({ error: 'Erreur lors de la récupération des rendez-vous', details: err.message });
   }
 };
