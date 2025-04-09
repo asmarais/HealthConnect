@@ -1,7 +1,7 @@
 <section id="sp-page-title">
   <div class="row">
-    <div id="sp-title" class="col-lg-12 ">
-      <div class="sp-column ">
+    <div id="sp-title" class="col-lg-12">
+      <div class="sp-column">
         <div class="sp-page-title" style="background-image: url(../../assets/images/page-title.jpg);">
           <div class="container">
             <h2>Login</h2>
@@ -9,16 +9,12 @@
               <li class="float-left">
                 <span class="divider fa fa-location" aria-hidden="true"></span>
               </li>
-
-              <li itemprop="itemListElement" itemscope=""
-                itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a
-                  itemprop="item" href="index.html" class="pathway"><span
-                    itemprop="name">Home</span></a>
+              <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item">
+                <a itemprop="item" href="index.html" class="pathway"><span itemprop="name">Home</span></a>
                 <meta itemprop="position" content="1">
               </li>
-              <li itemprop="itemListElement" itemscope=""
-                itemtype="https://schema.org/ListItem" class="breadcrumb-item active"><span
-                  itemprop="name">Login</span>
+              <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active">
+                <span itemprop="name">Login</span>
                 <meta itemprop="position" content="3">
               </li>
             </ol>
@@ -41,9 +37,7 @@
               <div class="row justify-content-center">
                 <div class="col-md-6">
                   <div class="login-content-wrapper">
-
                     <form (submit)="onLogin(); $event.preventDefault()" class="form-validate">
-
                       <div class="form-group">
                         <label for="username" class="required">
                           Username<span class="star">*</span>
@@ -87,7 +81,6 @@
                         <button (click)="loginWithGoogle()" class="google-login-btn">
                           <i class="fab fa-google"></i> Sign in with Google
                         </button>
-                        
                       </div>
 
                       <div class="form-group">
@@ -96,7 +89,6 @@
                         </button>
                       </div>
                     </form>
-
                   </div>
                 </div>
               </div>
@@ -107,4 +99,3 @@
     </div>
   </div>
 </section>
-

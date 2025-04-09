@@ -265,8 +265,26 @@ const getRendezVousByDoctor = async (req, res) => {
   }
 };
 
+
+const getApprovedDoctors = async (req, res) => {
+  try {
+    const approvedDoctors = await Doctor.findAll({
+      where: { status: 'APPROVED' },
+      include: {
+        model: User,
+        attributes: { exclude: [] }, // Tu peux spécifier les attributs à inclure/exclure ici si besoin
+      },
+    });
+
+    res.status(200).json({ doctors: approvedDoctors });
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching approved doctors', error: err.message });
+  }
+};
+
 module.exports = {
   registerDoctor,
+  getApprovedDoctors,
   validateDoctor,
    getPendingDoctors,
   getDoctorById,

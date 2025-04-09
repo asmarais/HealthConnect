@@ -57,7 +57,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   loadDoctors() {
-    this.http.get<{ doctors: Doctor[] }>('http://localhost:5000/api/doctor')
+    this.http.get<{ doctors: Doctor[] }>('http://localhost:5000/api/doctor/doc/approved')
       .subscribe({
         next: (response) => {
           this.doctors = response.doctors;

@@ -58,7 +58,7 @@ export class DoctorsComponent implements OnInit {
   }
 
   fetchDoctors() {
-    let url = 'http://localhost:5000/api/doctor';
+    let url = 'http://localhost:5000/api/doctor/doc/approved';
     let params: any = {};
 
     // Use department name as specialite if selected, otherwise use specialty

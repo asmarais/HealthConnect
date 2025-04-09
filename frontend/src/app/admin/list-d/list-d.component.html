@@ -57,10 +57,8 @@
         <td>{{ doctor.User.numero_de_telephone }}</td>
         <td>
           <button class="action-btn view" (click)="viewProfile(doctor.user_id)">Voir</button>
-          <button class="action-btn edit" (click)="openEditModal(doctor)">Modifier</button>
           <button class="action-btn accept" (click)="acceptDoctor(doctor.user_id)">Accepter</button>
           <button class="action-btn reject" (click)="rejectDoctor(doctor.user_id)">Rejeter</button>
-          <button class="action-btn delete" (click)="deleteDoctor(doctor.user_id)">Supprimer</button>
         </td>
       </tr>
     </tbody>

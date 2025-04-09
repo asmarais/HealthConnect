@@ -18,6 +18,12 @@
 		cursor: pointer;
 	}
 
+	.error {
+		color: red;
+		text-align: center;
+		margin-bottom: 15px;
+	  }
+
 	.google-login-btn i {
 		margin-right: 10px;
 		font-size: 20px;

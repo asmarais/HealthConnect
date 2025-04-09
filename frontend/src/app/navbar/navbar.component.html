@@ -2,29 +2,47 @@
   <div class="container">
     <div class="container-inner">
       <div class="row">
-        <div id="sp-top1" class="col-12 col-sm-6 col-lg-6 ">
-          <div class="sp-column ">
+        <div id="sp-top1" class="col-12 col-sm-6 col-lg-6">
+          <div class="sp-column">
             <ul class="social-icons">
-              <li class="social-icon-facebook"><a target="_blank" href="#"
-                  aria-label="facebook"><span class="fa fa-facebook"
-                    aria-hidden="true"></span></a></li>
-              <li class="social-icon-twitter"><a target="_blank" href="#"
-                  aria-label="twitter"><span class="fa fa-twitter"
-                    aria-hidden="true"></span></a></li>
-              <li class="social-icon-google-plus"><a target="_blank" href="#"
-                  aria-label="Google Plus"><span class="fa fa-google-plus"
-                    aria-hidden="true"></span></a></li>
-              <li><a target="_blank" href="#" aria-label="Youtube"><span
-                    class="fa fa-youtube-play" aria-hidden="true"></span></a></li>
+              <li class="social-icon-facebook">
+                <a target="_blank" href="#" aria-label="facebook">
+                  <span class="fa fa-facebook" aria-hidden="true"></span>
+                </a>
+              </li>
+              <li class="social-icon-twitter">
+                <a target="_blank" href="#" aria-label="twitter">
+                  <span class="fa fa-twitter" aria-hidden="true"></span>
+                </a>
+              </li>
+              <li class="social-icon-google-plus">
+                <a target="_blank" href="#" aria-label="Google Plus">
+                  <span class="fa fa-google-plus" aria-hidden="true"></span>
+                </a>
+              </li>
+              <li>
+                <a target="_blank" href="#" aria-label="Youtube">
+                  <span class="fa fa-youtube-play" aria-hidden="true"></span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
-        <div id="sp-top2" class="col-12 col-sm-6 col-lg-6 ">
-          <div class="sp-column ">
+        <div id="sp-top2" class="col-12 col-sm-6 col-lg-6">
+          <div class="sp-column">
             <ul class="sp-contact-info">
-              <li class="sp-menu-item"><strong><a routerLink="/profilD">Are you a doctor ?</a></strong></li>
-              <li class="sp-menu-item"><a routerLink="/login">Login</a></li>
-              <li class="sp-menu-item"><a routerLink="/reg">Registration</a></li>
+              <!-- Afficher "Logout" si l'utilisateur est connecté -->
+              <li class="sp-menu-item" *ngIf="isLoggedIn()">
+                <strong><a (click)="logout()" style="cursor: pointer;">Logout</a></strong>
+              </li>
+              <!-- Afficher "Login" si l'utilisateur n'est pas connecté -->
+              <li class="sp-menu-item" *ngIf="!isLoggedIn()">
+                <a routerLink="/login">Login</a>
+              </li>
+              <!-- Afficher "Registration" si l'utilisateur n'est pas connecté -->
+              <li class="sp-menu-item" *ngIf="!isLoggedIn()">
+                <a routerLink="/reg">Registration</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -34,28 +52,41 @@
 </section>
 <header id="sp-header">
   <div class="container">
-      <div class="container-inner">
-          <div class="row">
-              <div id="sp-logo" class="col-6 col-sm-6 col-lg-3">
-                  <div class="sp-column">
-                      <div class="logo"><a href="index.html"><img class="logo-image" src="../../assets/images/HealthConnectLogo11.png" alt="Shaper Medico"></a></div>
-                  </div>
-              </div>
-              <div id="sp-menu" class="col-6 col-sm-6 col-lg-9">
-                  <div class="sp-column">
-                      <nav class="sp-megamenu-wrapper" role="navigation">
-                          <a id="offcanvas-toggler" aria-label="Navigation" class="offcanvas-toggler-right d-block d-lg-none" href="#"><i class="fa fa-bars" aria-hidden="true" title="Navigation"></i></a>
-                          <ul class="sp-megamenu-parent menu-animation-fade-up d-none d-lg-block">
-                              <li class="sp-menu-item  current-item active"><a routerLink="/home">Home</a>
-                              </li>
-                              <li class="sp-menu-item"><a routerLink="/appo">Appointments</a></li>
-                              <li class="sp-menu-item"><a routerLink="/doc">Doctors</a></li>
-                              <li class="sp-menu-item"><a routerLink="/schedule">Schedules</a></li>
-                          </ul>
-                      </nav>
-                  </div>
-              </div>
+    <div class="container-inner">
+      <div class="row">
+        <div id="sp-logo" class="col-6 col-sm-6 col-lg-3">
+          <div class="sp-column">
+            <div class="logo">
+              <a href="index.html">
+                <img class="logo-image" src="../../assets/images/HealthConnectLogo11.png" alt="Shaper Medico">
+              </a>
+            </div>
           </div>
+        </div>
+        <div id="sp-menu" class="col-6 col-sm-6 col-lg-9">
+          <div class="sp-column">
+            <nav class="sp-megamenu-wrapper" role="navigation">
+              <a id="offcanvas-toggler" aria-label="Navigation" class="offcanvas-toggler-right d-block d-lg-none" href="#">
+                <i class="fa fa-bars" aria-hidden="true" title="Navigation"></i>
+              </a>
+              <ul class="sp-megamenu-parent menu-animation-fade-up d-none d-lg-block" *ngIf="showMenuItems()">
+                <li class="sp-menu-item current-item active">
+                  <a routerLink="/home">Home</a>
+                </li>
+                <li class="sp-menu-item">
+                  <a routerLink="/appo">Appointments</a>
+                </li>
+                <li class="sp-menu-item">
+                  <a routerLink="/doc">Doctors</a>
+                </li>
+                <li class="sp-menu-item">
+                  <a routerLink="/schedule">Schedules</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
 </header>
