@@ -1,280 +1,95 @@
 <section id="sp-page-title">
-  <div class="row">
-      <div id="sp-title" class="col-lg-12 ">
-          <div class="sp-column ">
-              <div class="sp-page-title" style="background-image: url(../../assets/images/page-title.jpg);">
-                  <div class="container">
-                      <h2>Find A Doctor</h2>
-                      <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
-                          <li class="float-left">
-                              <span class="divider fa fa-location" aria-hidden="true"></span>
-                          </li>
-
-                          <li itemprop="itemListElement" itemscope=""
-                              itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a
-                                  itemprop="item" href="index.html" class="pathway"><span
-                                      itemprop="name">Home</span></a>
-                              <meta itemprop="position" content="1">
-                          </li>
-                          <li itemprop="itemListElement" itemscope=""
-                              itemtype="https://schema.org/ListItem" class="breadcrumb-item active"><span
-                                  itemprop="name">Doctors</span>
-                              <meta itemprop="position" content="2">
-                          </li>
-                      </ol>
-                  </div>
-              </div>
+    <div class="row">
+      <div id="sp-title" class="col-lg-12">
+        <div class="sp-column">
+          <div class="sp-page-title" style="background-image: url(../../assets/images/page-title.jpg);">
+            <div class="container">
+              <h2>{{ doctor?.User.nom }} {{ doctor?.User.prenom }}</h2>
+              <ol itemscope="" itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+                <li class="float-left">
+                  <span class="divider fa fa-location" aria-hidden="true"></span>
+                </li>
+                <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item"><a itemprop="item" href="index.html" class="pathway"><span itemprop="name">Home</span></a>
+                  <meta itemprop="position" content="1">
+                </li>
+                <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="breadcrumb-item active"><span itemprop="name">Doctors</span>
+                  <meta itemprop="position" content="2">
+                </li>
+              </ol>
+            </div>
           </div>
+        </div>
       </div>
-  </div>
-</section>
-<section id="sp-main-body">
-  <div class="container">
+    </div>
+  </section>
+  
+  <section id="sp-main-body">
+    <div class="container">
       <div class="container-inner">
-          <div class="row">
-              <main id="sp-component" class="col-lg-12 " role="main">
-                  <div class="sp-column ">
-                      <div id="system-message-container">
+        <div class="row">
+          <main id="sp-component" class="col-lg-12" role="main">
+            <div class="sp-column">
+              <div id="system-message-container"></div>
+  
+              <div id="spmedical" class="spmedical view-spmedical-specialist spmedical-person">
+                <div class="spmedical-row">
+                  <div class="spmedical-col-md-5 spmedical-col-lg-4 spmedical-col-xl-3">
+                    <div class="specialist-info">
+                      <div class="specialist-img">
+                        <img *ngIf="doctor?.image_url" [src]="doctor?.image_url" class="spmedical-person-image spmedical-img-responsive" alt="{{ doctor?.User.nom }}">
                       </div>
-
-                      <div id="spmedical" class="spmedical view-spmedical-specialist spmedical-person">
-
-                          <div class="spmedical-row">
-                              <div class="spmedical-col-md-5 spmedical-col-lg-4 spmedical-col-xl-3">
-                                  <div class="specialist-info">
-
-                                      <div class="specialist-img">
-                                          <img src="../../assets/images/specialists-04_263x357.jpg"
-                                              class="spmedical-person-image spmedical-img-responsive"
-                                              alt="Dr Mangle">
-                                      </div>
-
-                                      <div class="specialist-name">
-                                          <h3>Dr Mangle</h3>
-
-                                          <span>Orthopedic Surgery</span>
-                                      </div>
-
-                                      <div class="specialist-specialties">
-                                          <h3>Specialities</h3>
-                                          Orthopedic Surgery, M.D, Ph.D
-                                      </div>
-
-                                      <div class="specialist-contact-info">
-                                          <h3>Contact Info</h3>
-                                          <p>+192358743</p>
-
-                                          <a
-                                              href="/cdn-cgi/l/email-protection#4920273a3d28252509232626243a2128392c3b672a2624"><span
-                                                  class="__cf_email__"
-                                                  data-cfemail="81f5e4ecf1ede0f5e4afece4e5c1e4f9e0ecf1ede4afe2eeec">[email�protected]</span></a>
-
-                                          <ul class="specialist-social-icon">
-                                              <li>
-                                                  <a href="#" target="_blank"><i class="fa fa-facebook"
-                                                          aria-hidden="true"></i></a>
-                                              </li>
-                                              <li>
-                                                  <a href="#" target="_blank"><i class="fa fa-twitter"
-                                                          aria-hidden="true"></i></a>
-                                              </li>
-                                              <li>
-                                                  <a href="#" target="_blank"><i class="fa fa-linkedin"
-                                                          aria-hidden="true"></i></a>
-                                              </li>
-                                              <li>
-                                                  <a href="#" target="_blank"><i class="fa fa-google-plus"
-                                                          aria-hidden="true"></i></a>
-                                              </li>
-                                              <li>
-                                                  <a href="http://joomshaper.com" target="_blank"><i
-                                                          class="fa fa-globe" aria-hidden="true"></i></a>
-                                              </li>
-                                          </ul>
-
-                                      </div>
-
-                                      <div class="specialist-available-hours">
-                                          <h3>Available Hours</h3>
-                                          <ul>
-                                              <li>
-                                                  <span class="date">Sunday</span>
-                                                  <span class="time">9:00 - 10:00 </span>
-                                              </li>
-                                              <li>
-                                                  <span class="date">Monday</span>
-                                                  <span class="time">9:00 - 10:00 </span>
-                                              </li>
-                                          </ul>
-                                      </div>
-
-                                      <div class="appointment-button">
-                                          <a class="spmedical-btn btn-primary"
-                                              href="appo.html?specialistid=1:dr-carrie-fisher-3">
-                                              Request Appointment </a>
-                                      </div> <!-- /.appointment-button -->
-
-                                  </div>
-                              </div> <!-- //.spmedical-col-sm-4 -->
-
-                              <div
-                                  class="spmedical-col-md-6 spmedical-col-lg-7 spmedical-col-xl-7 spmedical-offset-lg-1">
-                                  <div class="about-specialist">
-
-                                      <div class="specialist-intro">
-                                          <h2>About The Doctor</h2>
-                                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                                              do eiusmod tempor incididunt ut labore et dolore magna
-                                              aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                              ullamco.</p>
-                                          <p>Laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                              irure dolor in reprehenderit in voluptate velit esse cillum
-                                              dolore eu fugiat nulla pariatur. dolor sit amet, consectetur
-                                              adipisicing elit sed do.</p>
-                                          <p>consectetur adipisicing elit, sed do eiusmod tempor
-                                              incididunt ut labore et dolore magna aliqua.</p>
-                                      </div>
-
-                                      <div class="specialist-work-experience">
-                                          <h2>Work Experience</h2>
-                                          <div class="spmedical-timeline-wrap">
-                                              <div class="spmedical-row">
-                                                  <div class="spmedical-col-sm-3">
-                                                      <div class="date">
-                                                          2012 - 2015 </div>
-                                                  </div>
-                                                  <div class="spmedical-col-sm-9">
-                                                      <div class="info">
-                                                          <span>Member</span>
-                                                          Pharmacy and Therapeutics Committee, Medico
-                                                          Clinic Arizona
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="spmedical-timeline-wrap">
-                                              <div class="spmedical-row">
-                                                  <div class="spmedical-col-sm-3">
-                                                      <div class="date">
-                                                          2015-2016 </div>
-                                                  </div>
-                                                  <div class="spmedical-col-sm-9">
-                                                      <div class="info">
-                                                          <span>Member</span>
-                                                          Pharmacy and Therapeutics Committee, Medico
-                                                          Clinic Arizona
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="spmedical-timeline-wrap">
-                                              <div class="spmedical-row">
-                                                  <div class="spmedical-col-sm-3">
-                                                      <div class="date">
-                                                          2017 - Present </div>
-                                                  </div>
-                                                  <div class="spmedical-col-sm-9">
-                                                      <div class="info">
-                                                          <span>Member</span>
-                                                          Pharmacy and Therapeutics Committee, Medico
-                                                          Clinic Arizona
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div> <!-- /.specialist-{type} -->
-
-                                      <div class="specialist-awards">
-                                          <h2>Awards & Honors</h2>
-                                          <div class="spmedical-timeline-wrap">
-                                              <div class="spmedical-row">
-                                                  <div class="spmedical-col-sm-3">
-                                                      <div class="date">
-                                                          2014 </div>
-                                                  </div>
-                                                  <div class="spmedical-col-sm-9">
-                                                      <div class="info">
-                                                          <span>Pathology Award</span>
-                                                          William Boyd Medal Alabama Association of
-                                                          Pathologists
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="spmedical-timeline-wrap">
-                                              <div class="spmedical-row">
-                                                  <div class="spmedical-col-sm-3">
-                                                      <div class="date">
-                                                          2015 </div>
-                                                  </div>
-                                                  <div class="spmedical-col-sm-9">
-                                                      <div class="info">
-                                                          <span>Teamwork Award </span>
-                                                          Excellence through Teamwork Award Abizi Clinic
-                                                          Enterprise
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div> <!-- /.specialist-{type} -->
-
-                                      <div class="specialist-education">
-                                          <h2>Education & Certification</h2>
-                                          <div class="spmedical-timeline-wrap">
-                                              <div class="spmedical-row">
-                                                  <div class="spmedical-col-sm-3">
-                                                      <div class="date">
-                                                          2006 </div>
-                                                  </div>
-                                                  <div class="spmedical-col-sm-9">
-                                                      <div class="info">
-                                                          <span>BS - Molecular Biology</span>
-                                                          University of Wyoming
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="spmedical-timeline-wrap">
-                                              <div class="spmedical-row">
-                                                  <div class="spmedical-col-sm-3">
-                                                      <div class="date">
-                                                          2009 </div>
-                                                  </div>
-                                                  <div class="spmedical-col-sm-9">
-                                                      <div class="info">
-                                                          <span>MD/PhD</span>
-                                                          Medical Scientist Training Program, University
-                                                          of Alabama at Birmingham
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="spmedical-timeline-wrap">
-                                              <div class="spmedical-row">
-                                                  <div class="spmedical-col-sm-3">
-                                                      <div class="date">
-                                                          2011 </div>
-                                                  </div>
-                                                  <div class="spmedical-col-sm-9">
-                                                      <div class="info">
-                                                          <span>Fellow - Transfusion Medicine</span>
-                                                          Hospital of the University of Pennsylvania,
-                                                          University of Pennsylvania
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div> <!-- /.specialist-{type} -->
-
-                                  </div> <!-- //.about-specialist -->
-                              </div> <!-- //.spmedical-col-sm-8 -->
-
-                          </div> <!-- //.spmedical-row -->
-
-                      </div> <!-- //.spmedical view-spmedical-teacher -->
+  
+                      <div class="specialist-name">
+                        <h3>{{ doctor?.User.nom }} {{ doctor?.User.prenom }}</h3>
+                        <span>{{ doctor?.specialite }}</span>
+                      </div>
+  
+                      <div class="specialist-specialties">
+                        <h3>Specialities</h3>
+                        {{ doctor?.specialite }}
+                      </div>
+  
+                      <div class="specialist-contact-info">
+                        <h3>Contact Info</h3>
+                        <p>{{ doctor?.User.numero_de_telephone }}</p>
+                        <a [href]="'mailto:' + doctor?.User.email">{{ doctor?.User.email }}</a>
+                      </div>
+  
+                      <div class="specialist-available-hours">
+                        <h3>Available Hours</h3>
+                        <ul>
+                          <li>
+                            <span class="date">Sunday</span>
+                            <span class="time">{{ doctor?.datedebut }} - {{ doctor?.datefin }}</span>
+                          </li>
+                          <li>
+                            <span class="date">Monday</span>
+                            <span class="time">{{ doctor?.datedebut }} - {{ doctor?.datefin }}</span>
+                          </li>
+                        </ul>
+                      </div>
+  
+                      <div class="appointment-button">
+                        <a class="spmedical-btn btn-primary" href="#">Request Appointment</a>
+                      </div>
+                    </div>
                   </div>
-              </main>
-          </div>
+  
+                  <div class="spmedical-col-md-6 spmedical-col-lg-7 spmedical-col-xl-7 spmedical-offset-lg-1">
+                    <div class="about-specialist">
+                      <div class="specialist-intro">
+                        <h2>About The Doctor</h2>
+                        <p>{{ doctor?.User.nom }} is a specialist in {{ doctor?.specialite }} with a rating of {{ doctor?.rating }}.</p>
+                      </div>
+                      <!-- More sections like Work Experience, Education, etc. -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
       </div>
-  </div>
-</section>
+    </div>
+  </section>
+  

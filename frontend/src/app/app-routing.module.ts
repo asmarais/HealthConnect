@@ -24,7 +24,7 @@ const routes: Routes = [
   {path : 'reg',component:RegisterComponent},
   {path : 'profilD',component:ProfileDComponent},
   {path : 'profilP',component:ProfilePComponent},
-  {path : 'DDoctor',component:DDoctorComponent},
+  { path: 'DDoctor/:id', component: DDoctorComponent },
 
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
 

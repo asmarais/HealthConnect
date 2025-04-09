@@ -1,6 +1,7 @@
 // doctors.component.ts
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 interface Doctor {
   user_id: number;
@@ -33,6 +34,7 @@ interface Department {
   styleUrls: ['./doctors.component.css']
 })
 export class DoctorsComponent implements OnInit {
+  doctor: Doctor | null = null;
   doctors: Doctor[] = [];
   selectedSpecialty: string = '';
   selectedDepartment: string = '';
@@ -51,10 +53,27 @@ export class DoctorsComponent implements OnInit {
     { id: '12', name: 'Mediclinic' }
   ];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private route: ActivatedRoute) {}
 
   ngOnInit() {
+    const doctorId = this.route.snapshot.paramMap.get('id');
+    if (doctorId) {
+      this.fetchDoctorDetails(doctorId);
+    }
+
     this.fetchDoctors();
+  }
+
+  fetchDoctorDetails(id: string): void {
+    const url = `http://localhost:5000/api/doctor/${id}`;
+    this.http.get<{ doctor: Doctor }>(url).subscribe({
+      next: (response) => {
+        this.doctor = response.doctor;
+      },
+      error: (error) => {
+        console.error('Error fetching doctor details:', error);
+      }
+    });
   }
 
   fetchDoctors() {

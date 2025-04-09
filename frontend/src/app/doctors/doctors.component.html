@@ -103,8 +103,8 @@
                             <img [src]="doctor.image_url" 
                                  class="spmedical-person-img spmedical-img-responsive"
                                  [alt]="doctor.User.prenom + ' ' + doctor.User.nom">
-                            <a [routerLink]="['/doctor', doctor.user_id]" 
-                               class="spmedical-btn spmedical-btn-primary">View Profile</a>
+                                 <a [routerLink]="['/DDoctor', doctor.user_id]" class="spmedical-btn spmedical-btn-primary">
+                                  View Profile</a>
                           </div>
   
                           <div class="specialists-info-wrapper">
