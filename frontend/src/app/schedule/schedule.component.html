@@ -60,7 +60,7 @@
             <div class="row justify-content-center">
               <div class="col-lg-11">
                 <div class="tab-content" id="nav-tabContent">
-                  <div *ngFor="let day of days" class="tab-pane fade" [class.show]="day.id === 'tue'" 
+                  <div *ngFor="let day of days" class="tab-pane fade" [class.show]="day.id === 'tue'"
                        [class.active]="day.id === 'tue'" [attr.id]="'nav-' + day.id" role="tabpanel">
                     <div class="row">
                       <div class="col-12">
@@ -70,14 +70,14 @@
                               <div class="caption">
                                 <span>{{slot.start}} - {{slot.end}}</span>
                                 <h3>{{slot.specialty}}</h3>
-                                <p><span>by</span> <strong>{{slot.doctorName}}</strong></p>
-                                <p><span>Specialty</span> <strong>{{slot.specialty}}</strong></p>
+                                <p><span>by :</span> <strong>{{slot.doctorName}}</strong></p>
+                                <p><span>Specialty : </span> <strong>{{slot.specialty}}</strong></p>
                                 <button class="btn" data-bs-toggle="modal" [attr.data-bs-target]="'#bookModal-' + slot.doctorId + '-' + slot.start">
                                   BOOK APPOINTMENT
                                 </button>
                               </div>
                             </div>
-                            <div class="modal fade" [attr.id]="'bookModal-' + slot.doctorId + '-' + slot.start" 
+                            <div class="modal fade" [attr.id]="'bookModal-' + slot.doctorId + '-' + slot.start"
                                  tabindex="-1" [attr.aria-labelledby]="'bookModalLabel-' + slot.doctorId + '-' + slot.start">
                               <div class="modal-dialog">
                                 <div class="modal-content">
@@ -92,7 +92,7 @@
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" 
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                                             (click)="bookAppointment(slot)">Confirm</button>
                                   </div>
                                 </div>
