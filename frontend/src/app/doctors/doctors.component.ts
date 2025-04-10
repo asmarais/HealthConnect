@@ -1,4 +1,3 @@
-// doctors.component.ts
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -35,7 +34,8 @@ interface Department {
 })
 export class DoctorsComponent implements OnInit {
   doctor: Doctor | null = null;
-  doctors: Doctor[] = [];
+  doctors: Doctor[] = []; // All fetched doctors
+  filteredDoctors: Doctor[] = []; // Filtered doctors for display
   selectedSpecialty: string = '';
   selectedDepartment: string = '';
   departments: Department[] = [
@@ -53,14 +53,13 @@ export class DoctorsComponent implements OnInit {
     { id: '12', name: 'Mediclinic' }
   ];
 
-  constructor(private http: HttpClient,private route: ActivatedRoute) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
   ngOnInit() {
     const doctorId = this.route.snapshot.paramMap.get('id');
     if (doctorId) {
       this.fetchDoctorDetails(doctorId);
     }
-
     this.fetchDoctors();
   }
 
@@ -80,7 +79,6 @@ export class DoctorsComponent implements OnInit {
     let url = 'http://localhost:5000/api/doctor/doc/approved';
     let params: any = {};
 
-    // Use department name as specialite if selected, otherwise use specialty
     if (this.selectedDepartment) {
       params.specialite = this.departments.find(d => d.id === this.selectedDepartment)?.name;
     } else if (this.selectedSpecialty) {
@@ -91,11 +89,29 @@ export class DoctorsComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.doctors = response.doctors;
+          this.updateFilteredDoctors(); // Update filtered list after fetching
         },
         error: (error) => {
           console.error('Error fetching doctors:', error);
+          this.doctors = [];
+          this.filteredDoctors = [];
         }
       });
+  }
+
+  updateFilteredDoctors() {
+    let filterValue = '';
+    if (this.selectedDepartment) {
+      filterValue = this.departments.find(d => d.id === this.selectedDepartment)?.name || '';
+    } else if (this.selectedSpecialty) {
+      filterValue = this.selectedSpecialty;
+    }
+
+    if (filterValue) {
+      this.filteredDoctors = this.doctors.filter(doctor => doctor.specialite === filterValue);
+    } else {
+      this.filteredDoctors = [...this.doctors]; // Show all doctors if no filter selected
+    }
   }
 
   onSubmit() {

@@ -91,22 +91,23 @@
                         </form>
                       </aside>
                     </div>
-  
+                
                     <div class="spmedical-col-md-8 spmedical-col-lg-9">
                       <div class="spmedical-result-counter">
-                        <h4>{{doctors.length}} Specialists Found</h4>
+                        <h4>{{filteredDoctors.length}} Specialists Found</h4>
                       </div>
-  
-                      <div class="spmedical-specialists" *ngFor="let doctor of doctors">
+                
+                      <!-- Display filtered doctors only -->
+                      <div class="spmedical-specialists" *ngFor="let doctor of filteredDoctors">
                         <div class="specialist-wrapper spmedical-d-flex">
                           <div class="specialists-img-wrapper">
                             <img [src]="doctor.image_url" 
                                  class="spmedical-person-img spmedical-img-responsive"
                                  [alt]="doctor.User.prenom + ' ' + doctor.User.nom">
-                                 <a [routerLink]="['/DDoctor', doctor.user_id]" class="spmedical-btn spmedical-btn-primary">
-                                  View Profile</a>
+                            <a [routerLink]="['/DDoctor', doctor.user_id]" class="spmedical-btn spmedical-btn-primary">
+                              View Profile</a>
                           </div>
-  
+                
                           <div class="specialists-info-wrapper">
                             <div class="specialists-name">
                               <h3>
@@ -117,7 +118,7 @@
                               </h3>
                               <span class="specialists-designation">{{doctor.specialite}}</span>
                             </div>
-  
+                
                             <div class="area-of-specialties">
                               <div class="specialists-category">
                                 <h3>Areas of Focus:</h3>
@@ -125,7 +126,7 @@
                                   <li>{{doctor.specialite}}</li>
                                 </ul>
                               </div>
-  
+                
                               <div class="specialists-available-hours">
                                 <h3>Available Hours:</h3>
                                 <ul>
@@ -134,7 +135,7 @@
                                   </li>
                                 </ul>
                               </div>
-  
+                
                               <div class="specialists-social-profile">
                                 <a [routerLink]="['/appointment', doctor.user_id]" 
                                    class="btn btn-link">Request Appointment</a>
@@ -142,6 +143,11 @@
                             </div>
                           </div>
                         </div>
+                      </div>
+                
+                      <!-- Message when no doctors match -->
+                      <div *ngIf="filteredDoctors.length === 0">
+                        <p>No doctors found for the selected specialty.</p>
                       </div>
                     </div>
                   </div>
