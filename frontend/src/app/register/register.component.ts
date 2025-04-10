@@ -106,7 +106,7 @@ export class RegisterComponent {
         next: (response: ApiResponse) => {
           console.log('✅ Patient registration successful:', response);
           alert('Patient registration successful!');
-          this.router.navigate(['/profilP']);
+          this.router.navigate(['/login']);
         },
         error: (error: ApiError) => {
           console.error('❌ Patient registration error:', error);

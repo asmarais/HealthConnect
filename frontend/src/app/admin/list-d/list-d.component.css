@@ -11,7 +11,148 @@
   align-items: center;
   margin-bottom: 16px;
 }
+/* list-d.component.css */
 
+/* Modal base styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 800px; /* Adjusted for two columns */
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-in-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Two-column specific styles */
+.two-column {
+  width: 100%;
+}
+
+.columns-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap; /* Added to prevent overflow on smaller screens */
+}
+
+.column-left,
+.column-right {
+  flex: 1;
+  min-width: 0;
+  width: 50%; /* Ensures equal width */
+}
+
+/* Form group styles */
+.form-group {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* Form actions (buttons) */
+.form-actions {
+  margin-top: 20px;
+  text-align: center;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.form-actions button {
+  padding: 8px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.form-actions button:first-child { /* Save button */
+  background-color: #048581;
+  color: white;
+}
+
+.form-actions button:first-child:hover {
+  background-color: #036b68;
+}
+
+.form-actions button:last-child { /* Cancel button */
+  background-color: #f44336;
+  color: white;
+}
+
+.form-actions button:last-child:hover {
+  background-color: #da190b;
+}
+
+/* Profile modal specific */
+.modal-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.modal-footer button {
+  padding: 8px 20px;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.modal-footer button:hover {
+  background-color: #34495e;
+}
+
+.profile-image {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+/* Table styles remain unchanged */
+.table-container {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ... Rest of your table and button styles remain the same ... */
 .add-btn {
   padding: 8px 16px;
   border-radius: 16px;

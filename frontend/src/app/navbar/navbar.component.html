@@ -31,6 +31,9 @@
         <div id="sp-top2" class="col-12 col-sm-6 col-lg-6">
           <div class="sp-column">
             <ul class="sp-contact-info">
+              <li class="sp-menu-item" *ngIf="isLoggedIn()">
+                <a [routerLink]="getProfileRoute()">Profil</a>
+              </li>
               <!-- Afficher "Logout" si l'utilisateur est connecté -->
               <li class="sp-menu-item" *ngIf="isLoggedIn()">
                 <strong><a (click)="logout()" style="cursor: pointer;">Logout</a></strong>
@@ -43,6 +46,7 @@
               <li class="sp-menu-item" *ngIf="!isLoggedIn()">
                 <a routerLink="/reg">Registration</a>
               </li>
+
             </ul>
           </div>
         </div>

@@ -1,25 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
-interface Appointment {
-  time: string;
-  patient: string;
-  reason: string;
-  phone: string;
-  notes: string;
-  accepted: boolean | 'rejected';
-}
-
-interface Patient {
-  name: string;
-  email: string;
-  phone: string;
-}
-
-interface Notification {
-  title: string;
-  date: string;
-  description: string;
-}
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-profile-d',
@@ -30,102 +11,244 @@ export class ProfileDComponent implements OnInit {
   @ViewChild('scheduleSection') scheduleSection!: ElementRef;
   @ViewChild('patientsSection') patientsSection!: ElementRef;
 
+  doctorId: number | null = null;
+  doctor = {
+    name: '',
+    rating: 'N/A',
+    joined: '',
+    email: '',
+    phone: '',
+    specialite: '',
+    datedebut: '',
+    datefin: '',
+    image_url: '',
+    adresse: '',
+    cin: ''
+  };
+
+  editedDoctor = {
+    name: '',
+    rating: '',
+    joined: '',
+    email: '',
+    phone: '',
+    specialite: '',
+    datedebut: '',
+    datefin: '',
+    image_url: '',
+    adresse: '',
+    cin: ''
+  };
 
   stats = {
-    appointments: 25,
-    patients: 48
+    appointments: 0,
+    patients: 0
   };
 
   viewMode: 'week' | 'day' = 'week';
   currentDay = 'Monday';
-  scheduleDateRange = 'March 30 – April 3';
+  scheduleDateRange = 'April 7 – April 11, 2025';
   timeSlots = ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'];
   days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
-  schedule: { [key: string]: Appointment[] } = {
-    Monday: [
-      { time: '8:00 AM', patient: 'John Doe', reason: 'Check-up', phone: '+1 123 456 7890', notes: 'First visit', accepted: false },
-      { time: '9:00 AM', patient: 'Sarah Smith', reason: 'Consultation', phone: '+1 234 567 8901', notes: 'Heart concerns', accepted: true },
-      { time: '10:00 AM', patient: 'Michael Brown', reason: 'Follow-up', phone: '+1 345 678 9012', notes: 'Post-surgery', accepted: true },
-      { time: '1:00 PM', patient: 'Emily Johnson', reason: 'Check-up', phone: '+1 456 789 0123', notes: 'Routine', accepted: false },
-      { time: '2:00 PM', patient: 'David Lee', reason: 'Surgery Prep', phone: '+1 567 890 1234', notes: 'Scheduled for next week', accepted: true }
-    ],
-    Tuesday: [
-      { time: '8:00 AM', patient: 'Anna Taylor', reason: 'Check-up', phone: '+1 678 901 2345', notes: 'Annual visit', accepted: true },
-      { time: '9:00 AM', patient: 'James Wilson', reason: 'Consultation', phone: '+1 789 012 3456', notes: 'Chest pain', accepted: false }
-    ],
+  schedule: { [key: string]: any[] } = {
+    Monday: [],
+    Tuesday: [],
     Wednesday: [],
     Thursday: [],
     Friday: []
   };
 
-  patients: Patient[] = [
-    { name: 'John Doe', email: 'john.doe@example.com', phone: '+1 123 456 7890' },
-    { name: 'Sarah Smith', email: 'sarah.smith@example.com', phone: '+1 234 567 8901' },
-    { name: 'Michael Brown', email: 'michael.brown@example.com', phone: '+1 345 678 9012' },
-    { name: 'Emily Johnson', email: 'emily.johnson@example.com', phone: '+1 456 789 0123' },
-    { name: 'David Lee', email: 'david.lee@example.com', phone: '+1 567 890 1234' },
-    { name: 'Anna Taylor', email: 'anna.taylor@example.com', phone: '+1 678 901 2345' },
-    { name: 'James Wilson', email: 'james.wilson@example.com', phone: '+1 789 012 3456' }
-  ];
-
-  notifications: Notification[] = [
-    { title: 'New Patient Request', date: '2025-03-29', description: 'John Doe has requested an appointment for a check-up.' },
-    { title: 'Reminder: Surgery', date: '2025-03-30', description: 'Scheduled surgery for Michael Brown at 2:00 PM.' },
-    { title: 'Staff Meeting', date: '2025-04-01', description: 'Staff meeting scheduled at 9:00 AM to discuss new protocols.' }
-  ];
-
-  selectedAppointment: Appointment | null = null;
+  patients: any[] = [];
+  notifications: any[] = [];
+  selectedAppointment: any = null;
   searchQuery = '';
   sortDirection: 'asc' | 'desc' = 'desc';
   currentPage = 1;
   patientsPerPage = 5;
-  filteredPatients: Patient[] = [];
-  paginatedPatients: Patient[] = [];
+  filteredPatients: any[] = [];
+  paginatedPatients: any[] = [];
   visibleAppointments: { [key: string]: boolean } = {};
+  isEditModalOpen = false;
 
-  doctor = {
-    name: '',
-    rating: '',
-    joined: '',
-    email: '',
-    phone: ''
-  };
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
+
   ngOnInit() {
-    this.filteredPatients = [...this.patients];
-    this.renderPatientsTable();
-    // // Set initial view to schedule
-    // this.setView('schedule');
-     // Load doctor data from localStorage
-  const userData = localStorage.getItem('user');
-console.log(userData ,"from local storage")
-  if (userData) {
-    try {
-      const user = JSON.parse(userData);
-
-      this.doctor = {
-        name: `${user.nom || ''} ${user.prenom || ''}`.trim(),
-        email: user.email || '',
-        phone: user.numero_de_telephone || '',
-        rating: user.rating || 'A+', // Use rating if available, otherwise default
-        joined: user.createdAt ? this.formatDate(user.createdAt) : ''
-      };
-    } catch (error) {
-      console.error('Error parsing user data from localStorage:', error);
+    const userData = this.authService.getUserDataFromToken();
+    console.log(userData);
+    if (userData && userData.userId) {
+      this.doctorId = userData.userId;
+      this.fetchDoctorData();
+      this.fetchAppointments();
+    } else {
+      console.error('No valid user data found. Please log in.');
     }
-  } else {
-    console.warn('No doctor data found in localStorage.');
   }
-}
-ngAfterViewInit() {
-  this.setView('schedule');
-}
 
-  formatDate(dateStr: string): string {
-    const date = new Date(dateStr);
-    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long' };
-    return date.toLocaleDateString(undefined, options);
+  fetchDoctorData() {
+    if (!this.doctorId) return;
+
+    this.http.get(`http://localhost:5000/api/doctor/${this.doctorId}`).subscribe(
+      (response: any) => {
+        const doctorData = response.doctor || response;
+        this.doctor = {
+          name: `${doctorData.User.prenom} ${doctorData.User.nom}`,
+          rating: doctorData.rating || 'N/A',
+          joined: doctorData.joined_at || doctorData.User.date_de_creation || 'Unknown',
+          email: doctorData.User.email,
+          phone: doctorData.User.numero_de_telephone,
+          specialite: doctorData.specialite || '',
+          datedebut: doctorData.datedebut || '',
+          datefin: doctorData.datefin || '',
+          image_url: doctorData.image_url || '',
+          adresse: doctorData.User.adresse || '',
+          cin: doctorData.User.cin || ''
+        };
+        this.editedDoctor = { ...this.doctor }; // Initialize editedDoctor with current data
+      },
+      (error) => {
+        console.error('Error fetching doctor data:', error);
+      }
+    );
   }
+
+  fetchAppointments() {
+    if (!this.doctorId) return;
+
+    this.http.get(`http://localhost:5000/api/rendezvous/doctor/${this.doctorId}`).subscribe(
+      (appointments: any) => {
+        const patientMap = new Map<number, any>();
+        const scheduleData: { [key: string]: any[] } = {
+          Monday: [],
+          Tuesday: [],
+          Wednesday: [],
+          Thursday: [],
+          Friday: []
+        };
+        const notificationData: any[] = [];
+
+        appointments.forEach((appt: any) => {
+          const startDate = new Date(appt.date_debut);
+          const dayOfWeek = startDate.getDay();
+          const dayName = this.days[dayOfWeek - 1] || 'Monday';
+          const time = startDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          const dateStr = startDate.toISOString().split('T')[0];
+
+          const appointment = {
+            id: appt.id,
+            time: this.closestTimeSlot(time),
+            patient: `Patient ${appt.patient_id}`,
+            patient_id: appt.patient_id,
+            reason: appt.raison || 'Consultation',
+            phone: '',
+            notes: appt.statut === 'PENDING' ? 'Awaiting confirmation' : 'Confirmed',
+            accepted: appt.statut === 'CONFIRMED' ? true : false
+          };
+
+          scheduleData[dayName].push(appointment);
+
+          notificationData.push({
+            title: appt.statut === 'PENDING' ? 'New Patient Request' : 'Appointment Reminder',
+            date: dateStr,
+            description: appt.statut === 'PENDING'
+              ? `Patient ${appt.patient_id} has requested an appointment at ${time}`
+              : `Consultation scheduled at ${time} with Patient ${appt.patient_id}`
+          });
+
+          if (!patientMap.has(appt.patient_id)) {
+            patientMap.set(appt.patient_id, {
+              name: `Patient ${appt.patient_id}`,
+              email: '',
+              phone: ''
+            });
+          }
+        });
+
+        this.schedule = scheduleData;
+        this.stats.appointments = appointments.length;
+        this.notifications = notificationData.sort((a, b) =>
+          new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+
+        const patientIds = Array.from(patientMap.keys());
+        const patientPromises = patientIds.map(id =>
+          this.http.get(`http://localhost:5000/api/patient/${id}`).toPromise()
+        );
+
+        Promise.all(patientPromises).then((patientResponses: any[]) => {
+          patientResponses.forEach((patientData: any, index: number) => {
+            const patientId = patientIds[index];
+            const fullName = `${patientData.User.prenom} ${patientData.User.nom}`;
+            patientMap.set(patientId, {
+              name: fullName,
+              email: patientData.User.email,
+              phone: patientData.User.numero_de_telephone
+            });
+
+            Object.values(this.schedule).forEach(day => {
+              day.forEach(appointment => {
+                if (appointment.patient_id === patientId) {
+                  appointment.patient = fullName;
+                  appointment.phone = patientData.User.numero_de_telephone;
+                }
+              });
+            });
+
+            this.notifications.forEach(notification => {
+              if (notification.description.includes(`Patient ${patientId}`)) {
+                notification.description = notification.description.replace(
+                  `Patient ${patientId}`,
+                  fullName
+                );
+              }
+            });
+          });
+
+          this.patients = Array.from(patientMap.values());
+          this.stats.patients = patientMap.size;
+          this.filteredPatients = [...this.patients];
+          this.renderPatientsTable();
+          this.setView('schedule');
+        }).catch(error => {
+          console.error('Error fetching patient details:', error);
+          this.patients = Array.from(patientMap.values());
+          this.stats.patients = patientMap.size;
+          this.filteredPatients = [...this.patients];
+          this.renderPatientsTable();
+          this.setView('schedule');
+        });
+      },
+      (error) => {
+        console.error('Error fetching appointments:', error);
+      }
+    );
+  }
+
+  closestTimeSlot(time: string): string {
+    const [hours, minutes] = time.split(':').map(Number);
+    const totalMinutes = hours * 60 + minutes;
+    let closestSlot = this.timeSlots[0];
+    let minDiff = Infinity;
+
+    this.timeSlots.forEach(slot => {
+      const [slotHours, slotMinutes] = slot.split(':').map((part, i) => {
+        if (i === 0) return parseInt(part);
+        return parseInt(part.slice(0, 2)) + (part.includes('PM') && part !== '12:00 PM' ? 12 * 60 : 0);
+      });
+      const slotTotalMinutes = slotHours * 60 + slotMinutes;
+      const diff = Math.abs(slotTotalMinutes - totalMinutes);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestSlot = slot;
+      }
+    });
+
+    return closestSlot;
+  }
+
   setView(viewId: string) {
     if (viewId === 'schedule') {
       this.scheduleSection.nativeElement.style.display = 'block';
@@ -146,8 +269,8 @@ ngAfterViewInit() {
     if (this.viewMode === 'day') this.currentDay = day;
   }
 
-  getDaySlots(day: string): { appointment: Appointment | null }[] {
-    const slots: { appointment: Appointment | null }[] = Array(this.timeSlots.length).fill(null).map(() => ({ appointment: null }));
+  getDaySlots(day: string): any[] {
+    const slots: any[] = Array(this.timeSlots.length).fill(null).map(() => ({ appointment: null }));
     this.schedule[day]?.forEach(appointment => {
       const index = this.timeSlots.indexOf(appointment.time);
       if (index >= 0) slots[index].appointment = appointment;
@@ -155,34 +278,110 @@ ngAfterViewInit() {
     return slots;
   }
 
-  showTooltip(appointment: Appointment) {
-    this.selectedAppointment = this.selectedAppointment === appointment ? null : appointment;
+  openModal(appointment: any) {
+    this.selectedAppointment = appointment;
   }
 
-  acceptAppointment(appointment: Appointment) {
-    appointment.accepted = true;
+  closeModal() {
     this.selectedAppointment = null;
-    this.renderPatientsTable();
   }
 
-  rejectAppointment(appointment: Appointment) {
-    if (confirm(`Are you sure you want to reject ${appointment.patient}'s appointment?`)) {
-      appointment.accepted = 'rejected';
-      this.selectedAppointment = null;
-      this.renderPatientsTable();
-    }
-  }
-
-  editAppointment(appointment: Appointment) {
-    alert(`Modify date for ${appointment.patient}'s appointment. (Placeholder action)`);
-  }
-
-  cancelAppointment(appointment: Appointment) {
+  cancelAppointment(appointment: any) {
     if (confirm(`Are you sure you want to cancel ${appointment.patient}'s appointment?`)) {
-      appointment.accepted = 'rejected';
-      this.selectedAppointment = null;
-      this.renderPatientsTable();
+      const appointmentId = appointment.id;
+
+      if (!appointmentId) {
+        console.error('Appointment ID is missing');
+        alert('Cannot cancel appointment: Missing ID');
+        return;
+      }
+
+      this.http.put(`http://localhost:5000/api/rendezvous/cancel/${appointmentId}`, {}).subscribe(
+        (response: any) => {
+          console.log('Appointment canceled successfully:', response);
+          this.closeModal();
+          this.fetchAppointments();
+        },
+        (error) => {
+          console.error('Error canceling appointment:', error);
+          alert('Failed to cancel the appointment. Please try again.');
+        }
+      );
     }
+  }
+
+  // Edit Doctor Functionality
+  openEditModal() {
+    this.editedDoctor = { ...this.doctor };
+    this.isEditModalOpen = true;
+  }
+
+  closeEditModal() {
+    this.isEditModalOpen = false;
+  }
+
+  saveDoctor() {
+    if (!this.editedDoctor.name || !this.editedDoctor.email || !this.editedDoctor.phone) {
+      alert('Name, email, and phone are required');
+      return;
+    }
+
+    const [prenom, ...nomParts] = this.editedDoctor.name.split(' ');
+    const nom = nomParts.join(' ');
+
+    const userData = {
+      nom: nom || '',
+      prenom: prenom || '',
+      email: this.editedDoctor.email,
+      numero_de_telephone: this.editedDoctor.phone,
+      adresse: this.editedDoctor.adresse || '',
+      cin: this.editedDoctor.cin || ''
+    };
+
+    const doctorData = {
+      specialite: this.editedDoctor.specialite || '',
+      datedebut: this.editedDoctor.datedebut || '',
+      datefin: this.editedDoctor.datefin || '',
+      image_url: this.editedDoctor.image_url || '',
+      rating: this.editedDoctor.rating || null
+    };
+
+    // Update User first
+    this.http.put(`http://localhost:5000/api/user/${this.doctorId}`, userData).subscribe({
+      next: (userResponse) => {
+        console.log('User update response:', userResponse);
+        // Then update Doctor
+        this.http.put(`http://localhost:5000/api/doctor/${this.doctorId}`, doctorData).subscribe({
+          next: (doctorResponse) => {
+            console.log('Doctor update response:', doctorResponse);
+            this.doctor = {
+              ...this.doctor,
+              name: this.editedDoctor.name,
+              email: this.editedDoctor.email,
+              phone: this.editedDoctor.phone,
+              specialite: this.editedDoctor.specialite,
+              datedebut: this.editedDoctor.datedebut,
+              datefin: this.editedDoctor.datefin,
+              image_url: this.editedDoctor.image_url,
+              rating: this.editedDoctor.rating,
+              adresse: this.editedDoctor.adresse,
+              cin: this.editedDoctor.cin
+            };
+            console.log("Doctor updated successfully");
+            this.closeEditModal();
+            this.fetchDoctorData(); // Refresh to ensure UI matches backend
+          },
+          error: (doctorError) => {
+            console.error('Error updating doctor:', doctorError);
+            alert('Failed to update doctor details: ' + (doctorError.error?.message || 'Unknown error'));
+          }
+        });
+      },
+      error: (userError) => {
+        console.error('Error updating user:', userError);
+        alert('Failed to update user details: ' + (userError.error?.message || 'Unknown error'));
+      }
+    });
   }
 
   filterPatients() {
@@ -212,8 +411,8 @@ ngAfterViewInit() {
     this.paginatedPatients = this.filteredPatients.slice(start, end);
   }
 
-  getPatientAppointments(patientName: string): Appointment[] {
-    const appointments: Appointment[] = [];
+  getPatientAppointments(patientName: string): any[] {
+    const appointments: any[] = [];
     Object.values(this.schedule).forEach(day => {
       day.forEach(appointment => {
         if (appointment.patient === patientName && appointment.accepted !== 'rejected') {

@@ -13,28 +13,33 @@ export class NavbarComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    // Récupérer le rôle de l'utilisateur connecté
     const userData = this.authService.getUserDataFromToken();
     if (userData) {
-      this.userRole = userData.role; // Assigner le rôle
+      this.userRole = userData.role;
     }
   }
 
-  // Vérifier si l'utilisateur est connecté
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 
-  // Vérifier si l'utilisateur n'est PAS un docteur
   showMenuItems(): boolean {
-    return this.userRole !== 'doctor'; // Retourne true si le rôle n'est pas 'doctor'
+    return this.userRole !== 'doctor';
   }
-
+  getProfileRoute(): string {
+    if (this.userRole === 'doctor') {
+      return '/profilD';
+    } else if (this.userRole === 'user') {
+      return '/profilP';
+    } else {
+      return '/login'; 
+    }
+  }
   // Méthode pour déconnexion
   logout() {
-    localStorage.removeItem('token'); // Supprimer le token du localStorage
-    localStorage.removeItem('user'); // Supprimer les données utilisateur si elles sont stockées
-    this.userRole = null; // Réinitialiser le rôle
-    this.router.navigate(['/login']); // Rediriger vers la page de login
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.userRole = null;
+    this.router.navigate(['/login']);
   }
 }

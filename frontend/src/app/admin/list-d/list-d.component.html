@@ -1,7 +1,7 @@
+<!-- list-d.component.html -->
 <div class="table-container">
   <div class="table-header">
     <h2 class="text-lg font-bold">Liste des médecins approuvés</h2>
-    <button class="add-btn">Ajouter un médecin</button>
   </div>
   <table class="table">
     <thead>
@@ -65,44 +65,95 @@
   </table>
 </div>
 
-<!-- Modal de Profil -->
+
+<!-- Profile Modal -->
 <div class="modal" *ngIf="showProfileModal">
-  <div class="modal-content">
+  <div class="modal-content two-column">
     <h2>Profil du Médecin</h2>
-    <div *ngIf="selectedDoctor">
-      <p><strong>Nom:</strong> {{ selectedDoctor.nom }}</p>
-      <p><strong>Prénom:</strong> {{ selectedDoctor.prenom }}</p>
-      <p><strong>Email:</strong> {{ selectedDoctor.email }}</p>
-      <p><strong>Téléphone:</strong> {{ selectedDoctor.numero_de_telephone }}</p>
-      <p><strong>Adresse:</strong> {{ selectedDoctor.adresse }}</p>
-      <p><strong>CIN:</strong> {{ selectedDoctor.cin }}</p>
-      <p><strong>Spécialité:</strong> {{ selectedDoctor.specialite }}</p>
-      <p><strong>Heure début:</strong> {{ selectedDoctor.datedebut }}</p>
-      <p><strong>Heure fin:</strong> {{ selectedDoctor.datefin }}</p>
-      <p><strong>Statut:</strong> {{ selectedDoctor.status }}</p>
-      <img [src]="selectedDoctor.image_url" alt="Doctor Image" style="max-width: 100%; border-radius: 10px;">
+    <div *ngIf="selectedDoctor" class="columns-container">
+      <div class="column-left">
+        <p><strong>Nom:</strong> {{ selectedDoctor.User.nom }}</p>
+        <p><strong>Prénom:</strong> {{ selectedDoctor.User.prenom }}</p>
+        <p><strong>Email:</strong> {{ selectedDoctor.User.email }}</p>
+        <p><strong>Téléphone:</strong> {{ selectedDoctor.User.numero_de_telephone }}</p>
+        <p><strong>Adresse:</strong> {{ selectedDoctor.User.adresse }}</p>
+      </div>
+      <div class="column-right">
+        <p><strong>CIN:</strong> {{ selectedDoctor.User.cin }}</p>
+        <p><strong>Spécialité:</strong> {{ selectedDoctor.specialite }}</p>
+        <p><strong>Heure début:</strong> {{ selectedDoctor.datedebut }}</p>
+        <p><strong>Heure fin:</strong> {{ selectedDoctor.datefin }}</p>
+        <p><strong>Statut:</strong> {{ selectedDoctor.status }}</p>
+        <img [src]="selectedDoctor.image_url" alt="Doctor Image" class="profile-image">
+      </div>
     </div>
-    <button (click)="closeModal()">Fermer</button>
+    <div class="modal-footer">
+      <button (click)="closeModal()">Fermer</button>
+    </div>
   </div>
 </div>
 
-<!-- Modal de Modification -->
+<!-- Edit Modal -->
 <div class="modal" *ngIf="showEditModal">
-  <div class="modal-content">
+  <div class="modal-content two-column">
     <h2>Modifier le Médecin</h2>
-    <form>
-      <input [(ngModel)]="editedDoctor.User.nom" name="nom" placeholder="Nom">
-      <input [(ngModel)]="editedDoctor.User.prenom" name="prenom" placeholder="Prénom">
-      <input [(ngModel)]="editedDoctor.User.email" name="email" placeholder="Email">
-      <input [(ngModel)]="editedDoctor.User.numero_de_telephone" name="telephone" placeholder="Téléphone">
-      <input [(ngModel)]="editedDoctor.User.adresse" name="adresse" placeholder="Adresse">
-      <input [(ngModel)]="editedDoctor.User.cin" name="cin" placeholder="CIN">
-      <input [(ngModel)]="editedDoctor.specialite" name="specialite" placeholder="Spécialité">
-      <input [(ngModel)]="editedDoctor.datedebut" name="datedebut" placeholder="Heure début">
-      <input [(ngModel)]="editedDoctor.datefin" name="datefin" placeholder="Heure fin">
-      <input [(ngModel)]="editedDoctor.image_url" name="image_url" placeholder="URL Image">
-      <button type="button" (click)="updateDoctor()">Sauvegarder</button>
-      <button type="button" (click)="closeModal()">Annuler</button>
+    <form class="columns-container">
+      <div class="column-left">
+        <div class="form-group">
+          <label>Nom:</label>
+          <input [(ngModel)]="editedDoctor.User.nom" name="nom" placeholder="Nom">
+        </div>
+        <div class="form-group">
+          <label>Prénom:</label>
+          <input [(ngModel)]="editedDoctor.User.prenom" name="prenom" placeholder="Prénom">
+        </div>
+        <div class="form-group">
+          <label>Email:</label>
+          <input [(ngModel)]="editedDoctor.User.email" name="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label>Téléphone:</label>
+          <input [(ngModel)]="editedDoctor.User.numero_de_telephone" name="telephone" placeholder="Téléphone">
+        </div>
+        <div class="form-group">
+          <label>Adresse:</label>
+          <input [(ngModel)]="editedDoctor.User.adresse" name="adresse" placeholder="Adresse">
+        </div>
+      </div>
+      <div class="column-right">
+        <div class="form-group">
+          <label>CIN:</label>
+          <input [(ngModel)]="editedDoctor.User.cin" name="cin" placeholder="CIN">
+        </div>
+        <div class="form-group">
+          <label>Spécialité:</label>
+          <input [(ngModel)]="editedDoctor.specialite" name="specialite" placeholder="Spécialité">
+        </div>
+        <div class="form-group">
+          <label>Heure début:</label>
+          <input [(ngModel)]="editedDoctor.datedebut" name="datedebut" placeholder="Heure début">
+        </div>
+        <div class="form-group">
+          <label>Heure fin:</label>
+          <input [(ngModel)]="editedDoctor.datefin" name="datefin" placeholder="Heure fin">
+        </div>
+        <div class="form-group">
+          <label>URL Image:</label>
+          <input [(ngModel)]="editedDoctor.image_url" name="image_url" placeholder="URL Image">
+        </div>
+        <div class="form-group">
+          <label>Statut:</label>
+          <select [(ngModel)]="editedDoctor.status" name="status">
+            <option value="APPROVED">Approuvé</option>
+            <option value="PENDING">En attente</option>
+            <option value="REJECTED">Rejeté</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" (click)="updateDoctor()">Sauvegarder</button>
+        <button type="button" (click)="closeModal()">Annuler</button>
+      </div>
     </form>
   </div>
 </div>

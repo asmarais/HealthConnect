@@ -3,39 +3,59 @@
   <!-- Header -->
   <header class="header">
     <div class="profile">
-      <img [src]="patient.profilePic" [alt]="patient.name" class="profile-pic" />
-      <button class="text-blue-600 hover:text-blue-800 p-2 rounded-full transition-colors duration-200 edit-btn" aria-label="Edit">
+      <button class="text-blue-600 hover:text-blue-800 p-2 rounded-full transition-colors duration-200 edit-btn" (click)="openEditModal()" aria-label="Edit">
         <i class="fas fa-pencil-alt w-5 h-5"></i>
       </button>
       <div class="profile-info">
-        <h1>{{ patient.name }}</h1>
+        <h1>{{ doctor.name }}</h1>
         <div class="contact-info">
-          <div class="contact-item">
-            <i class="fas fa-award w-4 h-4"></i>
-            <span>{{ patient.rating }}</span>
-            <i class="fas fa-calendar-alt w-4 h-4 ml-2"></i>
-            <span>Joined: {{ patient.joined }}</span>
+          <div class="contact-column">
+            <div class="contact-item">
+              <i class="fas fa-award w-4 h-4"></i>
+              <span>{{ doctor.rating }}</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-calendar-alt w-4 h-4"></i>
+              <span>Joined: {{ doctor.joined }}</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope w-4 h-4"></i>
+              <span>{{ doctor.email }}</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone w-4 h-4"></i>
+              <span>{{ doctor.phone }}</span>
+            </div>
           </div>
-          <div class="contact-item">
-            <i class="fas fa-envelope w-4 h-4"></i>
-            <span>{{ patient.email }}</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-phone w-4 h-4"></i>
-            <span>{{ patient.phone }}</span>
+          <div class="contact-column">
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt w-4 h-4"></i>
+              <span>{{ doctor.address }}</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-id-card w-4 h-4"></i>
+              <span>{{ doctor.cin }}</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-shield-alt w-4 h-4"></i>
+              <span>{{ doctor.socialSecurityNumber }}</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-allergies w-4 h-4"></i>
+              <span>{{ doctor.allergies }}</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </header>
-
+<BR>
   <!-- Main Content -->
   <main class="main max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-5 gap-6">
     <!-- Announcements -->
     <section class="announcements-container col-span-1 lg:col-span-3">
       <div class="announcements-header">
         <h2>Announcements</h2>
-        <button class="view-all">View All</button>
       </div>
       <div class="announcement" [ngClass]="announcement.bgClass" *ngFor="let announcement of announcements">
         <div class="flex justify-between">
@@ -60,7 +80,7 @@
           <div class="calendar-day disabled" *ngFor="let empty of emptyDays"></div>
           <div class="calendar-day"
                *ngFor="let day of daysInMonth"
-               [ngClass]="{'selected': selectedDate === getDateString(day)}"
+               [ngClass]="{'selected': selectedDate === getDateString(day), 'has-appointment': hasAppointments(getDateString(day))}"
                (click)="selectDay(day)">
             {{ day }}
           </div>
@@ -84,4 +104,53 @@
       </section>
     </div>
   </main>
+
+  <!-- Edit Patient Modal -->
+  <div class="modal-overlay" *ngIf="isEditModalOpen" (click)="closeEditModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>Edit Patient Details</h3>
+      <form (ngSubmit)="savePatient()" class="form-two-columns">
+        <div class="form-column">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" [(ngModel)]="editedPatient.name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" [(ngModel)]="editedPatient.email" name="email" type="email" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input id="phone" [(ngModel)]="editedPatient.phone" name="phone" required />
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input id="address" [(ngModel)]="editedPatient.address" name="address" />
+          </div>
+        </div>
+        <div class="form-column">
+          <div class="form-group">
+            <label for="cin">CIN</label>
+            <input id="cin" [(ngModel)]="editedPatient.cin" name="cin" />
+          </div>
+          <div class="form-group">
+            <label for="socialSecurityNumber">Social Security Number</label>
+            <input id="socialSecurityNumber" [(ngModel)]="editedPatient.socialSecurityNumber" name="socialSecurityNumber" />
+          </div>
+          <div class="form-group">
+            <label for="allergies">Allergies</label>
+            <input id="allergies" [(ngModel)]="editedPatient.allergies" name="allergies" />
+          </div>
+          <div class="form-group">
+            <label for="score">Score</label>
+            <input id="score" [(ngModel)]="editedPatient.score" name="score" type="number" />
+          </div>
+        </div>
+        <div class="modal-buttons">
+          <button type="submit" class="modal-btn save">Save</button>
+          <button type="button" class="modal-btn close" (click)="closeEditModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

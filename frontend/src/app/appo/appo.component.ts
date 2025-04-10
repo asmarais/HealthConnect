@@ -20,7 +20,7 @@ interface Doctor {
 export class AppoComponent implements OnInit {
   appointmentForm: FormGroup;
   specialists: Doctor[] = [];
-
+  userid: number | null = null;
   constructor(private fb: FormBuilder, private http: HttpClient,private authService: AuthService) {
     this.appointmentForm = this.fb.group({
       patientName: ['', Validators.required],
@@ -33,7 +33,9 @@ export class AppoComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Charger les docteurs au démarrage du composant
+    const userData = this.authService.getUserDataFromToken();
+    console.log('User data:', userData);
+    this.userid=userData.userId;
     this.loadDoctors();
   }
 
@@ -52,9 +54,9 @@ export class AppoComponent implements OnInit {
   onSubmit() {
     if (this.appointmentForm.valid) {
       const formValue = this.appointmentForm.value;
-      
+
       const appointmentData = {
-        patient_id: 12, // À modifier selon votre système d'authentification
+        patient_id: this.userid, // À modifier selon votre système d'authentification
         medecin_id: parseInt(formValue.medecinId),
         date_debut: new Date(formValue.appointmentDate).toISOString(),
         date_fin: new Date(new Date(formValue.appointmentDate).getTime() + 30*60000).toISOString(),

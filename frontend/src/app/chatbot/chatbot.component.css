@@ -1,0 +1,220 @@
+/* chatbot.component.css */
+.chatbot-icon {
+  position: fixed;
+  bottom: 30px;
+  right: 40px;
+  width: 55px;
+  height: 55px;
+  background-color: #ffffff00;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.chatbot-icon:hover {
+  background-color: #666;
+}
+
+.imgchat {
+  max-width: 60%;
+  height: auto;
+}
+
+.chatbot-container {
+  position: fixed;
+  bottom: 90px;
+  right: 40px;
+  width: 350px;
+  max-height: 600px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex; /* Changed from 'none' since we control visibility with Angular */
+  flex-direction: column;
+  z-index: 1000;
+  opacity: 0; /* For transition effect */
+  visibility: hidden; /* Hidden by default */
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.chatbot-container.active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease;
+}
+
+.chatbot-header {
+  background-color: #252C33;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.chatbot-title {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.chatbot-close {
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.chatbot-body {
+  padding: 15px;
+  flex: 1; /* Take remaining space */
+  overflow-y: auto;
+  background-color: #f9f9f9; /* Slight background for better contrast */
+}
+
+.chatbot-message {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.chatbot-bot .medical-response {
+  background-color: #e5e5e5;
+  color: #252C33;
+  max-width: 80%;
+  border-radius: 5px;
+  padding: 8px 12px;
+}
+
+.chatbot-user .medical-response {
+  background-color: #252C33;
+  color: #fff;
+  max-width: 80%;
+  margin-left: auto;
+  border-radius: 5px;
+  padding: 8px 12px;
+}
+
+.chatbot-footer {
+  padding: 10px 15px;
+  border-top: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  background-color: #fff;
+}
+
+.chatbot-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  margin-right: 10px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.chatbot-input:focus {
+  border-color: #252C33;
+}
+
+.chatbot-input::placeholder {
+  color: #666;
+}
+
+.chatbot-send-btn {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 15px;
+  background-color: #252C33;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chatbot-send-btn:hover {
+  background-color: #666;
+}
+
+@media (max-width: 767px) {
+  .chatbot-icon {
+      width: 50px;
+      height: 50px;
+      bottom: 20px;
+      right: 20px;
+  }
+
+  .imgchat {
+      max-width: 50%;
+  }
+
+  .chatbot-container {
+      width: 90%;
+      max-width: 300px;
+      bottom: 70px;
+      right: 10px;
+  }
+
+  .chatbot-title {
+      font-size: 14px;
+      line-height: 18px;
+  }
+
+  .chatbot-message {
+      font-size: 12px;
+      line-height: 16px;
+  }
+
+  .chatbot-input,
+  .chatbot-send-btn {
+      font-size: 12px;
+  }
+
+  .chatbot-footer {
+      flex-direction: row; /* Keep row layout for better UX */
+      padding: 8px;
+  }
+
+  .chatbot-input {
+      margin-right: 5px;
+      margin-bottom: 0;
+  }
+
+  .chatbot-send-btn {
+      padding: 8px 10px;
+  }
+}
+
+
+
+/* Add styling for formatted content */
+.medical-response p {
+  margin: 0;
+}
+
+.medical-response strong {
+  font-weight: 700;
+}

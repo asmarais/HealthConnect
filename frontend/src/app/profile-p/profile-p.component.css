@@ -56,9 +56,15 @@ body {
 
 .contact-info {
   display: flex;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.contact-column {
+  display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-top: 8px;
+  flex: 1;
 }
 
 .contact-item {
@@ -69,7 +75,7 @@ body {
   color: #000;
 }
 
-.contact-item i-lucide {
+.contact-item i {
   color: #048581;
 }
 
@@ -250,4 +256,106 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  width: 600px; /* Increased width for two columns */
+  max-width: 90%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  color: #000;
+}
+
+.modal-content h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #353535;
+}
+
+.form-two-columns {
+  display: flex;
+  gap: 24px;
+}
+
+.form-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  margin-bottom: 0; /* Removed bottom margin since column handles spacing */
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: #353535;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #353535;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  justify-content: flex-end;
+}
+
+.modal-btn {
+  padding: 8px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.modal-btn.save {
+  background: #048581;
+  color: white;
+}
+
+.modal-btn.save:hover {
+  background: #036b68;
+}
+
+.modal-btn.close {
+  background: #353535;
+  color: white;
+}
+
+.modal-btn.close:hover {
+  background: #2a2a2a;
+}
+
+.calendar-day.has-appointment {
+  background-color: #e7f0fa;
+  font-weight: bold;
 }

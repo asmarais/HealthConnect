@@ -1,10 +1,10 @@
-<br><br><br><br><br>
+<br><br><br><br>
 <div class="container">
   <header class="header">
     <div class="profile">
       <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=150&h=150"
-           alt="Dean Guerrero" class="profile-pic" />
-      <button class="text-blue-600 hover:text-blue-800 p-2 rounded-full transition-colors duration-200" aria-label="Edit">
+           alt="Doctor Profile" class="profile-pic" />
+      <button class="text-blue-600 hover:text-blue-800 p-2 rounded-full transition-colors duration-200" aria-label="Edit" (click)="openEditModal()">
         <i class="fas fa-pencil-alt w-5 h-5"></i>
       </button>
       <div class="profile-info">
@@ -63,7 +63,6 @@
           </div>
         </div>
       </div>
-
       <div class="schedule-grid" [ngClass]="{'day-view': viewMode === 'day'}">
         <div>
           <div class="time-label h-10"></div>
@@ -73,21 +72,8 @@
           <div class="day-header" (click)="selectDay(day)">{{ day }}</div>
           <div class="time-slots">
             <div class="time-slot" *ngFor="let slot of getDaySlots(day)">
-              <div class="appointment-block" *ngIf="slot.appointment" [ngClass]="{'not-accepted': !slot.appointment.accepted}"
-                   (click)="showTooltip(slot.appointment)">
+              <div class="appointment-block" *ngIf="slot.appointment" (click)="openModal(slot.appointment)">
                 {{ slot.appointment.patient }} – {{ slot.appointment.reason }}
-                <div class="tooltip" *ngIf="selectedAppointment === slot.appointment">
-                  <p><strong>Patient:</strong> {{ slot.appointment.patient }}</p>
-                  <p><strong>Reason:</strong> {{ slot.appointment.reason }}</p>
-                  <p><strong>Phone:</strong> {{ slot.appointment.phone }}</p>
-                  <p><strong>Notes:</strong> {{ slot.appointment.notes }}</p>
-                  <div class="tooltip-buttons">
-                    <button class="tooltip-btn accept" *ngIf="!slot.appointment.accepted" (click)="acceptAppointment(slot.appointment)">Accept</button>
-                    <button class="tooltip-btn reject" *ngIf="!slot.appointment.accepted" (click)="rejectAppointment(slot.appointment)">Reject</button>
-                    <button class="tooltip-btn edit" *ngIf="slot.appointment.accepted" (click)="editAppointment(slot.appointment)">Modify Date</button>
-                    <button class="tooltip-btn cancel" *ngIf="slot.appointment.accepted" (click)="cancelAppointment(slot.appointment)">Cancel</button>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -98,7 +84,8 @@
     <section #patientsSection id="patients-section" class="patients-table-container col-span-1 lg:col-span-3">
       <div class="patients-table-header">
         <input type="text" class="search-bar" placeholder="Search by name..." [(ngModel)]="searchQuery" (ngModelChange)="filterPatients()" />
-        <button class="sort-btn" (click)="toggleSort()">Sort by Pending Status ({{ sortDirection === 'desc' ? '↓' : '↑' }})</button>
+        <span>Sort by :</span>
+        <button class="sort-btn" (click)="toggleSort()"> Status ({{ sortDirection === 'desc' ? '↓' : '↑' }})</button>
       </div>
       <table class="patients-table">
         <thead>
@@ -132,10 +119,6 @@
                 <div class="appointments-list visible">
                   <div class="appointment-item" *ngFor="let appointment of getPatientAppointments(patient.name)">
                     <span>{{ appointment.time }} – {{ appointment.reason }} ({{ appointment.accepted ? 'Accepted' : 'Pending' }})</span>
-                    <div class="appointment-actions" *ngIf="!appointment.accepted">
-                      <button class="appointment-btn accept" (click)="acceptAppointment(appointment)">Accept</button>
-                      <button class="appointment-btn reject" (click)="rejectAppointment(appointment)">Reject</button>
-                    </div>
                   </div>
                 </div>
               </td>
@@ -164,4 +147,73 @@
       </section>
     </div>
   </main>
+
+  <!-- Appointment Modal -->
+  <div class="modal-overlay" *ngIf="selectedAppointment" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>Appointment Details</h3>
+      <p><strong>Patient:</strong> {{ selectedAppointment.patient }}</p>
+      <div class="modal-buttons">
+        <button class="modal-btn cancel" (click)="cancelAppointment(selectedAppointment)">Cancel Appointment</button>
+        <button class="modal-btn close" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Doctor Modal -->
+  <div class="modal-overlay" *ngIf="isEditModalOpen" (click)="closeEditModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>Edit Doctor Details</h3>
+      <form (ngSubmit)="saveDoctor()" class="form-two-columns">
+        <div class="form-column">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" [(ngModel)]="editedDoctor.name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" [(ngModel)]="editedDoctor.email" name="email" type="email" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input id="phone" [(ngModel)]="editedDoctor.phone" name="phone" required />
+          </div>
+          <div class="form<group">
+            <label for="adresse">Address</label>
+            <input id="adresse" [(ngModel)]="editedDoctor.adresse" name="adresse" />
+          </div>
+          <div class="form-group">
+            <label for="cin">CIN</label>
+            <input id="cin" [(ngModel)]="editedDoctor.cin" name="cin" />
+          </div>
+        </div>
+        <div class="form-column">
+          <div class="form-group">
+            <label for="specialite">Specialty</label>
+            <input id="specialite" [(ngModel)]="editedDoctor.specialite" name="specialite" />
+          </div>
+          <div class="form-group">
+            <label for="datedebut">Start Time</label>
+            <input id="datedebut" [(ngModel)]="editedDoctor.datedebut" name="datedebut" type="time" />
+          </div>
+          <div class="form-group">
+            <label for="datefin">End Time</label>
+            <input id="datefin" [(ngModel)]="editedDoctor.datefin" name="datefin" type="time" />
+          </div>
+          <div class="form-group">
+            <label for="image_url">Image URL</label>
+            <input id="image_url" [(ngModel)]="editedDoctor.image_url" name="image_url" />
+          </div>
+          <div class="form-group">
+            <label for="rating">Rating</label>
+            <input id="rating" [(ngModel)]="editedDoctor.rating" name="rating" />
+          </div>
+        </div>
+        <div class="modal-buttons">
+          <button type="submit" class="modal-btn save">Save</button>
+          <button type="button" class="modal-btn close" (click)="closeEditModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

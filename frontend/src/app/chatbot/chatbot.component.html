@@ -1,0 +1,32 @@
+<div class="chatbot-icon" (click)="toggleChat()">
+  <img class="imgchat" src="assets/images/chatbot.png" alt="HealthBuddy Chatbot">
+</div>
+
+<div class="chatbot-container" [class.active]="isChatOpen">
+  <div class="chatbot-header">
+    <h2 class="chatbot-title">HealthBuddy</h2>
+    <button class="chatbot-close" (click)="toggleChat()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="chatbot-body" id="chat-messages">
+    <div *ngFor="let message of messages"
+         class="chatbot-message"
+         [class.chatbot-user]="message.sender === 'user'"
+         [class.chatbot-bot]="message.sender === 'bot'">
+      <div class="medical-response">
+        <p [innerHTML]="formatMessage(message.content)"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="chatbot-footer">
+    <input type="text"
+           class="chatbot-input"
+           [(ngModel)]="userInput"
+           (keypress)="onKeyPress($event)"
+           placeholder="Décrivez vos symptômes...">
+    <button class="chatbot-send-btn" (click)="sendMessage()">Envoyer</button>
+  </div>
+</div>

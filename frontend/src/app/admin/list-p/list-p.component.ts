@@ -1,3 +1,4 @@
+// list-p.component.ts
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,11 +9,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ListPComponent implements OnInit {
   private apiUrl = 'http://localhost:5000/api/patient';
+  private userApiUrl = 'http://localhost:5000/api/user';
+
   patients: any[] = [];
   selectedPatient: any = null;
+  editedPatient: any = null;
+
   showProfileModal = false;
   showEditModal = false;
-  editedPatient: any = {};
 
   constructor(private http: HttpClient) { }
 
@@ -21,10 +25,14 @@ export class ListPComponent implements OnInit {
   }
 
   loadPatients() {
-    this.http.get(`${this.apiUrl}/`).subscribe(
-      (data: any) => {
-        this.patients = data;
-        console.log(this.patients);
+    this.http.get<any>(`${this.apiUrl}/`).subscribe(
+      (response) => {
+        if (Array.isArray(response)) {
+          this.patients = response.map((patient: any) => ({
+            ...patient,
+            User: patient.User
+          }));
+        }
       },
       (error) => {
         console.error('Error fetching patients:', error);
@@ -33,9 +41,12 @@ export class ListPComponent implements OnInit {
   }
 
   viewProfile(id: number) {
-    this.http.get(`${this.apiUrl}/${id}`).subscribe(
-      (data: any) => {
-        this.selectedPatient = data;
+    this.http.get<any>(`${this.apiUrl}/${id}`).subscribe(
+      (response) => {
+        this.selectedPatient = {
+          ...response,
+          User: response.User
+        };
         this.showProfileModal = true;
       },
       (error) => {
@@ -47,39 +58,48 @@ export class ListPComponent implements OnInit {
   openEditModal(patient: any) {
     this.editedPatient = {
       user_id: patient.user_id,
+      User: { ...patient.User },
       numero_securite_sociale: patient.numero_securite_sociale,
       allergies: patient.allergies,
-      nom: patient.User.nom,
-      prenom: patient.User.prenom,
-      email: patient.User.email,
-      numero_de_telephone: patient.User.numero_de_telephone,
-      adresse: patient.User.adresse,
-      cin: patient.User.cin,
+      score: patient.score,
+      raison: patient.raison
     };
     this.showEditModal = true;
   }
 
   updatePatient() {
-    const payload = {
-      numero_securite_sociale: this.editedPatient.numero_securite_sociale,
-      allergies: this.editedPatient.allergies,
-      User: {
-        nom: this.editedPatient.nom,
-        prenom: this.editedPatient.prenom,
-        email: this.editedPatient.email,
-        numero_de_telephone: this.editedPatient.numero_de_telephone,
-        adresse: this.editedPatient.adresse,
-        cin: this.editedPatient.cin,
-      }
+    if (!this.editedPatient?.user_id) return;
+
+    const userData = {
+      nom: this.editedPatient.User.nom,
+      prenom: this.editedPatient.User.prenom,
+      email: this.editedPatient.User.email,
+      numero_de_telephone: this.editedPatient.User.numero_de_telephone,
+      adresse: this.editedPatient.User.adresse,
+      cin: this.editedPatient.User.cin
     };
 
-    this.http.put(`${this.apiUrl}/${this.editedPatient.user_id}`, payload).subscribe(
+    const patientData = {
+      numero_securite_sociale: this.editedPatient.numero_securite_sociale,
+      allergies: this.editedPatient.allergies,
+      score: this.editedPatient.score,
+      raison: this.editedPatient.raison
+    };
+
+    this.http.put(`${this.userApiUrl}/${this.editedPatient.user_id}`, userData).subscribe(
       () => {
-        this.loadPatients();
-        this.showEditModal = false;
+        this.http.put(`${this.apiUrl}/${this.editedPatient.user_id}`, patientData).subscribe(
+          () => {
+            this.showEditModal = false;
+            this.loadPatients();
+          },
+          (error) => {
+            console.error('Error updating patient data:', error);
+          }
+        );
       },
       (error) => {
-        console.error('Error updating patient:', error);
+        console.error('Error updating user data:', error);
       }
     );
   }
@@ -100,5 +120,7 @@ export class ListPComponent implements OnInit {
   closeModal() {
     this.showProfileModal = false;
     this.showEditModal = false;
+    this.selectedPatient = null;
+    this.editedPatient = null;
   }
 }

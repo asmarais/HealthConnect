@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private apiUrl = 'http://localhost:5000/api/doctor'; // URL de l'API pour les docteurs
+  private apiUrl = 'http://localhost:5000/api/doctor'; 
 
   email: string = '';
   password: string = '';

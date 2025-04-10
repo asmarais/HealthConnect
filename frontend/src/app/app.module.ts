@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfilePComponent } from './profile-p/profile-p.component';
 import { DDoctorComponent } from './ddoctor/ddoctor.component';
+import { ChatbotComponent } from './chatbot/chatbot.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DDoctorComponent } from './ddoctor/ddoctor.component';
     RegisterComponent,
     ProfileDComponent,
     ProfilePComponent,
-    DDoctorComponent
+    DDoctorComponent,
+    ChatbotComponent
   ],
   imports: [
     BrowserModule,
