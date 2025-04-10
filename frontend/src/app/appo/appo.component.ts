@@ -38,7 +38,9 @@ export class AppoComponent implements OnInit {
     this.userid=userData.userId;
     this.loadDoctors();
   }
-
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
   loadDoctors() {
     this.http.get<{ doctors: Doctor[] }>('http://localhost:5000/api/doctor')
       .subscribe({

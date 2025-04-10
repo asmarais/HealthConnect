@@ -78,7 +78,7 @@
                   <a routerLink="/home">Home</a>
                 </li>
                 <li class="sp-menu-item">
-                  <a routerLink="/appo">Appointments</a>
+                  <a routerLink="/appo" *ngIf="isLoggedIn()">Appointments</a>
                 </li>
                 <li class="sp-menu-item">
                   <a routerLink="/doc">Doctors</a>

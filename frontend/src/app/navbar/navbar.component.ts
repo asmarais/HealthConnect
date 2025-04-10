@@ -32,10 +32,9 @@ export class NavbarComponent implements OnInit {
     } else if (this.userRole === 'user') {
       return '/profilP';
     } else {
-      return '/login'; 
+      return '/login';
     }
   }
-  // Méthode pour déconnexion
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

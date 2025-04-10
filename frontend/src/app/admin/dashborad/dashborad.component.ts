@@ -21,12 +21,24 @@ export class DashboradComponent implements OnInit {
   doctors: any[] = [];
 
   constructor(private http: HttpClient) {
-    Chart.register(...registerables); // Register Chart.js components
+    Chart.register(...registerables);
   }
 
   ngOnInit(): void {
     this.loadDashboardData();
     this.initializeCharts();
+  }
+
+  // Fonction pour obtenir les 7 derniers jours
+  getLast7Days(): string[] {
+    const dates = [];
+    const today = new Date();
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - i);
+      dates.push(date.toLocaleDateString());
+    }
+    return dates;
   }
 
   loadDashboardData(): void {
@@ -93,21 +105,34 @@ export class DashboradComponent implements OnInit {
       }
     });
 
-    // Initialize empty appointments variation chart
+    // Initialize appointments variation chart with last 7 days
+    const last7Days = this.getLast7Days();
     new Chart('appointmentsVariationChart', {
       type: 'line',
       data: {
-        labels: [],
+        labels: last7Days,
         datasets: [{
           label: 'Rendez-vous par jour',
-          data: [],
+          data: Array(7).fill(0), // Initialiser avec 0 pour chaque jour
           borderColor: '#66BB6A',
           fill: false
         }]
       },
       options: {
         scales: {
-          y: { beginAtZero: true }
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Nombre de rendez-vous'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Date'
+            }
+          }
         }
       }
     });
@@ -118,10 +143,10 @@ export class DashboradComponent implements OnInit {
 
     this.http.get<any>(this.apiUrl.appointments).subscribe(
       (appointments) => {
-        const doctorAppointments = appointments.filter((appt: any) => appt.doctor_id === parseInt(doctorId));
+        const doctorAppointments = appointments.filter((appt: any) => appt.medecin_id === parseInt(doctorId));
         const hoursByDate = doctorAppointments.reduce((acc: any, appt: any) => {
-          const date = new Date(appt.date).toLocaleDateString();
-          acc[date] = (acc[date] || 0) + 1; // Assuming 1 hour per appointment
+          const date = new Date(appt.date_debut).toLocaleDateString();
+          acc[date] = (acc[date] || 0) + 1;
           return acc;
         }, {});
 
@@ -136,16 +161,20 @@ export class DashboradComponent implements OnInit {
   }
 
   updateAppointmentsChart(appointments: any[]): void {
+    const last7Days = this.getLast7Days();
     const appointmentsByDate = appointments.reduce((acc: any, appt: any) => {
-      const date = new Date(appt.date).toLocaleDateString();
+      const date = new Date(appt.date_debut).toLocaleDateString();
       acc[date] = (acc[date] || 0) + 1;
       return acc;
     }, {});
 
+    // Préparer les données pour les 7 derniers jours
+    const chartData = last7Days.map(date => appointmentsByDate[date] || 0);
+
     const chart = Chart.getChart('appointmentsVariationChart');
     if (chart) {
-      chart.data.labels = Object.keys(appointmentsByDate);
-      chart.data.datasets[0].data = Object.values(appointmentsByDate);
+      chart.data.labels = last7Days;
+      chart.data.datasets[0].data = chartData;
       chart.update();
     }
   }

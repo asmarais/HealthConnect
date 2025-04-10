@@ -30,12 +30,12 @@
   bottom: 90px;
   right: 40px;
   width: 350px;
-  max-height: 600px;
+  max-height: 450px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  display: flex; /* Changed from 'none' since we control visibility with Angular */
+  display: flex; 
   flex-direction: column;
   z-index: 1000;
   opacity: 0; /* For transition effect */
