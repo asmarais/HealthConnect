@@ -118,6 +118,35 @@ const sendEmail = async (to, type, prenom, mot_de_passe = "") => {
       </html>
     `;
   }
+  else if (type === "google_signup") {
+    subject = "Bienvenue sur HealthConnect via Google";
+    emailContent = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+          .container { background-color: #fff; padding: 20px; border-radius: 8px; max-width: 600px; margin: auto; }
+          h1 { color: #4CAF50; }
+          p { font-size: 16px; line-height: 1.5; }
+          .footer { font-size: 12px; color: #777; text-align: center; margin-top: 20px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h1>Bienvenue sur HealthConnect</h1>
+          <p>Bonjour ${prenom},</p>
+          <p>Votre compte a été créé avec succès via Google.</p>
+          <p>Voici votre mot de passe temporaire : <strong>${mot_de_passe}</strong></p>
+          <p>Merci de le modifier dès que possible depuis votre profil.</p>
+          <p>L’équipe HealthConnect</p>
+          <div class="footer">&copy; 2024 HealthConnect. Tous droits réservés.</div>
+        </div>
+      </body>
+      </html>
+    `;
+  }
+  
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to,
