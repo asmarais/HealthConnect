@@ -12,6 +12,18 @@ services:
       - chatbot
     environment:
       - HOST=0.0.0.0
+  # Flask Chatbot
+
+  chatbot:
+    build:
+      context: ./chatbot
+    environment:
+      - FLASK_APP=chat.py
+    ports:
+      - "5001:5001"
+    command: flask run --host=0.0.0.0 --port=5001
+    depends_on:
+      - nodejs
 
   # Node.js Backend
   nodejs:
@@ -44,15 +56,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
-  # Flask Chatbot
-  chatbot:
-    build:
-      context: ./chatbot
-    environment:
-      - FLASK_APP=chat.py
-    ports:
-      - "5001:5001"
-    command: flask run --host=0.0.0.0 --port=5001
+ 
 
 volumes:
   mysql_data:
