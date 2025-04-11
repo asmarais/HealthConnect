@@ -33,11 +33,11 @@ const User = sequelize.define('User', {
   },
   numero_de_telephone: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   adresse: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   date_de_creation: {
     type: DataTypes.DATE,
@@ -49,7 +49,7 @@ const User = sequelize.define('User', {
   },
   cin: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   genre: {
     type: DataTypes.STRING,

@@ -38,9 +38,9 @@ exports.markAsRead = async (req, res) => {
 // Supprimer une notification
 exports.deleteNotification = async (req, res) => {
   try {
-    const { id } = req.params;
+    const  Id  = req.params.notification_id;
 
-    const deleted = await Notification.destroy({ where: { id } });
+    const deleted = await Notification.destroy({ where: { id:Id } });
     if (!deleted) return res.status(404).json({ error: 'Notification non trouvée' });
 
     res.status(200).json({ message: 'Notification supprimée avec succès' });
@@ -52,9 +52,9 @@ exports.deleteNotification = async (req, res) => {
 // Supprimer toutes les notifications d'un utilisateur
 exports.deleteAllNotifications = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const { id } = req.params.user_id;
 
-    const deleted = await Notification.destroy({ where: { userId } });
+    const deleted = await Notification.destroy({ where: { userId:id } });
 
     res.status(200).json({ message: 'Toutes les notifications ont été supprimées', deleted });
   } catch (err) {
@@ -65,9 +65,9 @@ exports.deleteAllNotifications = async (req, res) => {
 // Récupérer toutes les notifications d'un utilisateur
 exports.getAllNotifications = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const { id } = req.params.userId;
 
-    const notifications = await Notification.findAll({ where: { userId } });
+    const notifications = await Notification.findAll({ where: { userId:id } });
 
     if (notifications.length === 0) {
       return res.status(404).json({ error: 'Aucune notification trouvée' });
@@ -82,9 +82,9 @@ exports.getAllNotifications = async (req, res) => {
 // Récupérer une notification par ID
 exports.getNotificationById = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { Id } = req.params.id;
 
-    const notification = await Notification.findByPk(id);
+    const notification = await Notification.findByPk(Id);
     if (!notification) return res.status(404).json({ error: 'Notification non trouvée' });
 
     res.status(200).json({ notification });
